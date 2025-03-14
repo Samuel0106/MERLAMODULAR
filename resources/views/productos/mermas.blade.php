@@ -72,7 +72,7 @@
                     <tbody>
                         @foreach ($mermas as $merma)
                             <tr data-id="{{ $merma->id }}">
-                                <td>{{ $merma->producto->nombre_prod }}</td>
+                                <td>{{ $merma->producto->nombre_producto }}</td>
                                 @if (App\Models\Almacen::find($merma->producto->subarea))
                                     <td>{{ App\Models\Almacen::find($merma->producto->subarea)->almacen_nombre }}</td>
                                 @else

@@ -5,7 +5,7 @@
         <div class="grid grid-cols-1">
             <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Nombre del
                 Producto:</label>
-            <input name="nombre_prod" style="border-color: rgb(21 128 61);"
+            <input name="nombre_producto" style="border-color: rgb(21 128 61);"
                 class="py-1 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"
                 type="text" required />
         </div>
@@ -31,18 +31,18 @@
 
         <div class="grid grid-cols-1">
             <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Stock Mínimo:</label>
-            <input name="stock_min" style="border-color: rgb(21 128 61);"
+            <input name="stock_minimo" style="border-color: rgb(21 128 61);"
                 class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"
                 type="number" min="0" required />
         </div>
 
         <div class="grid grid-cols-1">
             <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Categoría:</label>
-            <select name="categoria_id" id="categoria_id"
+            <select name="id_categoria" id="id_categoria"
                 class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 required />
             @foreach ($categorias as $categoria)
-                <option id="{{ $categoria->id }}" value="{{ $categoria->id }}">{{ $categoria->nombre_cat }}</option>
+                <option id="{{ $categoria->id }}" value="{{ $categoria->id }}">{{ $categoria->nombre_categoria }}</option>
             @endforeach
 
             </select>

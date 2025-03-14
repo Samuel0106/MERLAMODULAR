@@ -14,9 +14,9 @@
     <tbody>
         @foreach ($productosA as $producto)
             <tr data-id="{{ $producto->id }}">
-                <td>{{ $producto->nombre_prod }}</td>
+                <td>{{ $producto->nombre_producto }}</td>
                 <td>{{ $producto->unidad }}</td>
-                <td>{{ $producto->categoria->nombre_cat }}</td>
+                <td>{{ $producto->categoria->nombre_categoria }}</td>
                 <td>{{ $producto->existencias }}</td>
                 <td>
                     @if ($producto->photo_prod != null)

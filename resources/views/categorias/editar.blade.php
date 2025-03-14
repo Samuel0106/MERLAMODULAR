@@ -15,8 +15,8 @@
                 <div class="grid grid-cols-1 gap-5 md:gap-8 mt-5 mx-7">
                     <div class="grid grid-cols-1">
                         <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Nombre de la categoría:</label>
-                        <input name="nombre_cat" value="{{ $categoria->nombre_cat }}" class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"  required/>
-                        @error('nombre_cat')
+                        <input name="nombre_categoria" value="{{ $categoria->nombre_categoria }}" class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"  required/>
+                        @error('nombre_categoria')
                             <span style="font-size: 10pt;color:red" role="alert">
                                 <strong>{{$message}}</strong>
                             </span>

@@ -21,8 +21,9 @@ class CreateDatosusersTable extends Migration
             $table->string('materno');
             $table->date('ingreso')->nullable();
             $table->date('antiguedad')->nullable();
-            $table->string('contrato')->nullable();
-            $table->string('puesto')->nullable();
+            $table->int('contrato');
+            $table->int('puesto');
+            $table->string('division');
             $table->string('area')->nullable()->default(null);
             $table->string('subarea');
             $table->timestamps();

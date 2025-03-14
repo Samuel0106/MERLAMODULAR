@@ -39,12 +39,12 @@ trait TestHelpers
             ->press('Filtrar')
             ->pause(1000);
         
-        $productos = Producto::where('categoria_id', $categoriaId)->get();
+        $productos = Producto::where('id_categoria', $categoriaId)->get();
         
         foreach ($productos as $producto) {
-            $browser->assertSee($producto->nombre_prod)
+            $browser->assertSee($producto->nombre_producto)
                     ->assertSee($producto->unidad)
-                    ->assertSee($producto->stock_min); 
+                    ->assertSee($producto->stock_minimo); 
         }
     } 
     public function verifyFilterProductsSoftDeletedByCategoria(Browser $browser, User $session, $categoriaId)
@@ -56,11 +56,11 @@ trait TestHelpers
             ->press('Filtrar')
             ->pause(1000);
         
-        $productos = Producto::where('categoria_id', $categoriaId)->get();
+        $productos = Producto::where('id_categoria', $categoriaId)->get();
         foreach ($productos as $producto) {
-            $browser->assertSee($producto->nombre_prod)
+            $browser->assertSee($producto->nombre_producto)
                     ->assertSee($producto->unidad)
-                    ->assertSee($producto->stock_min); 
+                    ->assertSee($producto->stock_minimo); 
         }
         $browser->assertSee("Producto Eliminado");
     }
@@ -74,13 +74,13 @@ trait TestHelpers
             ->press('Filtrar')
             ->pause(1000);
         
-        $productos = Producto::where('categoria_id', $categoriaId)->get();
+        $productos = Producto::where('id_categoria', $categoriaId)->get();
         $primerProducto = $productos->first();
         $idPrimerProducto = $primerProducto->id;
         $browser
         ->press('boton' . $idPrimerProducto)
         ->pause(1000);
-        $productos = Producto::withTrashed()->where('categoria_id', $categoriaId)->get();
+        $productos = Producto::withTrashed()->where('id_categoria', $categoriaId)->get();
         $primerProducto = $productos->first();
         $response = $this->actingAs($this->admin)
         ->assertTrue($primerProducto->trashed() , 'Product is soft-deleted');
@@ -103,7 +103,7 @@ trait TestHelpers
         $categorias = Categoria::where('id', $categoriaId)->get();
         
         foreach ($categorias as $categoria) {
-            $browser->assertSee($categoria->nombre_cat);
+            $browser->assertSee($categoria->nombre_categoria);
         }
     } 
 

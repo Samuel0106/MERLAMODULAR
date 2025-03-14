@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Quitar Existencias de ' . Str::of($producto->nombre_prod) . ', ' . Str::of($subarea_nombre)) }}
+            {{ __('Quitar Existencias de ' . Str::of($producto->nombre_producto) . ', ' . Str::of($subarea_nombre)) }}
         </h2>
     </x-slot>
     <div class="py-12">

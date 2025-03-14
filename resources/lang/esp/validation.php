@@ -158,7 +158,7 @@ return [
     */
 
     'attributes' => [
-        'nombre_cat'=> 'Nombre de la categoría'
+        'nombre_categoria'=> 'Nombre de la categoría'
     ],
 
 ];

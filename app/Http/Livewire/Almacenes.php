@@ -9,6 +9,7 @@ use App\Models\Datosuser;
 
 class Almacenes extends Component
 {
+
     public $almacenes;
     public $actuales = [];
     public $selectedArea;

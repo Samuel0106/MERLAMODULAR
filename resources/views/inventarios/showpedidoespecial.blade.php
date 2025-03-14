@@ -69,7 +69,7 @@
                             }
                             ?>
                             <td> {{$nombre}} </td>
-                            <td> {{$pedido->nombre_prod}} </td>
+                            <td> {{$pedido->nombre_producto}} </td>
                             <td> {{$pedido->cantidad}} </td>
                             <td class="px-14 py-1">
                                 @if ( $pedido->foto != null)

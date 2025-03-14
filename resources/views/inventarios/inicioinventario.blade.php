@@ -90,7 +90,7 @@
                         </div>
                     @endcan
                     <!-- Crear Categorias -->
-                    @can('inventarios.categoria')
+                    @can('inventario.categoria')
                         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 ">
                             <a href="{{ route('categorias.create') }}" class="card-link">
                                 <div class="icon-box service-box" data-aos="fade-up"

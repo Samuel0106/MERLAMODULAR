@@ -43,7 +43,7 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre_cat' => 'required|max:191|min:1|unique:categorias',
+            'nombre_categoria' => 'required|max:191|min:1|unique:categorias',
         ]);
         $cat = $request->all();
         Categoria::create($cat);
@@ -83,7 +83,7 @@ class CategoriaController extends Controller
     {
         
         $request->validate([
-            'nombre_cat' => 'required|max:191|min:1||regex:/^[a-zA-Z0-9\s\/.]+$/u|unique:categorias,nombre_cat,'.$categoria->id,
+            'nombre_categoria' => 'required|max:191|min:1||regex:/^[a-zA-Z0-9\s\/.]+$/u|unique:categorias,nombre_categoria,'.$categoria->id,
         ]);
         $categoria->fill($request->all());
         $categoria->save();

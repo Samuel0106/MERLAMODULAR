@@ -67,7 +67,7 @@ class EditarConsultaCategoriasTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->loginAs($this->admin)
             ->visit('/categorias/1/edit')
-            ->type("nombre_cat", 'NombreNuevo123')
+            ->type("nombre_categoria", 'NombreNuevo123')
             ->press("Guardar")
             ->pause(1000)
             ->assertSee("NombreNuevo123");
@@ -81,27 +81,27 @@ class EditarConsultaCategoriasTest extends DuskTestCase
         $producto = Categoria::factory()->create();
 
         $response = $this->actingAs($this->user)->put('categorias/' . $producto->id, [
-            'nombre_cat' => 'Nuevo Nombre',
+            'nombre_categoria' => 'Nuevo Nombre',
         ]);
         $response->assertStatus( status: 403);
-        $response->assertValid(['nombre_cat']);
+        $response->assertValid(['nombre_categoria']);
     }
     public function test_editar_categorias_update_works_as_admin(){
         $producto = Categoria::factory()->create();
 
         $response = $this->actingAs($this->admin)->put('categorias/' . $producto->id, [
-            'nombre_cat' => 'Nuevo Nombre',
+            'nombre_categoria' => 'Nuevo Nombre',
         ]);
         $response->assertStatus( status: 302);
-        $response->assertValid(['nombre_cat']);
+        $response->assertValid(['nombre_categoria']);
     }
     public function test_editar_categorias_validation_error_works(){
         $instancia = Categoria::factory()->create();
 
         $response = $this->actingAs($this->admin)->put('categorias/' . $instancia->id, [
-            'nombre_cat' => '',
+            'nombre_categoria' => '',
         ]);
-        $response->assertInValid(['nombre_cat']);
+        $response->assertInValid(['nombre_categoria']);
     }
 
 }

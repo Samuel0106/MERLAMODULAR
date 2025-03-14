@@ -74,6 +74,6 @@ class Datosuser extends Model
     }
 
     public function contratos(){
-        return $this->hasOne(Contratos::class, 'cl_tipco', 'contrato');
+        return $this->hasOne(Contratos::class, 'id', 'contrato');
     }
 }

@@ -67,7 +67,7 @@ class ViewConsultaCategoriasTest extends DuskTestCase
             $response = $this->actingAs($this->admin)->delete('categorias/' . $i);
             $response->assertStatus(status: 302);
             $this->assertDatabaseMissing('categorias', [
-                'nombre_cat' => $categoria->nombre_cat,
+                'nombre_categoria' => $categoria->nombre_categoria,
             ]);
         } 
         $this->truncateTableWithForeignKeys(Categoria::class, "CategoriaSeeder");
@@ -75,7 +75,7 @@ class ViewConsultaCategoriasTest extends DuskTestCase
     public function test_consultar_categorias_boton_destroys_categoria_succesfully(){
         $this->truncateTableWithForeignKeys(Categoria::class, "CategoriaSeeder");
         $this->browse(function (Browser $browser) {
-            $this->verifyBorrarButtonDeletesSuccessfully($browser, $this->admin, Categoria::class, "categorias", "nombre_cat", "/categorias", "#boton");
+            $this->verifyBorrarButtonDeletesSuccessfully($browser, $this->admin, Categoria::class, "categorias", "nombre_categoria", "/categorias", "#boton");
         });
         $this->truncateTableWithForeignKeys(Categoria::class, "CategoriaSeeder");
     }

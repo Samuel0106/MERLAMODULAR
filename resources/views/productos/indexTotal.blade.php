@@ -42,7 +42,7 @@
             <label class="block uppercase md:text-sm text-xs text-gray-500 font-semibold">Categoria:</label>
             <select id="_categoria_filtro_inventario_general" name="categoria_filtro" class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
                 @foreach ($categorias as $cat)
-                    <option value="{{ $cat->id }}">{{ $cat->nombre_cat }}</option>
+                    <option value="{{ $cat->id }}">{{ $cat->nombre_categoria }}</option>
                 @endforeach
             </select>
         </div>
@@ -80,7 +80,7 @@
             <label class="block uppercase md:text-sm text-xs text-gray-500 font-semibold">Categoría:</label>
             <select id="_categoria_filtro" name="categoria_filtro" class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
                 @foreach ($categorias as $categoria)
-                    <option value="{{ $categoria->id }}">{{ $categoria->nombre_cat }}</option>
+                    <option value="{{ $categoria->id }}">{{ $categoria->nombre_categoria }}</option>
                 @endforeach
                 <option value="0" style='color: blue;'>Todas</option>
             </select>
@@ -141,10 +141,10 @@
                 @foreach ($productos as $producto)
                     <tr data-id="{{ $producto->id }}">
                         <td>{{ $producto->id }}</td>
-                        <td>{{ $producto->nombre_prod }}</td>
+                        <td>{{ $producto->nombre_producto }}</td>
                         <td>{{ $producto->unidad }}</td>
-                        <td>{{ $producto->stock_min }}</td>
-                        <td>{{ $producto->categoria->nombre_cat }}</td>                        
+                        <td>{{ $producto->stock_minimo }}</td>
+                        <td>{{ $producto->categoria->nombre_categoria }}</td>                        
                         <td>{{ $producto->total_agregado }}</td>
                         <td>{{ $producto->solicitados_cant }}</td>
                         <td>{{ $producto->existencias }}</td>
@@ -308,10 +308,10 @@
                     
                         table.row.add([
                         data.lista[i].id,
-                        data.lista[i].nombre_prod,
+                        data.lista[i].nombre_producto,
                         data.lista[i].unidad,
-                        data.lista[i].stock_min,
-                        data.lista[i].categoria.nombre_cat,
+                        data.lista[i].stock_minimo,
+                        data.lista[i].categoria.nombre_categoria,
                         data.lista[i].total_agregado,
                         data.lista[i].solicitados_cant,
                         data.lista[i].existencias,
@@ -445,10 +445,10 @@
 
                     table.row.add([
                         data.lista[i].id,
-                        data.lista[i].nombre_prod,
+                        data.lista[i].nombre_producto,
                         data.lista[i].unidad,
-                        data.lista[i].stock_min,
-                        data.lista[i].categoria.nombre_cat,
+                        data.lista[i].stock_minimo,
+                        data.lista[i].categoria.nombre_categoria,
                         data.lista[i].existencias,
                         data.lista[i].area.area_nombre,
                         foto,

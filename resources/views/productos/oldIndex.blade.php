@@ -31,9 +31,9 @@
                             <td style="display: none;">{{$producto->id}}</td>
                             
                             <td>{{$producto->id}}</td>
-                            <td>{{$producto->nombre_prod}}</td>
+                            <td>{{$producto->nombre_producto}}</td>
                             <td>{{$producto->unidad}}</td>
-                            <td>{{$producto->stock_min}}</td>
+                            <td>{{$producto->stock_minimo}}</td>
                             <td>{{$producto->categoria}}</td>
                             <td  class="px-14 py-1">
                                 <img src="/imagen_productos/{{$producto->photo_prod}}" alt="Foto del producto" width="80%">

@@ -32,7 +32,7 @@ class InventarioIndex extends Component
         if($this->categoriaSelect != 0)
         {
             $this->productosT = Producto::where([
-                ['categoria_id', '=', $this->categoriaSelect],
+                ['id_categoria', '=', $this->categoriaSelect],
                 ])->get();
             }
             else{

@@ -61,7 +61,7 @@
                 @foreach ($categorias as $cat)
                     <option <?php if ($cat->id == $categorias[0]->id) {
                         print 'selected';
-                    } ?> value="{{ $cat->id }}">{{ $cat->nombre_cat }}</option>
+                    } ?> value="{{ $cat->id }}">{{ $cat->nombre_categoria }}</option>
                 @endforeach
             </select>
         </div>
@@ -109,10 +109,10 @@
                 @foreach ($productos as $producto)
                     <tr data-id="{{ $producto->id }}">
                         <td>{{ $producto->id }}</td>
-                        <td>{{ $producto->nombre_prod }}</td>
+                        <td>{{ $producto->nombre_producto }}</td>
                         <td>{{ $producto->unidad }}</td>
-                        <td>{{ $producto->stock_min }}</td>
-                        <td>{{ $producto->categoria->nombre_cat }}</td>
+                        <td>{{ $producto->stock_minimo }}</td>
+                        <td>{{ $producto->categoria->nombre_categoria }}</td>
                         <td>{{ $producto->existencias }}</td>
                         @if ($producto->subareas)
                             {{-- @dd($producto) --}}
@@ -276,10 +276,10 @@
 
                     table.row.add([
                         data.lista[i].id,
-                        data.lista[i].nombre_prod,
+                        data.lista[i].nombre_producto,
                         data.lista[i].unidad,
-                        data.lista[i].stock_min,
-                        data.lista[i].categoria.nombre_cat,
+                        data.lista[i].stock_minimo,
+                        data.lista[i].categoria.nombre_categoria,
                         data.lista[i].existencias,
                         //data.lista[i].solicitados_cant,
                         almacen,

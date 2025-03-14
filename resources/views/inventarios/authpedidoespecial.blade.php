@@ -88,7 +88,7 @@
                         <label class="mt-1 uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Nombre del producto: </label>
                         <input style="border-color: rgb(21 128 61);background-color: rgb(240, 240, 240);"
                         class=" py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 
-                        focus:ring-blue-700 focus:border-transparent" value="{{$pedido->nombre_prod}}" disabled />
+                        focus:ring-blue-700 focus:border-transparent" value="{{$pedido->nombre_producto}}" disabled />
 
                         <label class="mt-1 uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Cantidad: </label>
                         <input style="border-color: rgb(21 128 61);background-color: rgb(240, 240, 240);"

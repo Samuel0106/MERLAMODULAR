@@ -21,19 +21,19 @@
     <body>
     <?php
         $subareaSel;
-        $almacenS;
+        $almacenes;
         if(isset($_GET['subareaSel'])){
             $subareaSel = $_GET['subareaSel'];
         }else{
             $subareaSel = "";
         }
-        if(isset($_GET['almacenS'])){
-            $almacenS = $_GET['almacenS'];
+        if(isset($_GET['almacenes'])){
+            $almacenes = $_GET['almacenes'];
         }else {
-            $almacenS = "";
+            $almacenes = "";
         }
         ?>
-        @livewire('inventarios-create', ['almacenS'=> $almacenS, 'subareaSel'=> $subareaSel,'user' => $user, 'carro' => $carro, 'productos' => $productos, 'datos' => $datos])
+        @livewire('inventarios-create', ['almacenes'=> $almacenes, 'subareaSel'=> $subareaSel,'user' => $user, 'carro' => $carro, 'productos' => $productos, 'datos' => $datos])
         @livewireScripts
         @livewireChartsScripts
         @section('js')

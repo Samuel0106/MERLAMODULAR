@@ -37,7 +37,7 @@ class FiltroProductos extends Component
     // {
     //     if ($this->categoriaSeleccionada != '0') {
     //         $this->productosAlmacen = Producto::where('subarea', $this->almacen[0]->almacen_clave)
-    //             ->where('categoria_id', $this->categoriaSeleccionada)->get();
+    //             ->where('id_categoria', $this->categoriaSeleccionada)->get();
     //         for ($i = 1; $i < $this->almacen->count(); $i++) {
     //             $prod = Producto::where('subarea', $this->almacen[$i]->almacen_clave)->get();
     //             $this->productosAlmacen = $this->productosAlmacen->merge($prod);

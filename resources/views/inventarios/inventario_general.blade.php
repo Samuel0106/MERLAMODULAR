@@ -51,10 +51,10 @@
                 @foreach ($productos as $producto)
                     <tr data-id="{{ $producto->id }}">
                         <td>{{ $producto->id }}</td>
-                        <td>{{ $producto->nombre_prod }}</td>
+                        <td>{{ $producto->nombre_producto }}</td>
                         <td>{{ $producto->unidad }}</td>
-                        <td>{{ $producto->stock_min }}</td>
-                        <td>{{ $producto->categoria->nombre_cat }}</td>
+                        <td>{{ $producto->stock_minimo }}</td>
+                        <td>{{ $producto->categoria->nombre_categoria }}</td>
                         <td>{{ $producto->existencias }}</td>
                         <td>{{ App\Models\Area::find($producto->area)->area_nombre }}</td>
                         <td>{{ App\Models\Almacen::find($producto->subarea)->almacen_nombre }}</td>

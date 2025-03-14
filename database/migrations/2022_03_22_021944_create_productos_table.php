@@ -15,11 +15,11 @@ class CreateProductosTable extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_prod');
+            $table->string('nombre_producto');
             $table->string('unidad');
-            $table->integer('stock_min');
-            $table->unsignedBigInteger('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categorias')->onUpdate('cascade');
+            $table->integer('stock_minimo');
+            $table->unsignedBigInteger('id_categoria');
+            $table->foreign('id_categoria')->references('id')->on('categorias')->onUpdate('cascade');
             $table->string('area');
             $table->string('subarea');
             $table->integer('existencias');
@@ -28,7 +28,7 @@ class CreateProductosTable extends Migration
         });
         
         // Schema::table('productos', function($table) {
-        //     $table->foreign('categoria')->references('nombre_cat')->on('categorias')->onUpdate('cascade');
+        //     $table->foreign('categoria')->references('nombre_categoria')->on('categorias')->onUpdate('cascade');
         // });
     }
 

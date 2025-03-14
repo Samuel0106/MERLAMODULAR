@@ -109,7 +109,7 @@
                             <tr>
                                 <td class="px-6 py-4 text-center">
                                     <div>
-                                        {{ $producto->nombre_prod }}
+                                        {{ $producto->nombre_producto }}
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 text-center">
@@ -119,7 +119,7 @@
                                 </td>
                                 <td class="px-6 py-4 text-center">
                                     <div>
-                                        {{ $producto->categoria->nombre_cat }}
+                                        {{ $producto->categoria->nombre_categoria }}
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 text-center">

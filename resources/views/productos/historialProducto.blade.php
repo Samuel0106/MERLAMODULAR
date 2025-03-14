@@ -2,7 +2,7 @@
     @section('title', 'PLANTILLA - MERLA')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Historial '. $producto->nombre_prod . ', ' . $producto->ubicacion) }}
+            {{ __('Historial '. $producto->nombre_producto . ', ' . $producto->ubicacion) }}
         </h2>
     </x-slot>
 

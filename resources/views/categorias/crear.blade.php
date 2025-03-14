@@ -32,8 +32,8 @@
 
                         <div class="grid grid-cols-1">
                             <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Nombre de la Categoría:</label>
-                            <input name="nombre_cat" class=" @error('nombre_cat') is-invalid @enderror py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent" type="text" value="{{old('eid')}}" required />
-                            @error('nombre_cat')
+                            <input name="nombre_categoria" class=" @error('nombre_categoria') is-invalid @enderror py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent" type="text" value="{{old('eid')}}" required />
+                            @error('nombre_categoria')
                             <span style="font-size: 10pt;color:red" role="alert">
                                 <strong>{{$message}}</strong>
                             </span>

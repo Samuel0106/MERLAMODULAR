@@ -29,12 +29,12 @@ class InventarioController extends Controller
 
     public function __construct()
     {
-        $this->middleware('can:inventarios');
-        $this->middleware('can:inventarios.autorizar')->only('autorizarIndex', 'comentario', 'entregarProductos', 'changeProductStatus');
-        $this->middleware('can:inventarios.authPedidoEspecial')->only('indexPedidoEspecial', 'authPedidoEspecial');
-        $this->middleware('can:inventarios.entregar')->only('entregarIndex', 'entregadosIndex', 'show');
-        //$this->middleware('can:inventarios.proximosAgotar')->only('proximosAgotar');
-        $this->middleware('can:inventarios.reponer')->only('reponer');
+        $this->middleware('can:inventario');
+        $this->middleware('can:inventario.autorizar')->only('autorizarIndex', 'comentario', 'entregarProductos', 'changeProductStatus');
+        $this->middleware('can:inventario.authPedidoEspecial')->only('indexPedidoEspecial', 'authPedidoEspecial');
+        $this->middleware('can:inventario.entregar')->only('entregarIndex', 'entregadosIndex', 'show');
+        //$this->middleware('can:inventario.proximosAgotar')->only('proximosAgotar');
+        $this->middleware('can:inventario.reponer')->only('reponer');
     }
     /**
      * Display a listing of the resource.
@@ -110,10 +110,10 @@ class InventarioController extends Controller
         #Consulta de los productos cuando el area del producto es igual al del usuario autenticado
         #Muestra solo los productos con una existencia mayor al stock minimo + 10%
         $productos = DB::table('productos')
-            ->select('productos.id', 'nombre_prod', 'unidad', 'existencias', 'photo_prod', 'stock_min', 'area')
+            ->select('productos.id', 'nombre_producto', 'unidad', 'existencias', 'photo_prod', 'stock_minimo', 'area')
             ->join('areas', 'productos.area', '=', 'areas.area_clave')
             ->where('area', $area_clave)
-            ->whereRaw('existencias <= stock_min * 1.1')
+            ->whereRaw('existencias <= stock_minimo * 1.1')
             ->get();
 
 
@@ -136,7 +136,7 @@ class InventarioController extends Controller
     public function store(Request $request)
     {
         if (!$request->area) {
-            return redirect()->route('inventarios.create', ['subareaSel' => $request->subarea, 'almacenS' => $request->almacen]);
+            return redirect()->route('inventarios.create', ['subareaSel' => $request->subarea, 'almacenes' => $request->almacen]);
         }
 
         $inventario = $request->all();
@@ -195,7 +195,7 @@ class InventarioController extends Controller
             [
                 'solicitante' => 'required|exists:datosusers,eid',
                 'responsable' => 'required|exists:datosusers,eid',
-                'nombre_prod' => 'required|min:1|max:191|regex:/^[a-zA-Z0-9\s\/.]+$/u',
+                'nombre_producto' => 'required|min:1|max:191|regex:/^[a-zA-Z0-9\s\/.]+$/u',
                 'cantidad' => 'required|numeric|min:1|max:2147483647', //int(11) en la base de datos
                 'descripcion' => 'required|min:1|max:191|regex:/^[a-zA-Z0-9\s\/.]+$/u',
                 'foto' => 'mimes:png,jpg,jpeg|max:8192',
@@ -478,7 +478,7 @@ class InventarioController extends Controller
                     if ($inventario->almacen != $inventario->subarea) {
                         $destino = $inventario->subarea;
                         $areaDestino = substr($destino, 0, -1);
-                        $producto2 = Producto::where('subarea', $destino)->where('nombre_prod', $item->name)->get();
+                        $producto2 = Producto::where('subarea', $destino)->where('nombre_producto', $item->name)->get();
                         if (count($producto2) != 0) {
                             $producto2 = $producto2[0];
                             $producto2->existencias = $producto2->existencias + $item->options->qtyAuth;
@@ -487,10 +487,10 @@ class InventarioController extends Controller
                         } else {
                             $producto = Producto::find($item->id);
                             Producto::create([
-                                'nombre_prod' => $producto->nombre_prod,
+                                'nombre_producto' => $producto->nombre_producto,
                                 'unidad' => $producto->unidad,
-                                'stock_min' => $producto->stock_min,
-                                'categoria_id' => $producto->categoria_id,
+                                'stock_minimo' => $producto->stock_minimo,
+                                'id_categoria' => $producto->id_categoria,
                                 'area' => $areaDestino,
                                 'subarea' => $destino,
                                 'existencias' => $item->options->qtyAuth,
@@ -668,8 +668,8 @@ class InventarioController extends Controller
         $countCategorias = Categoria::select(DB::raw('count(*) as count'))->get();
         $countCategorias = $countCategorias[0]->count;
 
-        $vc = DB::table('view_counter')->where('pagina', 'stock1')->first()->visitas + 1;
-        DB::table('view_counter')->where('pagina', 'stock1')->update(['visitas' => $vc]);
+        $vc = DB::table('view_counter')->where('pagina', 'merla')->first()->visitas + 1;
+        DB::table('view_counter')->where('pagina', 'merla')->update(['visitas' => $vc]);
 
         return view('inventarios.inicio', compact('countPendientes', 'countAutorizados', 'productos', 'countCategorias', 'countPedidos', 'countMermas'));
     }
@@ -718,8 +718,8 @@ class InventarioController extends Controller
         $countCategorias = Categoria::select(DB::raw('count(*) as count'))->get();
         $countCategorias = $countCategorias[0]->count;
 
-        $vc = DB::table('view_counter')->where('pagina', 'stock1')->first()->visitas + 1;
-        DB::table('view_counter')->where('pagina', 'stock1')->update(['visitas' => $vc]);
+        $vc = DB::table('view_counter')->where('pagina', 'merla')->first()->visitas + 1;
+        DB::table('view_counter')->where('pagina', 'merla')->update(['visitas' => $vc]);
 
         return view('inventarios.iniciopedidos', compact('countPendientes', 'countAutorizados', 'productos', 'countCategorias', 'countPedidos', 'countMermas'));
     }
@@ -768,8 +768,8 @@ class InventarioController extends Controller
         $countCategorias = Categoria::select(DB::raw('count(*) as count'))->get();
         $countCategorias = $countCategorias[0]->count;
 
-        $vc = DB::table('view_counter')->where('pagina', 'stock1')->first()->visitas + 1;
-        DB::table('view_counter')->where('pagina', 'stock1')->update(['visitas' => $vc]);
+        $vc = DB::table('view_counter')->where('pagina', 'merla')->first()->visitas + 1;
+        DB::table('view_counter')->where('pagina', 'merla')->update(['visitas' => $vc]);
 
         return view('inventarios.inicioinventario', compact('countPendientes', 'countAutorizados', 'productos', 'countCategorias', 'countPedidos', 'countMermas'));
     }
@@ -818,8 +818,8 @@ class InventarioController extends Controller
         $countCategorias = Categoria::select(DB::raw('count(*) as count'))->get();
         $countCategorias = $countCategorias[0]->count;
 
-        $vc = DB::table('view_counter')->where('pagina', 'stock1')->first()->visitas + 1;
-        DB::table('view_counter')->where('pagina', 'stock1')->update(['visitas' => $vc]);
+        $vc = DB::table('view_counter')->where('pagina', 'merla')->first()->visitas + 1;
+        DB::table('view_counter')->where('pagina', 'merla')->update(['visitas' => $vc]);
 
         return view('inventarios.inicioproductos', compact('countPendientes', 'countAutorizados', 'productos', 'countCategorias', 'countPedidos', 'countMermas'));
     }
@@ -868,8 +868,8 @@ class InventarioController extends Controller
         $countCategorias = Categoria::select(DB::raw('count(*) as count'))->get();
         $countCategorias = $countCategorias[0]->count;
 
-        $vc = DB::table('view_counter')->where('pagina', 'stock1')->first()->visitas + 1;
-        DB::table('view_counter')->where('pagina', 'stock1')->update(['visitas' => $vc]);
+        $vc = DB::table('view_counter')->where('pagina', 'merla')->first()->visitas + 1;
+        DB::table('view_counter')->where('pagina', 'merla')->update(['visitas' => $vc]);
 
         return view('inventarios.iniciomermas', compact('countPendientes', 'countAutorizados', 'productos', 'countCategorias', 'countPedidos', 'countMermas'));
     }

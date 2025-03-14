@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
 
-            {{ __('Añadir mermas de ' . $producto->nombre_prod . ', en ' . $producto->ubicacion) }}
+            {{ __('Añadir mermas de ' . $producto->nombre_producto . ', en ' . $producto->ubicacion) }}
         </h2>
     </x-slot>
     <div class="py-12">

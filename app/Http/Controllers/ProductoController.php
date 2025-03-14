@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
 use App\Models\Subarea;
-use App\Models\Almacens;
+use App\Models\almacenes;
 use App\Models\Pedidoespecial;
 use App\Models\Baja;
 use DataTables;
@@ -48,7 +48,7 @@ class ProductoController extends Controller
         //Obtener el almacen del usuario autenticado y mostrar esos productos
         if (Auth::user()->can('producto.TodosAlmacenes') || Auth::user()->hasRole('admin')) {
             $productos = Producto::with(['areas', 'subareas', 'categoria', 'almacenes'])
-                ->where('categoria_id', $categorias[0]->id)->get();
+                ->where('id_categoria', $categorias[0]->id)->get();
         } /* else {
             $almacenes = Almacen::where('jefe_eid', auth()->user()->datos->eid)->where('habilitado', 1)->get();
             $productos = collect([]);
@@ -62,7 +62,7 @@ class ProductoController extends Controller
                 ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                 // ->where('subarea', $almacenes[0]->almacen_clave)
                 ->where('subarea', Auth::user()->datos->subarea)
-                ->where('categoria_id', $categorias[0]->id)->get();
+                ->where('id_categoria', $categorias[0]->id)->get();
         } */
         else if(Auth::user()->hasRole(['JefeInventario', 'JefeArea'])){
             $almacen = Almacen::where('jefe_eid', auth()->user()->eid)
@@ -71,20 +71,20 @@ class ProductoController extends Controller
                 $productos = Producto::query()
                 ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                 ->where('subarea', $almacen->almacen_clave)
-                ->where('categoria_id', $categorias[0]->id)->get();
+                ->where('id_categoria', $categorias[0]->id)->get();
             }
             else{
                 $productos = Producto::query()
                 ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                 ->where('area', auth()->user()->datos->area)
-                ->where('categoria_id', $categorias[0]->id)->get();
+                ->where('id_categoria', $categorias[0]->id)->get();
             }
         }
         else if(Auth::user()->hasRole(['JefeSubarea'])){
             $productos = Producto::query()
                 ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                 ->where('subarea', auth()->user()->datos->subarea)
-                ->where('categoria_id', $categorias[0]->id)->get();
+                ->where('id_categoria', $categorias[0]->id)->get();
         }
 
         return view('productos.index', compact(['productos', 'categorias']));
@@ -106,7 +106,7 @@ class ProductoController extends Controller
         $productos = Producto::query()
             ->with(['categoria', 'areas', 'subareas', 'almacenes'])
             ->where('subarea', $subareas[0]->subarea_clave)
-            ->where('categoria_id', $categorias[0]->id)->get();
+            ->where('id_categoria', $categorias[0]->id)->get();
         return view('productos.indexSubareas', compact(['productos', 'categorias', 'subareas', 'area']));
     }
     public function indexTotal()
@@ -132,7 +132,7 @@ class ProductoController extends Controller
 
         $almacenes = Almacen::where('area_id', $areas[0]->area_clave)->get();
 
-        $productos = Producto::where('categoria_id', $categorias[0]->id)
+        $productos = Producto::where('id_categoria', $categorias[0]->id)
             ->with(['subareas', 'almacenes'])
             ->where('subarea', $almacenes[2]->almacen_clave)->get();
 
@@ -183,10 +183,10 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $producto = $request->validate([
-            'nombre_prod' => 'required|max:191|min:1|regex:/^[a-zA-Z0-9\s@#$%&*]+$/u',
+            'nombre_producto' => 'required|max:191|min:1|regex:/^[a-zA-Z0-9\s@#$%&*]+$/u',
             'unidad' => 'required',
-            'stock_min' => 'required|numeric|max:2147483647|min:0',//int(11) en la base de datos
-            'categoria_id' => 'required',
+            'stock_minimo' => 'required|numeric|max:2147483647|min:0',//int(11) en la base de datos
+            'id_categoria' => 'required',
             'existencias' => 'required|numeric|max:2147483647|min:0',//int(11) en la base de datos
             'area' => 'required',
             'subarea' => 'required',
@@ -199,9 +199,9 @@ class ProductoController extends Controller
         $subarea = $request->input('subarea');
         $producto['area'] = substr($subarea, 0, 4);
         $producto['photo_prod'] = "iconProduct.png";
-        $producto['nombre_prod'] = preg_replace('/[^\p{L}0-9\s\/.-]+/u', '', $producto['nombre_prod']);
-        $nombre = $producto['nombre_prod'];
-        $categoria = $producto['categoria_id'];
+        $producto['nombre_producto'] = preg_replace('/[^\p{L}0-9\s\/.-]+/u', '', $producto['nombre_producto']);
+        $nombre = $producto['nombre_producto'];
+        $categoria = $producto['id_categoria'];
         $data = Producto::create($producto);
         if($request->has('photo_prod')){
             $imagen = $request->file('photo_prod');
@@ -239,7 +239,7 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
-        $almacenes = DB::table('almacens')->get();
+        $almacenes = DB::table('almacenes')->get();
         $categorias = DB::table('categorias')->get();
         //$area_id = Subarea::find($producto->subarea)->area_id;
         //$areas = DB::table('areas')->where('area_clave', 'lIKE', 'DX' . '%')->get();
@@ -257,10 +257,10 @@ class ProductoController extends Controller
     public function update(Request $request, Producto $producto)
     {
         $validacion = $request->validate([              //Variable no se usa pero valida correctamente
-            'nombre_prod' => 'required|max:191|min:1|regex:/^[a-zA-Z0-9\s@#$%&*]+$/u',
+            'nombre_producto' => 'required|max:191|min:1|regex:/^[a-zA-Z0-9\s@#$%&*]+$/u',
             'unidad' => 'required',
-            'stock_min' => 'required|numeric|max:2147483647|min:0',//int(11) en la base de datos
-            'categoria_id' => 'required',
+            'stock_minimo' => 'required|numeric|max:2147483647|min:0',//int(11) en la base de datos
+            'id_categoria' => 'required',
             'existencias' => 'required|numeric|max:2147483647|min:0',//int(11) en la base de datos
             'area' => 'required',
             'subarea' => 'required',
@@ -272,7 +272,7 @@ class ProductoController extends Controller
 
         $producto->fill($request->all());
         if ($request->photo_prod) {
-            $imagenProd = date('Ymdhi') . "_" . $producto->almacen . "_" . $producto->id . "_" . $producto->nombre . "_" . "photo_prod" . "_" . $producto->categoria_id . "." . $request->photo_prod->getClientOriginalExtension();
+            $imagenProd = date('Ymdhi') . "_" . $producto->almacen . "_" . $producto->id . "_" . $producto->nombre . "_" . "photo_prod" . "_" . $producto->id_categoria . "." . $request->photo_prod->getClientOriginalExtension();
             $request->photo_prod->move(public_path('imagen_productos'), $imagenProd);
             $producto->photo_prod = "$imagenProd";
         }
@@ -364,11 +364,11 @@ class ProductoController extends Controller
         if (Auth::user()->hasRole('usuario')) {
             $productos = Producto::query()
                 ->with(['areas', 'subareas', 'almacenes'])
-                ->where('categoria_id', $categorias[0]->id)
+                ->where('id_categoria', $categorias[0]->id)
                 ->where('subarea', auth()->user()->datos->subarea)->get();
         } else if (Auth::user()->hasRole('admin')) {
             $productos = Producto::query()
-                ->where('categoria_id', $categorias[0]->id)
+                ->where('id_categoria', $categorias[0]->id)
                 ->with(['areas', 'subareas', 'almacenes'])->get();
         } elseif (Auth::user()->hasRole(['JefeInventario', 'JefeArea'])) {
             $almacen = Almacen::where('jefe_eid', auth()->user()->datos->eid)->where('habilitado', 1)->first();
@@ -381,20 +381,20 @@ class ProductoController extends Controller
             } */
             $productos = Producto::query()
                 ->with(['areas', 'subareas', 'almacenes'])
-                ->where('categoria_id', $categorias[0]->id)
+                ->where('id_categoria', $categorias[0]->id)
                 ->where('area', auth()->user()->datos->area)->get();
 
             if($almacen){
                 $productos = Producto::query()
                 ->with(['areas', 'subareas', 'almacenes'])
-                ->where('categoria_id', $categorias[0]->id)
+                ->where('id_categoria', $categorias[0]->id)
                 ->where('subarea', $almacen->almacen_clave)->get();
             }
         }
         else{
             $productos = Producto::query()
             ->with(['areas', 'subareas', 'almacenes'])
-            ->where('categoria_id', $categorias[0]->id)->get();
+            ->where('id_categoria', $categorias[0]->id)->get();
         }
         // $productos = Producto::paginate(50);
         return view('productos.bajas', compact(['productos', 'categorias']));
@@ -460,7 +460,7 @@ class ProductoController extends Controller
         {
             if (Auth::user()->can('producto.TodosAlmacenes') || Auth::user()->hasRole('admin')) {
                 $productos = Producto::with(['areas', 'subareas', 'categoria', 'almacenes'])
-                    ->where('categoria_id', $cat)->get();
+                    ->where('id_categoria', $cat)->get();
             } 
             else if(Auth::user()->hasRole(['JefeInventario', 'JefeArea'])){
                 $almacen = Almacen::where('jefe_eid', auth()->user()->eid)
@@ -469,27 +469,27 @@ class ProductoController extends Controller
                     $productos = Producto::query()
                     ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                     ->where('subarea', $almacen->almacen_clave)
-                    ->where('categoria_id', $cat)->get();
+                    ->where('id_categoria', $cat)->get();
                 }
                 else{
                     $productos = Producto::query()
                     ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                     ->where('area', auth()->user()->datos->area)
-                    ->where('categoria_id', $cat)->get();
+                    ->where('id_categoria', $cat)->get();
                 }
             }
             else if(Auth::user()->hasRole(['JefeSubarea'])){
                 $productos = Producto::query()
                     ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                     ->where('subarea', auth()->user()->datos->subarea)
-                    ->where('categoria_id', $cat)->get();
+                    ->where('id_categoria', $cat)->get();
             }
         }
         else {
             
             if (Auth::user()->can('producto.TodosAlmacenes') || Auth::user()->hasRole('admin')) {
                 $productos = Producto::onlyTrashed()->with(['areas', 'subareas', 'categoria', 'almacenes'])
-                    ->where('categoria_id', $cat)->get();
+                    ->where('id_categoria', $cat)->get();
             } 
             else if(Auth::user()->hasRole(['JefeInventario', 'JefeArea'])){
                 $almacen = Almacen::where('jefe_eid', auth()->user()->eid)
@@ -498,20 +498,20 @@ class ProductoController extends Controller
                     $productos = Producto::query()
                     ->onlyTrashed()->with(['categoria', 'areas', 'subareas', 'almacenes'])
                     ->where('subarea', $almacen->almacen_clave)
-                    ->where('categoria_id', $cat)->get();
+                    ->where('id_categoria', $cat)->get();
                 }
                 else{
                     $productos = Producto::query()
                     ->onlyTrashed()->with(['categoria', 'areas', 'subareas', 'almacenes'])
                     ->where('area', auth()->user()->datos->area)
-                    ->where('categoria_id', $cat)->get();
+                    ->where('id_categoria', $cat)->get();
                 }
             }
             else if(Auth::user()->hasRole(['JefeSubarea'])){
                 $productos = Producto::query()
                     ->onlyTrashed()->with(['categoria', 'areas', 'subareas', 'almacenes'])
                     ->where('subarea', auth()->user()->datos->subarea)
-                    ->where('categoria_id', $cat)->get();
+                    ->where('id_categoria', $cat)->get();
             }
         }
         return response()->json(
@@ -529,7 +529,7 @@ class ProductoController extends Controller
         $categorias = Categoria::all();
         if (Auth::user()->can('producto.TodosAlmacenes') || Auth::user()->hasRole('admin')) {
             $productos = Producto::with(['areas', 'subareas', 'categoria', 'almacenes'])
-                ->where('categoria_id', $categorias[0]->id)->get();
+                ->where('id_categoria', $categorias[0]->id)->get();
         }else if(Auth::user()->hasRole(['JefeInventario', 'JefeArea'])){
             $almacen = Almacen::where('jefe_eid', auth()->user()->eid)
             ->where('habilitado', 1)->first();
@@ -537,20 +537,20 @@ class ProductoController extends Controller
                 $productos = Producto::query()
                 ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                 ->where('subarea', $almacen->almacen_clave)
-                ->where('categoria_id', $categorias[0]->id)->get();
+                ->where('id_categoria', $categorias[0]->id)->get();
             }
             else{
                 $productos = Producto::query()
                 ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                 ->where('area', auth()->user()->datos->area)
-                ->where('categoria_id', $categorias[0]->id)->get();
+                ->where('id_categoria', $categorias[0]->id)->get();
             }
         }
         else if(Auth::user()->hasRole(['JefeSubarea'])){
             $productos = Producto::query()
                 ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                 ->where('subarea', auth()->user()->datos->subarea)
-                ->where('categoria_id', $categorias[0]->id)->get();
+                ->where('id_categoria', $categorias[0]->id)->get();
         }
         
         //se modifica cada producto para añadir lo que llevara la columna almacen
@@ -582,7 +582,7 @@ class ProductoController extends Controller
         $query = Producto::query()->with(['categoria', 'areas', 'subareas', 'almacenes']);
 
         if ($cat) {
-            $query->where('categoria_id', $cat);
+            $query->where('id_categoria', $cat);
         }
         if ($eliminados) {
             $query->onlyTrashed();
@@ -624,7 +624,7 @@ class ProductoController extends Controller
         $cat = $request->categoria;
         $documentos = Producto::query()
             ->with(['categoria', 'area'])
-            ->where('categoria_id', $cat)
+            ->where('id_categoria', $cat)
             ->get();
 
         return response()->json(
@@ -642,14 +642,14 @@ class ProductoController extends Controller
             $productos = Producto::query()
                 ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                 ->when($cat != 0, function($query) use($cat){
-                    return $query->where('categoria_id', $cat);
+                    return $query->where('id_categoria', $cat);
                 })
                 ->where('subarea', auth()->user()->datos->subarea)->get();
         } else if (Auth::user()->hasRole('admin')) {
             $productos = Producto::query()
                 ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                 ->when($cat != 0, function($query) use($cat){
-                    return $query->where('categoria_id', $cat);
+                    return $query->where('id_categoria', $cat);
                 })->get();
         } elseif (Auth::user()->hasRole(['JefeInventario', 'JefeArea'])) {
             $almacen = Almacen::where('jefe_eid', auth()->user()->datos->eid)->where('habilitado', 1)->first();
@@ -657,7 +657,7 @@ class ProductoController extends Controller
             $productos = Producto::query()
                 ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                 ->when($cat != 0, function($query) use($cat){
-                    return $query->where('categoria_id', $cat);
+                    return $query->where('id_categoria', $cat);
                 })
                 ->where('area', auth()->user()->datos->area)->get();
 
@@ -665,7 +665,7 @@ class ProductoController extends Controller
                 $productos = Producto::query()
                 ->with(['categoria', 'areas', 'subareas', 'almacenes'])
                 ->when($cat != 0, function($query) use($cat){
-                    return $query->where('categoria_id', $cat);
+                    return $query->where('id_categoria', $cat);
                 })
                 ->where('subarea', $almacen->almacen_clave)->get();
             }
@@ -674,12 +674,12 @@ class ProductoController extends Controller
             $productos = Producto::query()
             ->with(['categoria', 'areas', 'subareas', 'almacenes'])
             ->when($cat != 0, function($query) use($cat){
-                return $query->where('categoria_id', $cat);
+                return $query->where('id_categoria', $cat);
             })->get();
         }
         /* $productos = Producto::query()
             ->with(['categoria', 'areas', 'subareas', 'almacenes'])
-            ->where('categoria_id', $cat)
+            ->where('id_categoria', $cat)
             ->get(); */
 
         return response()->json(
@@ -695,7 +695,7 @@ class ProductoController extends Controller
 
         if ($this->categoriaSelect != 0) {
             $this->productosT = Producto::where([
-                ['categoria_id', '=', $this->categoriaSelect],
+                ['id_categoria', '=', $this->categoriaSelect],
             ])->get();
         } else {
             // $this->productosT = Producto::all();
@@ -736,7 +736,7 @@ class ProductoController extends Controller
                     return $query->where('subarea', $subarea);
                 }) */
                     ->when($categoria != '0', function ($query) use ($categoria) {
-                        return $query->where('categoria_id', $categoria);
+                        return $query->where('id_categoria', $categoria);
                     })
                     /* ->when($producto != '0', function($query) use ($producto){
                     return $query->where('id', $producto);
@@ -760,7 +760,7 @@ class ProductoController extends Controller
                     return $query->where('subarea', $subarea);
                 }) */
                     ->when($categoria != '0', function ($query) use ($categoria) {
-                        return $query->where('categoria_id', $categoria);
+                        return $query->where('id_categoria', $categoria);
                     })
                     /* ->when($producto != '0', function($query) use ($producto){
                     return $query->where('id', $producto);
@@ -785,7 +785,7 @@ class ProductoController extends Controller
                     return $query->where('subarea', $subarea);
                 }) */
                     ->when($categoria != '0', function ($query) use ($categoria) {
-                        return $query->where('categoria_id', $categoria);
+                        return $query->where('id_categoria', $categoria);
                     })
                     /* ->when($producto != '0', function($query) use ($producto){
                     return $query->where('id', $producto);
@@ -809,7 +809,7 @@ class ProductoController extends Controller
                     return $query->where('subarea', $subarea);
                 }) */
                     ->when($categoria != '0', function ($query) use ($categoria) {
-                        return $query->where('categoria_id', $categoria);
+                        return $query->where('id_categoria', $categoria);
                     })
                     /* ->when($producto != '0', function($query) use ($producto){
                     return $query->where('id', $producto);
@@ -880,7 +880,7 @@ class ProductoController extends Controller
 
     // public function editar($id)
     // {
-    //     $almacenes = DB::table('almacens')->get();
+    //     $almacenes = DB::table('almacenes')->get();
     //     $categorias = DB::table('categorias')->get();
     //     $producto = Producto::where('id', $id)->get();
     //     //$area_id = Subarea::find($producto->subarea)->area_id;

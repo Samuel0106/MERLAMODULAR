@@ -78,7 +78,7 @@
                                 <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
                                     ALMACEN AL QUE SE LE SOLICITA PRODUCTOS:</label>
 
-                                <select id="_almacen" name="almacen" value='$almacen->almacen_nombre' wire:model="almacenSeleccionado"
+                                <select id="_almacen" name="almacen" value='$almacen->almacen_nombre' wire:model="almaceneseleccionado"
                                     wire:change="actualizarProductos"
                                     class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 
                                     focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
@@ -216,7 +216,7 @@
                     @endif
                     <!--
                     <div>
-                        <form action="{ { route('inventarios.pedidoespecial', [$areaSeleccionada1, $subareaSeleccionada1, $almacenSeleccionado]) }}"
+                        <form action="{ { route('inventarios.pedidoespecial', [$areaSeleccionada1, $subareaSeleccionada1, $almaceneseleccionado]) }}"
                         id="formEspecial" class="place-content-center inline-flex rounded">
                             <button type="submit" class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             type="button">Pedido fuera de Catalogo</button>
@@ -349,20 +349,20 @@
                                 <thead>
                                     <tr>
                                         <th class="bg-gray-800 text-white border border-white px-4 py-2">NOMBRE DEL PRODUCTO
-                                            @if ($orders['nombre_prod'] == 0)
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('nombre_prod', '0')">
+                                            @if ($orders['nombre_producto'] == 0)
+                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('nombre_producto', '0')">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                     </svg>                                  
                                                 </button>
-                                            @elseif($orders['nombre_prod'] == 1)
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('nombre_prod', '1')">
+                                            @elseif($orders['nombre_producto'] == 1)
+                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('nombre_producto', '1')">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
                                                     </svg>
                                                 </button>
                                             @else
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('nombre_prod', '2')">
+                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('nombre_producto', '2')">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
                                                     </svg>                                  
@@ -371,20 +371,20 @@
                                         </th>
                                         <th class="bg-gray-800 text-white border border-white px-4 py-2">TIPO DE UNIDAD</th>
                                         <th class="bg-gray-800 text-white border border-white px-4 py-2">CATEGORIA
-                                            @if ($orders['categoria_id'] == 0)
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('categoria_id', '0')">
+                                            @if ($orders['id_categoria'] == 0)
+                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('id_categoria', '0')">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                     </svg>                                  
                                                 </button>
-                                            @elseif($orders['categoria_id'] == 1)
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('categoria_id', '1')">
+                                            @elseif($orders['id_categoria'] == 1)
+                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('id_categoria', '1')">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
                                                     </svg>
                                                 </button>
                                             @else
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('categoria_id', '2')">
+                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('id_categoria', '2')">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
                                                     </svg>                                  
@@ -421,10 +421,10 @@
                                     @foreach ($productosA as $producto)
                                         <tr data-id="{{ $producto->id }}">
                                             <td class="border-b border-black px-4 py-2">
-                                                {!! str_ireplace($inputBusqueda, '<span class="bg-yellow-200 uppercase">' . $inputBusqueda . '</span>', $producto->nombre_prod) !!}
+                                                {!! str_ireplace($inputBusqueda, '<span class="bg-yellow-200 uppercase">' . $inputBusqueda . '</span>', $producto->nombre_producto) !!}
                                               </td>
                                             <td class="border-b border-black px-4 py-2" style="justify-items:center">{{ $producto->unidad }}</td>
-                                            <td class="border-b border-black px-4 py-2">{{ $producto->categoria->nombre_cat }}</td>
+                                            <td class="border-b border-black px-4 py-2">{{ $producto->categoria->nombre_categoria }}</td>
                                             <td class="border-b border-black px-4 py-2">{{ $producto->existencias }}</td>
                                             <td class="border-b border-black px-4 py-2">
                                                 @if ($producto->photo_prod != null)
@@ -510,7 +510,7 @@
                                                                 <input type="hidden" name="subareaDestino"
                                                                     wire:model="subDestino" />
                                                                 <input type="hidden" name="almacen"
-                                                                    value="{{ $almacenSeleccionado }}" />
+                                                                    value="{{ $almaceneseleccionado }}" />
                                                             </div>
                                                             <div class="rounded bg-blue-500 hover:bg-green-700">
                                                                 <button type="submit"

@@ -12,7 +12,7 @@ class Pedidoespecial extends Model
     protected $fillable =  [
         'solicitante',
         'responsable',
-        'nombre_prod',
+        'nombre_producto',
         'cantidad',
         'descripcion',
         'foto',

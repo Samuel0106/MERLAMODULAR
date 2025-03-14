@@ -49,13 +49,13 @@
                     <tbody>
                         @foreach ($productos as $producto)
 
-                            @if ($producto->stock_min > 1 ) {{-- Mostrar solo los productos que tengan mas de 1 de stock  --}}
+                            @if ($producto->stock_minimo > 1 ) {{-- Mostrar solo los productos que tengan mas de 1 de stock  --}}
                             
                                 <!--muestra los productos que esten proximos a agotar-->
                                 <tr>
                                     <td class="px-6 py-4 text-center">
                                         <div>
-                                            {{ $producto->nombre_prod }}
+                                            {{ $producto->nombre_producto }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 text-center">
@@ -70,7 +70,7 @@
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <div>
-                                            {{ $producto->stock_min }}
+                                            {{ $producto->stock_minimo }}
                                         </div>
                                     </td>
                                     <td>

@@ -119,7 +119,7 @@ class UserController extends Controller
         $datos = Datosuser::where('eid', Auth::user()->eid)->firstOrFail();
         $correo = DB::table('users')->select('email')->where('eid', Auth::user()->eid)->first();
         $division = DB::table('divisiones')->select('division_nombre')->where('division_clave', str_split($datos->area, 2)[0])->first();
-        $contrato = $datos['contrato'] ? Contratos::where('cl_tipco', $datos['contrato'])->first()['tipocontrato'] : 'Sin contrato';
+        $contrato = $datos['contrato'] ? Contratos::where('id', $datos['contrato'])->first()['tipo_de_contrato'] : 'Sin contrato';
         $area = $datos['area'] ? Area::where('area_clave', $datos->area)->first()['area_nombre'] : 'Sin area';
         $subarea = $datos['subarea'] ? Subarea::where('subarea_clave', $datos->subarea)->first()['subarea_nombre'] : 'Sin subarea';
 

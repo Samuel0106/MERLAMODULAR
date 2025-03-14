@@ -20,7 +20,7 @@
                 <option value=0>Todas las categorias</option>
                 {{-- <option value=1>Papeleria</option> --}}
                 @foreach ($categorias as $cat)
-                    <option value={{$cat->id}}>{{$cat->nombre_cat}}</option>
+                    <option value={{$cat->id}}>{{$cat->nombre_categoria}}</option>
                 @endforeach
             </select>
         </div>
@@ -46,10 +46,10 @@
                 @foreach ($productosT as $producto)
                     <tr data-id="{{ $producto->id }}">
                         <td>{{ $producto->id }}</td>
-                        <td>{{ $producto->nombre_prod }}</td>
+                        <td>{{ $producto->nombre_producto }}</td>
                         <td>{{ $producto->unidad }}</td>
-                        <td>{{ $producto->stock_min }}</td>
-                        <td>{{ $producto->categoria->nombre_cat }}</td>
+                        <td>{{ $producto->stock_minimo }}</td>
+                        <td>{{ $producto->categoria->nombre_categoria }}</td>
                         <td>{{ $producto->existencias }}</td>
                         <td>{{ App\Models\Area::find($producto->area)->area_nombre }} , {{ App\Models\Almacen::find($producto->subarea)->almacen_nombre }}</td>
                         <td class="px-14 py-1">

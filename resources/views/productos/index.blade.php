@@ -55,7 +55,7 @@
             <select id="_categoria_filtro" name="categoria_filtro"
                 class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
                 @foreach ($categorias as $cat)
-                    <option value="{{ $cat->id }}">{{ $cat->nombre_cat }}</option>
+                    <option value="{{ $cat->id }}">{{ $cat->nombre_categoria }}</option>
                 @endforeach
             </select>
         </div>
@@ -148,10 +148,10 @@
                     columns:
                         [
                             {title : "ID", data : "id"},
-                            {title : "NOMBRE DEL PRODUCTO", data : "nombre_prod"},
+                            {title : "NOMBRE DEL PRODUCTO", data : "nombre_producto"},
                             {title : "TIPO DE UNIDAD", data : "unidad"},
-                            {title : "STOCK MÍNIMO", data : "stock_min"},
-                            {title : "CATEGORÍA", data : "categoria.nombre_cat"},
+                            {title : "STOCK MÍNIMO", data : "stock_minimo"},
+                            {title : "CATEGORÍA", data : "categoria.nombre_categoria"},
                             {title : "CANTIDAD SOLICITADA", data : "solicitados_cant"},
                             {title : "EXISTENCIAS", data : "existencias"},
                             {title : "ALMACEN", data : "almacen"}, 
@@ -294,9 +294,9 @@
     //                 acciones += "</div>";
     //                 acciones += "</td>";
 
-    //                 //dd(data.lista[i].nombre_prod);
+    //                 //dd(data.lista[i].nombre_producto);
     //                 // Agregar un console.log() para verificar el nombre antes de añadir la fila a la tabla
-    //                 //console.log('Nombre antes de añadir la fila:', data.lista[i].nombre_prod);
+    //                 //console.log('Nombre antes de añadir la fila:', data.lista[i].nombre_producto);
 
     //                 foto = "<td class=\"px-14 py-1\">" +
     //                     "<img src=\"" + url_foto + "\"" +
@@ -316,10 +316,10 @@
                     
     //                 table.row.add([
     //                     data.lista[i].id,
-    //                     data.lista[i].nombre_prod,
+    //                     data.lista[i].nombre_producto,
     //                     data.lista[i].unidad,
-    //                     data.lista[i].stock_min,
-    //                     data.lista[i].categoria.nombre_cat,
+    //                     data.lista[i].stock_minimo,
+    //                     data.lista[i].categoria.nombre_categoria,
     //                     data.lista[i].solicitados_cant,
     //                     data.lista[i].existencias,
     //                     almacen,
@@ -327,9 +327,9 @@
     //                     acciones
     //                 ]);
     //                 // Agregar un dd() para verificar el nombre después de agregar la fila a la tabla
-    //                 //dd(data.lista[i].nombre_prod);
+    //                 //dd(data.lista[i].nombre_producto);
     //                 // Agregar un console.log() para verificar el nombre después de agregar la fila a la tabla
-    //                 //console.log('Nombre después de añadir la fila:', data.lista[i].nombre_prod);
+    //                 //console.log('Nombre después de añadir la fila:', data.lista[i].nombre_producto);
     //             }
     //         }
     //         table.draw();

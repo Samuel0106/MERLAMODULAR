@@ -69,12 +69,12 @@ class InventariosCreate extends Component
                 ['area_id', '=', $this->areaSeleccionada1],
             ])->get();
             try {
-                $this->almacenSeleccionado = $this->almacenes->first()->almacen_clave;
+                $this->almaceneseleccionado = $this->almacenes->first()->almacen_clave;
             } catch (\Throwable $th) {
-                $this->almacenSeleccionado = null;
+                $this->almaceneseleccionado = null;
             }
             $this->productosA = Producto::where([
-                ['subarea', '=', $this->almacenSeleccionado],
+                ['subarea', '=', $this->almaceneseleccionado],
             ])->get();
             $this->detectarCambio();
             $this->mostrarPaginado();
@@ -104,7 +104,7 @@ class InventariosCreate extends Component
             if($this->subareaAux == null){
                 $this->subareaAux = session()->get('almacenpe');
             }
-            $this->almacenSeleccionado = session()->get('almacenpe');
+            $this->almaceneseleccionado = session()->get('almacenpe');
             if($this->areaAux == null){
                 $this->areaAux = $this->areaSeleccionada1;
             }
@@ -114,7 +114,7 @@ class InventariosCreate extends Component
                 $this->subareaAux = session()->get('almacenpe');//
             };                                                  //
             $this->areaAux = $this->areaSeleccionada1;          //
-            $this->almacenSeleccionado = $this->subareaAux;     //
+            $this->almaceneseleccionado = $this->subareaAux;     //
             */
             
             $this->productosA = Producto::where([
@@ -131,10 +131,10 @@ class InventariosCreate extends Component
     {
         $busqueda = $this->inputBusqueda;
             $this->productosA = Producto::where([
-                ['subarea', '=', $this->almacenSeleccionado],
+                ['subarea', '=', $this->almaceneseleccionado],
             ])
             ->when($busqueda, function ($query) use ($busqueda) {
-                return $query->where('nombre_prod', 'LIKE', '%' . $this->inputBusqueda . '%');
+                return $query->where('nombre_producto', 'LIKE', '%' . $this->inputBusqueda . '%');
             })
             ->when($this->tipoOrden != 0, function ($query) {
                 return $query->orderBy($this->columnaSeleccionada, $this->tipoOrden);
@@ -152,8 +152,8 @@ class InventariosCreate extends Component
 
     public function reiniciarOrden()
     {
-        $this->orders['nombre_prod'] = 0;
-        $this->orders['categoria_id'] = 0;
+        $this->orders['nombre_producto'] = 0;
+        $this->orders['id_categoria'] = 0;
         $this->orders['existencias'] = 0;
         $this->tipoOrden = 0;
         $this->columnaSeleccionada = 0;
@@ -241,12 +241,12 @@ class InventariosCreate extends Component
         $area = Area::find($this->areaSeleccionada);
         $this->almacenes = Almacen::where('area_id', $area->area_clave)->where('habilitado',1)->get();
         try {
-            $this->almacenSeleccionado = $this->almacenes->first()->almacen_clave;
+            $this->almaceneseleccionado = $this->almacenes->first()->almacen_clave;
         } catch (\Throwable $th) {
-            $this->almacenSeleccionado = null;
+            $this->almaceneseleccionado = null;
         }
         $this->productosA = Producto::where([
-            ['subarea', '=', $this->almacenSeleccionado],
+            ['subarea', '=', $this->almaceneseleccionado],
         ])->get();
     }
     public function actualizarSubareas1()
@@ -266,7 +266,7 @@ class InventariosCreate extends Component
     public function actualizarProductos()
     {
         $this->productosA = Producto::where([
-            ['subarea', '=', $this->almacenSeleccionado],
+            ['subarea', '=', $this->almaceneseleccionado],
         ])->get();
     }
     public function cambioSubDestino()

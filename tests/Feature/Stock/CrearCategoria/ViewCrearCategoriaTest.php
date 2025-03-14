@@ -57,7 +57,7 @@ class ViewCrearCategoriaTest extends DuskTestCase
         $this->truncateTableWithForeignKeys(Categoria::class, "CategoriaSeeder", true);
         $this->browse(function (Browser $browser) {
             $browser->loginAs($this->admin)->visit('/categorias/create')
-            ->type("nombre_cat", 'NuevaCategoria')
+            ->type("nombre_categoria", 'NuevaCategoria')
             ->press("Guardar")
             ->pause(1000)
             ->assertSee("NuevaCategoria");

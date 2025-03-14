@@ -28,6 +28,7 @@ class CreateInventariosTable extends Migration
             $table->boolean('proposito')->default(0);
             $table->date('fecha_entrega')->nullable();
             $table->date('fecha_autorizado')->nullable();
+            $table->date('fecha_estimada')->nullable();
             $table->string('foto_entrega');
             $table->timestamps();
         });

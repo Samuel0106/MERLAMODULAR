@@ -14,8 +14,8 @@ class CreateContratosTable extends Migration
     public function up()
     {
         Schema::create('contratos', function (Blueprint $table) {
-            $table->id('cl_tipco');
-            $table->string('tipocontrato');
+            $table->id();
+            $table->string('tipo_de_contrato');
             $table->timestamps();
         });
     }

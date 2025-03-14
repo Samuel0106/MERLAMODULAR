@@ -45,7 +45,7 @@ class ViewStockCrearTest extends DuskTestCase
         $response->assertStatus(200);
         $response->assertSee("Unidad");
     }
-    public function test_crear_productos_form_contains_stock_minimo()
+    public function test_crear_productos_form_contains_stock_minimoimo()
     {
         
         $response = $this->actingAs($this->admin)->get('/productos/create');

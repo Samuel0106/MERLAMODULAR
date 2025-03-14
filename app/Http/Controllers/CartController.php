@@ -18,7 +18,7 @@ class CartController extends Controller
             $producto = Producto::findOrFail($request->input(key:'producto_id'));
             Cart::add(
                 $producto->id, 
-                $producto->nombre_prod, 
+                $producto->nombre_producto, 
                 $request->input(key:'cantidad'),
                 $price = 0,
                 $weight = 0,
@@ -33,7 +33,7 @@ class CartController extends Controller
         }else{
             Cart::add(
                 $producto_id = 'esp', 
-                $request->nombre_prod, 
+                $request->nombre_producto, 
                 $request->input(key:'cantidad'),
                 $price = 0,
                 $weight = 0,

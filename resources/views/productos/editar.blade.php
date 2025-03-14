@@ -2,7 +2,7 @@
     @section('title', 'PLANTILLA - MERLA')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Editar Producto: ') . Str::of($producto->nombre_prod) }}
+            {{ __('Editar Producto: ') . Str::of($producto->nombre_producto) }}
         </h2>
     </x-slot>
     <style>
@@ -72,10 +72,10 @@
                             <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Nombre
                                 del
                                 producto:</label>
-                            <input name="nombre_prod" value="{{ $producto->nombre_prod }}"
+                            <input name="nombre_producto" value="{{ $producto->nombre_producto }}"
                                 class="py-1 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"
                                 type="text" required />
-                            <small class="text-gray-400">Nombre actual: {{ $producto->nombre_prod }}</small>
+                            <small class="text-gray-400">Nombre actual: {{ $producto->nombre_producto }}</small>
                         </div>
 
                         <div class="grid grid-cols-1">
@@ -110,7 +110,7 @@
                         <div class="grid grid-cols-1">
                             <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Stock
                                 Mínimo:</label>
-                            <input name="stock_min" value="{{ $producto->stock_min }}"
+                            <input name="stock_minimo" value="{{ $producto->stock_minimo }}"
                                 class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"
                                 type="number" min="0" required />
                         </div>
@@ -118,13 +118,13 @@
                         <div class="grid grid-cols-1">
                             <label
                                 class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Categoría:</label>
-                            <select name="categoria_id" id="categoria_id"
+                            <select name="id_categoria" id="id_categoria"
                                 class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"
                                 required />
                             @foreach ($categorias as $categoria)
                                 <option id="{{ $categoria->id }}" value="{{ $categoria->id }}"
-                                    {{ $producto->categoria_id == $categoria->id ? 'selected' : '' }}>
-                                    {{ $categoria->nombre_cat }}</option>
+                                    {{ $producto->id_categoria == $categoria->id ? 'selected' : '' }}>
+                                    {{ $categoria->nombre_categoria }}</option>
                             @endforeach
 
                             </select>

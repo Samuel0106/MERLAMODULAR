@@ -50,7 +50,7 @@ class ViewConsultaProductosTest extends DuskTestCase
             Producto::truncate();
             for ($i = 1; $i <= Categoria::count(); $i++) {
                     Producto::factory()->times(10)->create([
-                        'categoria_id' => $i,
+                        'id_categoria' => $i,
                     ]);
                 $this->verifyFilterProductsByCategoria($browser, $this->admin, $i);
             }
@@ -63,7 +63,7 @@ class ViewConsultaProductosTest extends DuskTestCase
             Producto::truncate();
             for ($i = 1; $i <= Categoria::count(); $i++) {
                     Producto::factory()->times(10)->create([
-                        'categoria_id' => $i,
+                        'id_categoria' => $i,
                         'existencias' => 0,
                     ]);
                     Producto::all()->map(function($producto){{
@@ -81,7 +81,7 @@ class ViewConsultaProductosTest extends DuskTestCase
             Producto::truncate();
             for ($i = 1; $i <= Categoria::count(); $i++) {
                     Producto::factory()->times(10)->create([
-                        'categoria_id' => $i,
+                        'id_categoria' => $i,
                         'existencias' => 0,
                     ]);
                 $this->verifyBorrarButtonInProductosSoftDeletesSuccessfully($browser, $this->admin, $i);

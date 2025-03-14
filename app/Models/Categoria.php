@@ -10,7 +10,7 @@ class Categoria extends Model
     use HasFactory;
 
     protected $fillable =  [
-        'nombre_cat',
+        'nombre_categoria',
     ];
 
     public function producto()
@@ -20,6 +20,6 @@ class Categoria extends Model
 /*
     public function setNombreCatAttribute($value)
     {
-        $this->attributes['nombre_cat'] = strtolower($value);
+        $this->attributes['nombre_categoria'] = strtolower($value);
     }*/
 }

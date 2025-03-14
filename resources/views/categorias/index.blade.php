@@ -66,7 +66,7 @@
                                 <td style="display: none;">{{ $categoria->id }}</td>
 
                                 <td>{{ $categoria->id }}</td>
-                                <td>{{ $categoria->nombre_cat }}</td>
+                                <td>{{ $categoria->nombre_categoria }}</td>
                                 @if(@Auth::user()->hasRole('admin'))
                                     <td class="border px-4 py-2">
                                         <div class="flex justify-center rounded-lg text-lg" role="group">

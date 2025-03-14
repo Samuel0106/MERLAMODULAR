@@ -9,7 +9,7 @@ class Contratos extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'cl_tipco',
-        'tipocontrato'
+        'id',
+        'tipo_de_contrato'
     ];
 }

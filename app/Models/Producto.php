@@ -17,10 +17,10 @@ class Producto extends Model
     // }
 
     protected $fillable =  [
-        'nombre_prod',
+        'nombre_producto',
         'unidad',
-        'stock_min',
-        'categoria_id',
+        'stock_minimo',
+        'id_categoria',
         'area',
         'subarea', 
         'existencias',

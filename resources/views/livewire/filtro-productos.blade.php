@@ -5,13 +5,13 @@
         {{-- <div style="width:50%; margin-left: 20px; margin-top:40px; margin-bottom: 1em ">
             <div class="grid grid-cols-1">
                 <label class="uppercase md:text-sm text-xs text-gray-500 font-semibold"> Filtrar por Categoría:</label>
-                <select name="categoria_id" id="categoria_id" wire:model="categoriaSeleccionada"
+                <select name="id_categoria" id="id_categoria" wire:model="categoriaSeleccionada"
                 wire:change="cambioCategoria"
                     class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     required />
                     <option id="0" value="0">Todos</option>
                 @foreach ($categorias as $categoria)
-                    <option id="{{ $categoria->id }}" value="{{ $categoria->id }}">{{ $categoria->nombre_cat }}</option>
+                    <option id="{{ $categoria->id }}" value="{{ $categoria->id }}">{{ $categoria->nombre_categoria }}</option>
                 @endforeach
 
                 </select>
@@ -38,10 +38,10 @@
                 @foreach ($productosAlmacen as $producto)
                     <tr data-id="{{ $producto->id }}">
                         <td>{{ $producto->id }}</td>
-                        <td>{{ $producto->nombre_prod }}</td>
+                        <td>{{ $producto->nombre_producto }}</td>
                         <td>{{ $producto->unidad }}</td>
-                        <td>{{ $producto->stock_min }}</td>
-                        <td>{{ $producto->categoria->nombre_cat }}</td>
+                        <td>{{ $producto->stock_minimo }}</td>
+                        <td>{{ $producto->categoria->nombre_categoria }}</td>
                         <td>{{ $producto->existencias }}</td>
                         @if($producto->subareas)
                             <td>{{ $producto->areas->area_nombre }} , {{ $producto->subareas->subarea_nombre }}</td>

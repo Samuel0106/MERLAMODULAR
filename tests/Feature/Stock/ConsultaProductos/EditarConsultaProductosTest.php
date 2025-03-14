@@ -72,42 +72,42 @@ class EditarConsultaProductosTest extends DuskTestCase
         $producto = Producto::factory()->create();
 
         $response = $this->actingAs($this->admin)->put('productos/' . $producto->id, [
-            'nombre_prod' => '',
+            'nombre_producto' => '',
             'unidad' => 'Piezas',
-            'stock_min' => '',
-            'categoria_id' => '1',
+            'stock_minimo' => '',
+            'id_categoria' => '1',
             'area' => 'DX17', 
             'subarea' => 'DX17X', 
             'existencias' => '3', 
             'photo_prod' => 'iconProduct.png'
         ]);
         $response->assertStatus( status: 302);
-        $response->assertInValid(['nombre_prod','stock_min']);
+        $response->assertInValid(['nombre_producto','stock_minimo']);
     }
     public function test_editar_productos_update_works_as_admin(){
         $producto = Producto::factory()->create();
 
         $response = $this->actingAs($this->admin)->put('productos/' . $producto->id, [
-            'nombre_prod' => 'Nuevo Nombre',
+            'nombre_producto' => 'Nuevo Nombre',
             'unidad' => 'Piezas',
-            'stock_min' => '123',
-            'categoria_id' => '1',
+            'stock_minimo' => '123',
+            'id_categoria' => '1',
             'area' => 'DX17', 
             'subarea' => 'DX17X', 
             'existencias' => '3', 
             'photo_prod' => 'iconProduct.png'
         ]);
         $response->assertStatus( status: 302);
-        $response->assertValid(['nombre_prod','stock_min']);
+        $response->assertValid(['nombre_producto','stock_minimo']);
     }
     public function test_editar_productos_update_doesnt_works_as_user(){
         $producto = Producto::factory()->create();
 
         $response = $this->actingAs($this->user)->put('productos/' . $producto->id, [
-            'nombre_prod' => 'Nuevo Nombre',
+            'nombre_producto' => 'Nuevo Nombre',
             'unidad' => 'Piezas',
-            'stock_min' => '123',
-            'categoria_id' => '1',
+            'stock_minimo' => '123',
+            'id_categoria' => '1',
             'area' => 'DX17', 
             'subarea' => 'DX17X', 
             'existencias' => '3', 

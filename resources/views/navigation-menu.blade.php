@@ -144,7 +144,7 @@
                                                             <li class="px-3 py-1 hover:bg-gray-100">Crear</li>
                                                         </a>
                                                     @endcan
-                                                    @can('users.usuariosBaja')
+                                                    @can('users.baja')
                                                         <a href="{{ route('users.usuariosBaja') }}">
                                                             <li class="px-3 py-1 hover:bg-gray-100">Baja</li>
                                                         </a>
@@ -159,7 +159,7 @@
                                 </div>
                                 @endcan
                                 <!-- Inicio -->
-                                @can('inventarios')
+                                @can('inventario')
                                 <div class="group inline-block" align="left" width="48">
         
                                     <button class="outline-none focus:outline-none px-3 py-1 bg-white rounded-sm flex items-center min-w-32">
@@ -192,7 +192,7 @@
                                                 <ul class="pr-1 flex-1">Solicitar Producto</ul> 
                                             </a>
                                         </li>
-                                        @can('inventarios.proximosAgotar')
+                                        @can('inventario.proximosAgotar')
                                         <li class="rounded-sm relative px-3 py-1 hover:bg-gray-100">
                                             <a href="{{ route('inventarios.proximosAgotar') }}">
                                                 <ul class="pr-1 flex-1">Productos proximos a agotar</ul> 
@@ -209,21 +209,21 @@
                                                 <ul class="px-3 py-1 hover:bg-gray-100">Pedido Especial</ul>
                                             </a>
                                         </li>
-                                        @can('inventarios.autorizar')
+                                        @can('inventario.autorizar')
                                         <li>
                                             <a href="{{ route('inventarios.autorizar') }}">
                                                 <ul class="px-3 py-1 hover:bg-gray-100">Autorizar Pedidos</ul>
                                             </a>
                                         </li>
                                         @endcan
-                                        @can('inventarios.authPedidoEspecial')
+                                        @can('inventario.authPedidoEspecial')
                                         <li>
                                             <a href="{{ route('inventarios.indexPedidoEspecial') }}">
                                                 <ul class="px-3 py-1 hover:bg-gray-100">Autorizar Pedidos Especiales</ul>
                                             </a>
                                         </li>   
                                         @endcan 
-                                        @can('inventarios.entregar')
+                                        @can('inventario.entregar')
                                         <li>
                                         
                                             <a href="{{ route('inventarios.entregar') }}">
@@ -274,7 +274,7 @@
                                             </a>
                                         </li>
                                         @endcan
-                                        @can('inventarios.categoria')
+                                        @can('inventario.categoria')
                                         <li>
                                             <a href="{{ route('categorias.create') }}">
                                                 <ul class="px-3 py-1 hover:bg-gray-100">Crear Categoría</ul>

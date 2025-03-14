@@ -17,7 +17,7 @@ class CreatePedidoespecialTable extends Migration
             $table->id();
             $table->string('solicitante');
             $table->string('responsable');
-            $table->string('nombre_prod');
+            $table->string('nombre_producto');
             $table->integer('cantidad');
             $table->string('descripcion');
             $table->string('foto');
