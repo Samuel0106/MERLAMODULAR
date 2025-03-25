@@ -89,7 +89,7 @@
                         </div>
                     @endcan
                     <!-- Usuarios dados de baja -->
-                    @can('users.usuariosBaja')
+                    @can('users.baja')
                         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
                             <a href="{{ route('users.usuariosBaja') }}" class="card-link">
                                 <div class="icon-box service-box" data-aos="fade-up"
@@ -102,7 +102,7 @@
                                         </svg>
                                     </div>
                                     <h4 class="title">Baja</h4>
-                                    <p class="description">Aquí podrás dar de baja usuarios.</p>
+                                    <p class="description">Aquí podrás ver los usuarios dados de baja.</p>
                                 </div>
                             </a>
                         </div>

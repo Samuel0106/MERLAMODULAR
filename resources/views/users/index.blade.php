@@ -15,7 +15,6 @@
 
     <div class="py-10">
 
-
         <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8 mt-5 mx-7">
             <div class="grid grid-cols-1">
                 <label class="block uppercase md:text-sm text-xs text-gray-500 font-semibold">División:</label>
@@ -98,7 +97,6 @@
                             @can('disponibles.edit')
                                 <th>Acciones</th>
                             @endcan
-
                         </tr>
                     </thead>
                     <tbody>
@@ -144,13 +142,13 @@
                                                     style="text-decoration: none"
                                                     class="rounded bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 mx-1">Editar</a>
 
-                                                {{-- <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST"
                                                     class="formEliminar rounded bg-red-600 hover:bg-red-700 mx-1">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         class="rounded text-white font-bold py-2 px-4">Borrar</button>
-                                                </form> --}}
+                                                </form>
 
                                                 {{-- < !-- botón bajar -- >
                                                 <form action="{ { route('users.bajar') }}" method="POST"

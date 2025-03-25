@@ -52,7 +52,7 @@
                 @endphp
                 <div class="row">
                     <!-- Autorizar inventarios -->
-                    @can('inventarios.mermas')
+                    @can('inventario.mermas')
                         <div class="w-4 col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
                             <a href="{{ route('mermas.index') }}" class="card-link">
                                 <div class="icon-box service-box" data-aos="fade-up"

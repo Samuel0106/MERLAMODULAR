@@ -126,7 +126,7 @@
                         </a>
                     </div>
                     <!-- Autorizar inventarios -->
-                    @can('inventarios.autorizar')
+                    @can('inventario.autorizar')
                         <div class="w-4 col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
                             <a href="{{ route('inventarios.autorizar') }}" class="card-link">
                                 <div class="icon-box service-box" data-aos="fade-up"
@@ -158,7 +158,7 @@
                     @endcan
 
                     <!-- Autorizar Pedidos Especiales -->
-                    @can('inventarios.authPedidoEspecial')
+                    @can('inventario.authPedidoEspecial')
                         <div class="w-4 col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
                             <a href="{{ route('inventarios.indexPedidoEspecial') }}" class="card-link">
                                 <div class="icon-box service-box" data-aos="fade-up"
@@ -178,7 +178,7 @@
                     @endcan
 
                     <!-- Entregar solicitudes-->
-                    @can('inventarios.entregar')
+                    @can('inventario.entregar')
                         <div class="w-4 col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
                             <a href="{{ route('inventarios.entregar') }}" class="card-link">
                                 <div class="icon-box service-box" data-aos="fade-up"

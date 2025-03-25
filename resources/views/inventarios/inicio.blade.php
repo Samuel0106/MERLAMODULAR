@@ -19,7 +19,6 @@
         </div>
     </section> ======= End Hero =======-->
 
-
     <main id="main">
         <!-- ======= Featured Services Section ======= -->
         <section id="featured-services" class="featured-services" href="#services">
@@ -74,9 +73,6 @@
                             </div>
                         </a>
                     </div>
-                    @can('inventarios.almacenes')
-                    <!-- Gestionar Productos -->
-@endcan
 <!-- Realizar Pedidos -->
 <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
     <a href="{{ route('pedidos.realizar') }}" class="card-link">
@@ -97,7 +93,7 @@
 </div>
                     <!-- Inventario General -->
                     {{-- validacion para almacenes --}}
-                    @can('inventarios.almacenes')
+                    @can('inventario.almacen')
                         <div class="w-4 col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
                             <a href="{{ route('inventarios.inicioinventario') }}" class="card-link">
                                 <div class="icon-box service-box" data-aos="fade-up"
@@ -135,7 +131,7 @@
                         </div>
                     @endcan
                     {{-- Mermas --}}
-                    @can('inventarios.mermas')
+                    @can('inventario.mermas')
                         <div class="w-4 col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
                             <a href="{{ route('inventarios.iniciomermas') }}" class="card-link">
                                 <div class="icon-box service-box" data-aos="fade-up"
@@ -155,7 +151,7 @@
                         </div>
                     @endcan
 
-                    @can('inventarios.almacenes')
+                    @can('inventario.almacen')
                         <!-- Consultar Productos-->
                         <div class="w-4 col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
                             <a href="{{ route('almacenes.index') }}" class="card-link">
@@ -174,22 +170,6 @@
                             </a>
                         </div>
                     @endcan
-
-                    {{-- @can('inventarios.reponer')
-                        <!-- Reponer producto -->
-                        <div class="w-4 col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
-                            <div class="icon-box service-box" data-aos="fade-up" data-aos-delay="{{$delay=($delay%$max)+$espacio}}">
-                                <div class="icon">
-                                    <!-- <i class="bx bx-x"></i> -->
-                                    <svg class="iconos" viewBox="0 0 24 24">
-                                        <path fill="currentColor" d="M13 5h9v2h-9zM2 7h7v2h2V3H9v2H2zm7 10h13v2H9zm10-6h3v2h-3zm-2 4V9.012h-2V11H2v2h13v2zM7 21v-6H5v2H2v2h3v2z"/>
-                                    </svg>
-                                </div>
-                                <h4 class="title"><a href="{{ route('inventarios.reponer') }}">Reponer producto</a></h4>
-                                <p class="description">Mustra los productos que han sido solicitados para reponerlos.</p>
-                            </div>
-                        </div>
-                    @endcan --}}
                 </div>
 
             </div>

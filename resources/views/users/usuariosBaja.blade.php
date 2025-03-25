@@ -16,8 +16,6 @@
     <div class="py-10">
 
         <div class="mx-auto sm:px-6 lg:px-8" style="width:80rem;">
-<!--            <button type="submit" class="rounded text-white font-bold py-2 px-4">Borrar</button> -->
-
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-6" style="width:100%;">
 
                 <table id="data-table" class="stripe hover translate-table"
@@ -26,7 +24,6 @@
                         <tr>
 
                             <th>eid</th>
-                            {{-- <th>Correo</th> --}}
                             <th>Contrato</th>
                             <th>Puesto</th>
                             <th>Área</th>
@@ -43,11 +40,6 @@
                                         {{ $user->eid }}
                                     </div>
                                 </td>
-                                {{-- <td class="px-6 py-4 text-center mostrar-usuario">
-                                    <div>
-                                        {{ $correos[$index]->email }}
-                                    </div>
-                                </td> --}}
                                 <td class="px-6 py-4 text-center mostrar-usuario">
                                     <div>
                                         @if($user->contrato == '3')

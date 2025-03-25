@@ -150,7 +150,7 @@
                                                         </a>
                                                     @endcan
                                                     <a href="{{ route('users.centros') }}">
-                                                        <li class="px-3 py-1 hover:bg-gray-100">Centros de Trabajo</li>
+                                                        <li class="px-3 py-1 hover:bg-gray-100">Plantas</li>
                                                     </a>
                                                 </ul>
                                             </li>
@@ -337,7 +337,7 @@
                                 @endif
                                 
                                 <!-- Mermas -->
-                                @can('inventarios.mermas')
+                                @can('inventario.mermas')
                                 <div class="group inline-block items-center" align="left" width="48">
         
                                     <button class="outline-none focus:outline-none px-3 py-1 bg-white rounded-sm flex items-center min-w-32">
@@ -367,7 +367,7 @@
                                 </div>
                                 @endcan
                                 <!-- Almacenes -->
-                                @can('inventarios.almacenes')
+                                @can('inventario.almacen')
                                 <div class="group inline-block" align="left" width="48">
                                     <button class="outline-none focus:outline-none px-3 py-1 bg-white rounded-sm flex items-center min-w-32">
                                         <a href="{{ route('almacenes.index')}}">

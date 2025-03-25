@@ -31,7 +31,7 @@
 
             </tr>
         </thead>
-        @can('inventarios.entregar')
+        @can('inventario.entregar')
             <tbody>
                 @foreach ($inventariosAutorizados as $inventario)
                     @if($areaSeleccionada == $inventario->area || $areaSeleccionada == '')

@@ -90,7 +90,7 @@
                 
                             </tr>
                         </thead>
-                        @can('inventarios.entregar')
+                        @can('inventario.entregar')
                             <tbody>
                                 @foreach ($inventariosAutorizados as $inventario)
                                     <tr data-id="{{ $inventario->id }}">

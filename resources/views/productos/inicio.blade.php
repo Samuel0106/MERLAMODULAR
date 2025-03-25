@@ -244,7 +244,7 @@
                                 </div>
                             </div>
                         </div>
-                        @can('inventarios.autorizar')
+                        @can('inventario.autorizar')
                             <!-- Autorizar inventarios -->
                             <div class="p-6 border-b border-gray-200 md:border-l">
                                 <div class="flex items-center">
@@ -276,7 +276,7 @@
                                 </div>
                             </div>
                         @endcan
-                        @can('inventarios.entregar')
+                        @can('inventario.entregar')
                             <!-- Entregar solicitudes-->
                             <div class="p-6 border-b border-gray-200 md:border-l">
                                 <div class="flex items-center">

@@ -27,7 +27,7 @@ class UserController extends Controller
         $this->middleware('can:users.create')->only('create', 'store');
         $this->middleware('can:users.destroy')->only('destroy');
         $this->middleware('can:users.datosPersonales')->only('datosPersonales');
-        $this->middleware('can:users.usuariosBaja')->only('usuariosBaja');
+        $this->middleware('can:users.baja')->only('usuariosBaja');
     }
 
     public function index()
@@ -332,20 +332,7 @@ class UserController extends Controller
 
     function permisosRol()
     {
-        //$supervisor = [['name','!=', 'Director'],['name','!=', 'admin'],['name','!=', 'supervisor']];
-        //$admin = [['name','!=', 'Director'],['name','!=', 'admin']];
-        //$director = [['name','!=', 'Director']];
-        //$currentRole = Auth::user()->roles->pluck('name')[0];
-
-        //switch($currentRole){
-        //  case 'Director':
-        //    return $director;
-        //case 'admin':
-        //  return $admin;
-        //case 'supervisor':
-        //  return $supervi   sor;
-
-        //}
+ 
 
         $roleJSub = [['name', '!=', 'SuperRoot'], ['name', '!=', 'JefeDivision'], ['name', '!=', 'RecursosHumanos'], ['name', '!=', 'JefeSindicato'], ['name', '!=', 'JefeArea'], ['name', '!=', 'JefeSubarea']];
         $roleJArea = [['name', '!=', 'SuperRoot'], ['name', '!=', 'JefeDivision'], ['name', '!=', 'RecursosHumanos'], ['name', '!=', 'JefeSindicato'], ['name', '!=', 'JefeArea']];
