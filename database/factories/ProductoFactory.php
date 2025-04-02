@@ -18,8 +18,8 @@ class ProductoFactory extends Factory
             'unidad' => 'Piezas',
             'stock_minimo' => $this->faker->randomNumber(3),
             'id_categoria' => $this->faker->randomElement([1, 2, 3, 4, 5]),
-            'area' => 'DX17', 
-            'subarea' => 'DX17X', 
+            'area' => 'DN00', 
+            'subarea' => 'DN00', 
             'existencias' => $this->faker->randomNumber(6), 
             'photo_prod' => 'iconProduct.png'
         ];

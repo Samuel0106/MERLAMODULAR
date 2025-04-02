@@ -16,7 +16,20 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-
+            <div class="my-4 px-4 py-3 ml-2 leading-normal text-green-500 rounded-lg" role="alert">
+                    <div class="text-left">
+                        <a href="{{ route('inventarios.inicio') }}"
+                            class='w-auto bg-blue-500 hover:bg-blue-600 rounded-lg shadow-xl font-medium text-white px-4 py-2'>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-flex" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Regresar
+                        </a>
+                    </div>
+                </div>
                 <form action="{{ route('inventarios.especial_store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="grid grid-cols-1 col-span-2 mx-10">

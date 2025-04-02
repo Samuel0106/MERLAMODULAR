@@ -47,8 +47,8 @@ class DatosuserController extends Controller
         if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('SuperRoot'))
         {
             $divisiones = DB::table('divisiones')->get();
-            $areas = DB::table('areas')->where('area_clave', 'lIKE', 'DX' . '%')->get();
-            $subareas = DB::table('subareas')->where('subarea_clave', 'lIKE', 'DX00' . '%')->get();
+            $areas = DB::table('areas')->where('area_clave', 'lIKE', 'DN' . '%')->get();
+            $subareas = DB::table('subareas')->where('subarea_clave', 'lIKE', 'DN00' . '%')->get();
             /**$datosuser = DB::table('datosusers')->get();*/
             return view('datos.crear',['areas' => $areas, 'subareas' => $subareas, 'divisiones' => $divisiones]);
         }
@@ -110,8 +110,8 @@ class DatosuserController extends Controller
             $datosuser = DB::table('datosusers')->get(); 
 
             $divisiones = DB::table('divisiones')->get();
-            $areas = DB::table('areas')->where('area_clave', 'lIKE', 'DX' . '%')->get();
-            $subareas = DB::table('subareas')->where('subarea_clave', 'lIKE', 'DX00' . '%')->get();
+            $areas = DB::table('areas')->where('area_clave', 'lIKE', 'DN' . '%')->get();
+            $subareas = DB::table('subareas')->where('subarea_clave', 'lIKE', 'DN00' . '%')->get();
 
             return view('datos.editar', ['areas' => $areas, 'subareas' => $subareas, 'divisiones' => $divisiones], compact('datos'));
         }

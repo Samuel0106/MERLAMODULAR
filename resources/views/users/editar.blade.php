@@ -93,9 +93,10 @@
                                 class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                                 required>
                                 @foreach (App\Models\Puesto::all() as $puesto)
-                                    <option id="{{ $puesto->id }}" value="{{ $puesto->nombre_puesto }}"
-                                        {{ $datos->puesto == $puesto->nombre_puesto ? 'selected' : '' }}>
-                                        {{ $puesto->nombre_puesto }}</option>
+                                <option id="{{ $puesto->id }}" value="{{ $puesto->id }}" 
+    {{ $datos->puesto == $puesto->id ? 'selected' : '' }}>
+    {{ $puesto->nombre_puesto }}
+</option>
                                 @endforeach
                             </select>
                         </div>

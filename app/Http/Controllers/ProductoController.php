@@ -37,7 +37,7 @@ class ProductoController extends Controller
     {
         $this->middleware('can:producto.crear')->only('create', 'store', 'index', 'edit', 'update', 'destroy', 'editI', 'updateI');
         $this->middleware('can:producto.existencias')->only('eliminarExistenciasIndex');
-        $this->middleware('can:producto.TodosAlmacenes')->only('indexTotal');
+        $this->middleware('can:producto.todosalmacenes')->only('indexTotal');
     }
     public function index()
     {
@@ -46,7 +46,7 @@ class ProductoController extends Controller
         }*/
         $categorias = Categoria::all();
         //Obtener el almacen del usuario autenticado y mostrar esos productos
-        if (Auth::user()->can('producto.TodosAlmacenes') || Auth::user()->hasRole('admin')) {
+        if (Auth::user()->can('producto.todosalmacenes') || Auth::user()->hasRole('admin')) {
             $productos = Producto::with(['areas', 'subareas', 'categoria', 'almacenes'])
                 ->where('id_categoria', $categorias[0]->id)->get();
         } /* else {
@@ -111,7 +111,7 @@ class ProductoController extends Controller
     }
     public function indexTotal()
     {
-        if(!(Auth::user()->eid == '9JJGM' || Auth::user()->can('producto.TodosAlmacenes'))) {
+        if(!(Auth::user()->eid == 'XMOH4' || Auth::user()->can('producto.todosalmacenes'))) {
             return abort(403);
         }
         /*if (Auth::user()->hasRole('usuario')) {
@@ -132,9 +132,16 @@ class ProductoController extends Controller
 
         $almacenes = Almacen::where('area_id', $areas[0]->area_clave)->get();
 
-        $productos = Producto::where('id_categoria', $categorias[0]->id)
-            ->with(['subareas', 'almacenes'])
-            ->where('subarea', $almacenes[2]->almacen_clave)->get();
+        $almacen_clave_prefix = substr($almacenes[2]->almacen_clave, 0, 2); 
+
+
+$productos = Producto::where('id_categoria', $categorias[0]->id)
+    ->with(['subareas', 'almacenes'])
+    ->whereHas('subareas', function ($query) use ($almacen_clave_prefix) {
+
+        $query->where('subarea', 'LIKE', $almacen_clave_prefix . '%');
+    })
+    ->get();
 
         return view('productos.indexTotal', compact('productos', 'categorias', 'areas', 'almacenes', 'subareas'));
     }
@@ -145,34 +152,38 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        /*if (Auth::user()->hasRole('usuario')) {
-            return abort(403);
-        }*/
-        $pedidoesp = null;
-        if(isset($_GET['pedido'])){
-            $pedidoesp = Pedidoespecial::where('id',$_GET['pedido'])->first();
-        }
+{
+    /*if (Auth::user()->hasRole('usuario')) {
+        return abort(403);
+    }*/
+    $pedidoesp = null;
+    if (isset($_GET['pedido'])) {
+        $pedidoesp = Pedidoespecial::where('id', $_GET['pedido'])->first();
+    }
 
-        $area = DB::table('datosusers')->where('eid', 'LIKE', Auth::user()->eid)->get()->first()->area;
-        $categorias = DB::table('categorias')->get();
+    $area = DB::table('datosusers')->where('eid', 'LIKE', Auth::user()->eid)->get()->first()->area;
+    $categorias = DB::table('categorias')->get();
 
-        if (Auth::user()->can('producto.TodosAlmacenes')) {
-            $almacenes = Almacen::where('habilitado', 1)->get();
+    // Verificar si el usuario tiene permiso para ver todos los almacenes o si es un administrador
+    if (Auth::user()->can('producto.todosalmacenes') || Auth::user()->hasRole('admin')) {
+        // Si el usuario es admin o tiene permiso, obtener todos los almacenes habilitados
+        $almacenes = Almacen::where('habilitado', 1)->get();
+        $almacen_nombre = null;
+        $almacen_clave = null;
+    } else {
+        // Si no es admin, obtener solo los almacenes donde es jefe
+        if ($almacenes = Almacen::where('jefe_eid', Auth::user()->eid)->where('habilitado', 1)->first()) {
+            $almacen_nombre = $almacenes->almacen_nombre;
+            $almacen_clave = $almacenes->almacen_clave;
+        } else {
             $almacen_nombre = null;
             $almacen_clave = null;
-        } else {
-            if ($almacenes = Almacen::where('jefe_eid', Auth::user()->eid)->where('habilitado', 1)->first()) {
-                $almacen_nombre = $almacenes->almacen_nombre;
-                $almacen_clave = $almacenes->almacen_clave;
-            } else {
-                $almacen_nombre = null;
-                $almacen_clave = null;
-            }
         }
-
-        return view('productos.crear', compact('categorias', 'almacen_clave', 'area', 'almacen_nombre', 'almacenes', 'pedidoesp'));
     }
+
+    return view('productos.crear', compact('categorias', 'almacen_clave', 'area', 'almacen_nombre', 'almacenes', 'pedidoesp'));
+}
+
 
     /**
      * Store a newly created resource in storage.
@@ -197,7 +208,8 @@ class ProductoController extends Controller
         ]);
         
         $subarea = $request->input('subarea');
-        $producto['area'] = substr($subarea, 0, 4);
+        $producto['area'] = substr($subarea, 0, 3);
+        $producto['subarea'] = substr($subarea, 0, 4);
         $producto['photo_prod'] = "iconProduct.png";
         $producto['nombre_producto'] = preg_replace('/[^\p{L}0-9\s\/.-]+/u', '', $producto['nombre_producto']);
         $nombre = $producto['nombre_producto'];
@@ -239,10 +251,10 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
-        $almacenes = DB::table('almacenes')->get();
+        $almacenes = DB::table('almacens')->get();
         $categorias = DB::table('categorias')->get();
         //$area_id = Subarea::find($producto->subarea)->area_id;
-        //$areas = DB::table('areas')->where('area_clave', 'lIKE', 'DX' . '%')->get();
+        //$areas = DB::table('areas')->where('area_clave', 'lIKE', 'DN' . '%')->get();
         //$subareas = DB::table('subareas')->where('subarea_clave', 'lIKE', $area_id . '%')->get();
         return view('productos.editar', compact('categorias', 'producto', 'almacenes'));
     }
@@ -458,7 +470,7 @@ class ProductoController extends Controller
         $eli = $request->bandera;
         if($eli === 0)
         {
-            if (Auth::user()->can('producto.TodosAlmacenes') || Auth::user()->hasRole('admin')) {
+            if (Auth::user()->can('producto.todosalmacenes') || Auth::user()->hasRole('admin')) {
                 $productos = Producto::with(['areas', 'subareas', 'categoria', 'almacenes'])
                     ->where('id_categoria', $cat)->get();
             } 
@@ -487,7 +499,7 @@ class ProductoController extends Controller
         }
         else {
             
-            if (Auth::user()->can('producto.TodosAlmacenes') || Auth::user()->hasRole('admin')) {
+            if (Auth::user()->can('producto.todosalmacenes') || Auth::user()->hasRole('admin')) {
                 $productos = Producto::onlyTrashed()->with(['areas', 'subareas', 'categoria', 'almacenes'])
                     ->where('id_categoria', $cat)->get();
             } 
@@ -527,7 +539,7 @@ class ProductoController extends Controller
     {
         $cat = $request->categoria;
         $categorias = Categoria::all();
-        if (Auth::user()->can('producto.TodosAlmacenes') || Auth::user()->hasRole('admin')) {
+        if (Auth::user()->can('producto.todosalmacenes') || Auth::user()->hasRole('admin')) {
             $productos = Producto::with(['areas', 'subareas', 'categoria', 'almacenes'])
                 ->where('id_categoria', $categorias[0]->id)->get();
         }else if(Auth::user()->hasRole(['JefeInventario', 'JefeArea'])){
@@ -587,7 +599,7 @@ class ProductoController extends Controller
         if ($eliminados) {
             $query->onlyTrashed();
         }
-        if (!Auth::user()->can('producto.TodosAlmacenes') && !Auth::user()->hasRole('admin')) {
+        if (!Auth::user()->can('producto.todosalmacenes') && !Auth::user()->hasRole('admin')) {
             if (Auth::user()->hasRole(['JefeInventario', 'JefeArea'])) {
                 $almacen = Almacen::where('jefe_eid', auth()->user()->eid)
                     ->where('habilitado', 1)->first();

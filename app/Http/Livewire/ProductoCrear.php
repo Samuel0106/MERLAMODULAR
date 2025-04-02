@@ -21,7 +21,7 @@ class ProductoCrear extends Component
 
     public function mount()
     {
-        if(Auth::user()->can('producto.TodosAlmacenes'))
+        if(Auth::user()->can('producto.todosalmacenes'))
             $this->almacenes = Almacen::where('habilitado',1)->get();
         else
             $this->almacenes = Almacen::where('jefe_eid', Auth::user()->eid)->where('habilitado',1)->get();

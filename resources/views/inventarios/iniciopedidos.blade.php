@@ -75,27 +75,24 @@
                                 </p>
                             </div>
                         </a>
-                    </div>
-                    <!-- Estado de los Pedidos -->
-                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
-                        <a href="{{ route('pedidos.estado') }}" class="card-link">
+                        </div>
+                    <!-- Solicitar pedido especial -->
+                    <div class="col-md-6 col-lg-3  d-flex align-items-stretch mb-5">
+                        <a href="{{ route('inventarios.pedidoespecial') }}" class="card-link">
                             <div class="icon-box service-box" data-aos="fade-up"
                                 data-aos-delay="{{ $delay = ($delay % $max) + $espacio }}">
                                 <div class="icon">
+                                    {{-- <i class="bx bx-add-to-queue"></i> --}}
                                     <svg class="iconos" viewBox="0 0 24 24">
                                         <path fill="currentColor"
-                                            d="M12 4a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm1 3h-2v5h5v-2h-3V7z" />
+                                            d="M20 2H8c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM8 16V4h12l.002 12H8z" />
+                                        <path fill="currentColor"
+                                            d="M4 8H2v12c0 1.103.897 2 2 2h12v-2H4V8zm11-2h-2v3h-3v2h3v3h2v-3h3V9h-3z" />
                                     </svg>
                                 </div>
-                                <h4 class="title">Estado de los Pedidos</h4>
+                                <h4 class="title">Solicitar pedido especial</h4>
                                 <p class="description">
-                                    Consulta el progreso y estado de los pedidos realizados.
-                                    modificaciones.
-                                    @if ($countPedidos == 1)
-                                        <b>Usted ha realizado {{ $countPedidos }} pedido.</b>
-                                    @else
-                                        <b>Usted ha realizado {{ $countPedidos }} pedidos.</b>
-                                    @endif
+                                    Solicituar un producto que no exista en el inventario
                                 </p>
                             </div>
                         </a>
@@ -176,7 +173,6 @@
                             </a>
                         </div>
                     @endcan
-
                     <!-- Entregar solicitudes-->
                     @can('inventario.entregar')
                         <div class="w-4 col-md-6 col-lg-3 d-flex align-items-stretch mb-5">

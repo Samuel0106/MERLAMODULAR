@@ -13,10 +13,11 @@ class Categoria extends Model
         'nombre_categoria',
     ];
 
-    public function producto()
-    {
-        return $this->hasMany(Producto::class);
-    }
+    public function productos()
+{
+    return $this->hasMany(Producto::class, 'id_categoria'); 
+}
+
 /*
     public function setNombreCatAttribute($value)
     {

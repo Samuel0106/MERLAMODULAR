@@ -16,14 +16,14 @@ class MermaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:inventarios.mermas');
+        $this->middleware('can:inventario.mermas');
     }
     public function index()
     {
         if (Auth::user()->hasRole('admin')) {
             $mermas = Merma::all();
         } else {
-            if (auth()->user()->datos->subarea == 'DX000') { //Si usuario de Edificio Divisional
+            if (auth()->user()->datos->subarea == 'DN07') { //Si usuario de Edificio Divisional
                 $almacenes = Almacen::where('jefe_eid', auth()->user()->datos->eid)->get(); //Almacenes donde el usuario es Jefe
                 $productos = collect([]);
                 foreach ($almacenes as $a) {

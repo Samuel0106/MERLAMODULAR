@@ -75,18 +75,25 @@ class InventarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+{
+    $datos = Datosuser::where('eid', Auth::user()->eid)->firstOrFail();
+    $user = User::where('eid', Auth::user()->eid)->firstOrFail();
 
-        $datos = Datosuser::where('eid', Auth::user()->eid)->firstOrFail();
-        $user = User::where('eid', Auth::user()->eid)->firstOrFail();
-        $categorias = Categoria::all();
-        $productos = Producto::all();
-        $carro = Cart::content();
-        $carro = $carro->keyBy('id');
-        $areas = DB::table('areas')->where('area_clave', 'lIKE', 'DX' . '%')->get();
-        $subareas = DB::table('subareas')->where('subarea_clave', 'lIKE', 'DX17' . '%')->get();
-        return view('inventarios.crear', compact('datos', 'user', 'categorias', 'productos', 'carro', 'areas', 'subareas'));
+    $categorias = Categoria::all();
+    $productos = Producto::all();
+
+    $carro = Cart::content()->keyBy('id');
+
+    if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('SuperRoot')) {
+
+        $areas = DB::table('areas')->get();
+        $subareas = DB::table('subareas')->get();
+    } else {
+        $areas = DB::table('areas')->where('area_clave', $datos->area)->get();
+        $subareas = DB::table('subareas')->where('subarea_clave', $datos->subarea)->get();
     }
+    return view('inventarios.crear', compact('datos', 'user', 'categorias', 'productos', 'carro', 'areas', 'subareas'));
+}
 
     public function reponer()
     {
@@ -315,7 +322,7 @@ class InventarioController extends Controller
             return abort(403);
         }*/
 
-        if (Auth::user()->can('producto.TodosAlmacenes')) {
+        if (Auth::user()->can('producto.todosalmacenes')) {
             $inventariosPendientes = Inventario::where('status', 'Pendiente')->get();
         } else {
             $almacenes = Almacen::where('jefe_eid', auth()->user()->datos->eid)->get();
@@ -336,7 +343,7 @@ class InventarioController extends Controller
         /*if (Auth::user()->hasRole('usuario')) {
             return abort(403);
         }*/
-        if (Auth::user()->can('producto.TodosAlmacenes')) {
+        if (Auth::user()->can('producto.todosalmacenes')) {
             $inventariosAutorizados = Inventario::where('status', 'Autorizado')->orWhere('status', 'Autorizado parcialmente')->get();
         } else {
             $inventariosAutorizados = Inventario::where('area', Auth::user()->datos->area)->where('status', 'Autorizado')->orWhere('status', 'Autorizado parcialmente')->get(); //Muestra todos los pedidos autorizados en la misma area
@@ -376,7 +383,7 @@ class InventarioController extends Controller
     public function autorizarProductos(Inventario $inventario)
     {
         //dd("entra");
-        if (!(($inventario->status == "Autorizado" and Auth::user()->can('inventarios.entregar')) or ($inventario->status == "Pendiente" and Auth::user()->can('inventarios.autorizar')))) {
+        if (!(($inventario->status == "Autorizado" and Auth::user()->can('inventario.entregar')) or ($inventario->status == "Pendiente" and Auth::user()->can('inventario.autorizar')))) {
             return abort(403);
         }
         $productos = json_decode($inventario->carrito, false);
@@ -439,7 +446,7 @@ class InventarioController extends Controller
 
     public function inventarioGeneral()
     {
-        if (Auth::user()->eid == '9JJGM' || Auth::user()->can('producto.TodosAlmacenes')) {
+        if (Auth::user()->eid == '9JJGM' || Auth::user()->can('producto.todosalmacenes')) {
             $productos = Producto::all();
             return view('inventarios.inventario_General', compact('productos'));
         }

@@ -238,7 +238,7 @@
                                 </div>
                                   <!-- Inventario -->
                                 @if(
-                                    @Auth::user()->can('producto.TodosAlmacenes') ||
+                                    @Auth::user()->can('producto.todosalmacenes') ||
                                     @Auth::user()->can('inventarios.categoria') ||
                                     @Auth::user()->can('producto.existencias'))
                                 <div class="group inline-block" align="left" width="48">
@@ -257,13 +257,15 @@
                                         class="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute
                                         transition duration-150 ease-in-out origin-top min-w-32">
                                         <!-- Solicitar Producto -->
-                                        @if (@Auth::user()->eid == '9JJGM' || @Auth::user()->can('producto.TodosAlmacenes'))
+                                        @if (@Auth::user()->eid == '9JJGM' || @Auth::user()->can('producto.todosalmacenes'))
                                         <li class="rounded-sm relative px-3 py-1 hover:bg-gray-100">
                                             <a href="{{ route('productos.indexTotal') }}">
                                                 <ul class="pr-1 flex-1">Inventario general</ul> 
                                             </a>
                                         </li>
                                         @endif
+                                        <!-- 
+======= Section =======
                                         @can('producto.existencias')
                                         <li class="rounded-sm relative px-3 py-1 hover:bg-gray-100">
                                             {{-- <a href="{{ route('productos.indexI') }}">
@@ -274,6 +276,7 @@
                                             </a>
                                         </li>
                                         @endcan
+                                        ======= End  =======-->
                                         @can('inventario.categoria')
                                         <li>
                                             <a href="{{ route('categorias.create') }}">
@@ -317,7 +320,7 @@
                                             </a>
                                             
                                             @if (
-                                                !Auth::user()->can('producto.TodosAlmacenes') and
+                                                !Auth::user()->can('producto.todosalmacenes') and
                                                     !Auth::user()->hasRole('usuario') and
                                                     App\Models\Almacen::where('jefe_eid', auth()->user()->datos->eid)->where('habilitado', 1)->count() !=
                                                         0)

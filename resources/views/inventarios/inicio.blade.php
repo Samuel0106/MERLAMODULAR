@@ -73,24 +73,6 @@
                             </div>
                         </a>
                     </div>
-<!-- Realizar Pedidos -->
-<div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
-    <a href="{{ route('pedidos.realizar') }}" class="card-link">
-        <div class="icon-box service-box" data-aos="fade-up"
-            data-aos-delay="{{ $delay = ($delay % $max) + $espacio }}">
-            <div class="icon">
-                <svg class="iconos" viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                        d="M12 2a6 6 0 0 1 6 6v4h4v2H2v-2h4V8a6 6 0 0 1 6-6zm0 2a4 4 0 0 0-4 4v4h8V8a4 4 0 0 0-4-4zM2 18h20v2H2v-2z" />
-                </svg>
-            </div>
-            <h4 class="title">Realizar Pedidos</h4>
-            <p class="description">
-                Genera nuevos pedidos para abastecer los almacenes.
-            </p>
-        </div>
-    </a>
-</div>
                     <!-- Inventario General -->
                     {{-- validacion para almacenes --}}
                     @can('inventario.almacen')

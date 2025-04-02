@@ -53,7 +53,7 @@ class InventariosCreate extends Component
         $this->subarea = auth()->user()->datos->subarea;
         if ($this->carro->count() == 0) {
             $this->areas = Area::where([
-                ['division_id', '=', 'DX'],
+                ['division_id', '=', 'DN'],
             ])->get();
             if(Auth::user()->hasRole('JefeInventario')){
                 $this->areaSeleccionada = $this->areas->first()->area_clave;
@@ -61,7 +61,7 @@ class InventariosCreate extends Component
                 $this->areaSeleccionada = $this->area;
             }
             $this->areas1 = Area::where([
-                ['division_id', '=', 'DX'],
+                ['division_id', '=', 'DN'],
             ])->get();
             $this->areaSeleccionada1 = $this->area;
             $this->almacenes = Almacen::where('area_id', $this->areaSeleccionada)->where('habilitado',1)->get();
@@ -73,9 +73,16 @@ class InventariosCreate extends Component
             } catch (\Throwable $th) {
                 $this->almaceneseleccionado = null;
             }
-            $this->productosA = Producto::where([
-                ['subarea', '=', $this->almaceneseleccionado],
-            ])->get();
+
+            if ($this->almaceneseleccionado) {
+                
+                $subareaRelacionada = substr($this->almaceneseleccionado, 0, 2);
+    
+                $this->productosA = Producto::where('subarea', 'LIKE', $subareaRelacionada . '%')->get();
+                
+            } else {
+                $this->productosA = collect();
+            }
             $this->detectarCambio();
             $this->mostrarPaginado();
             try {
@@ -96,7 +103,7 @@ class InventariosCreate extends Component
             $productos = Producto::all();
             foreach ($productos as $p) {
                 if ($this->carro->where('id', $p->id)->count() > 0) {
-                    $this->subareaAux = $p->subarea;
+                    $this->subareaAux = $p->almacenseleccionado;
                     $this->areaAux = $p->area;
                     break;
                 }
@@ -117,9 +124,14 @@ class InventariosCreate extends Component
             $this->almaceneseleccionado = $this->subareaAux;     //
             */
             
-            $this->productosA = Producto::where([
-                ['subarea', '=', $this->subareaAux],
-            ])->get();
+        if ($this->almaceneseleccionado) {
+            
+            $subareaRelacionada = substr($this->almaceneseleccionado, 0, 2);
+
+            $this->productosA = Producto::where('subarea', 'LIKE', $subareaRelacionada . '%')->get();
+        } else {
+            $this->productosA = collect();
+        }
             $this->detectarCambio();
             $this->mostrarPaginado();
             $this->subDestino = $this->subareaSeleccionada1;
@@ -130,26 +142,32 @@ class InventariosCreate extends Component
     public function render()
     {
         $busqueda = $this->inputBusqueda;
-            $this->productosA = Producto::where([
-                ['subarea', '=', $this->almaceneseleccionado],
-            ])
-            ->when($busqueda, function ($query) use ($busqueda) {
-                return $query->where('nombre_producto', 'LIKE', '%' . $this->inputBusqueda . '%');
-            })
-            ->when($this->tipoOrden != 0, function ($query) {
-                return $query->orderBy($this->columnaSeleccionada, $this->tipoOrden);
-            })
-            ->get();
+    
+        if (!$this->almaceneseleccionado) {
+            $this->productosA = collect();
+        } else {
+            $subareaRelacionada = substr($this->almaceneseleccionado, 0, 2);
+
+            $this->productosA = Producto::where('subarea', 'LIKE', $subareaRelacionada . '%')
+                ->when($busqueda, function ($query) use ($busqueda) {
+                    return $query->where('nombre_producto', 'LIKE', '%' . $busqueda . '%');
+                })
+                ->when($this->tipoOrden != 0, function ($query) {
+                    return $query->orderBy($this->columnaSeleccionada, $this->tipoOrden);
+                })
+                ->get();
+        }
+    
         $this->detectarCambio();
-        if($this->flagNuevaPagina)
-        {
+        if ($this->flagNuevaPagina) {
             $this->asignarPaginacion();
             $this->flagNuevaPagina = false;
         }
+
         $this->mostrarPaginado();
         return view('livewire.inventarios-create');
     }
-
+    
     public function reiniciarOrden()
     {
         $this->orders['nombre_producto'] = 0;
@@ -245,6 +263,7 @@ class InventariosCreate extends Component
         } catch (\Throwable $th) {
             $this->almaceneseleccionado = null;
         }
+        
         $this->productosA = Producto::where([
             ['subarea', '=', $this->almaceneseleccionado],
         ])->get();
@@ -265,9 +284,14 @@ class InventariosCreate extends Component
     }
     public function actualizarProductos()
     {
-        $this->productosA = Producto::where([
-            ['subarea', '=', $this->almaceneseleccionado],
-        ])->get();
+        if (!$this->almaceneseleccionado) {
+            $this->productosA = collect();
+            return;
+        }
+        $subareaRelacionada = substr($this->almaceneseleccionado, 0, 2);
+        
+        $this->productosA = Producto::where('subarea', 'LIKE', $subareaRelacionada . '%')->get();
+        
     }
     public function cambioSubDestino()
     {

@@ -16,7 +16,7 @@ class Almacenes extends Component
     public $areas;
     
     public function mount(){
-        $this->areas = Area::where('division_id','DX')->get();
+        $this->areas = Area::where('division_id','DN')->get();
         $this->selectedArea = $this->areas->first()->area_clave;
     }
     public function render()

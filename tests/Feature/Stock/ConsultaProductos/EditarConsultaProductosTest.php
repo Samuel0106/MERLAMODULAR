@@ -76,8 +76,8 @@ class EditarConsultaProductosTest extends DuskTestCase
             'unidad' => 'Piezas',
             'stock_minimo' => '',
             'id_categoria' => '1',
-            'area' => 'DX17', 
-            'subarea' => 'DX17X', 
+            'area' => 'DN00', 
+            'subarea' => 'DN00', 
             'existencias' => '3', 
             'photo_prod' => 'iconProduct.png'
         ]);
@@ -92,8 +92,8 @@ class EditarConsultaProductosTest extends DuskTestCase
             'unidad' => 'Piezas',
             'stock_minimo' => '123',
             'id_categoria' => '1',
-            'area' => 'DX17', 
-            'subarea' => 'DX17X', 
+            'area' => 'DN00', 
+            'subarea' => 'DN00', 
             'existencias' => '3', 
             'photo_prod' => 'iconProduct.png'
         ]);
@@ -108,8 +108,8 @@ class EditarConsultaProductosTest extends DuskTestCase
             'unidad' => 'Piezas',
             'stock_minimo' => '123',
             'id_categoria' => '1',
-            'area' => 'DX17', 
-            'subarea' => 'DX17X', 
+            'area' => 'DN00', 
+            'subarea' => 'DN00', 
             'existencias' => '3', 
             'photo_prod' => 'iconProduct.png'
         ]);

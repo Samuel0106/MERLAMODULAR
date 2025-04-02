@@ -139,16 +139,15 @@
                             <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"> ALMACEN:</label>
                             <select name="subarea" required
                                 class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                                @if (Auth::user()->can('producto.TodosAlmacenes'))
-                                    @foreach ($almacenes as $almacen)
-                                        <option value="{{ $almacen->almacen_clave }}">{{ $almacen->almacen_nombre }}
-                                        </option>
-                                    @endforeach
-                                @elseif(empty($almacen_clave))
-                                    <option value="">{{ '-No eres Jefe de ningún almacen activo-' }}</option>
-                                @else
-                                    <option value="{{ $almacen_clave }}" selected> {{ $almacen_nombre }} </option>
-                                @endif
+                                @if (Auth::user()->can('producto.todosalmacenes') || Auth::user()->hasRole('admin'))
+    @foreach ($almacenes as $almacen)
+        <option value="{{ $almacen->almacen_clave }}">{{ $almacen->almacen_nombre }}</option>
+    @endforeach
+@elseif(empty($almacen_clave))
+    <option value="">{{ '-No eres Jefe de ningún almacen activo-' }}</option>
+@else
+    <option value="{{ $almacen_clave }}" selected>{{ $almacen_nombre }}</option>
+@endif
                             </select>
                         </div>
 

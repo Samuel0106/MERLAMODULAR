@@ -154,7 +154,7 @@
 
                                                     <!-- botón autorizar -->
                                                     <form
-                                                        action="{{ route('inventario.changeProductStatus', ['inventario' => $inventario->id, 'status' => 'Autorizado', 'id' => $producto->id]) }}"
+                                                        action="{{ route('inventarios.changeProductStatus', ['inventario' => $inventario->id, 'status' => 'Autorizado', 'id' => $producto->id]) }}"
                                                         method="PUT" enctype="multipart/form-data"
                                                         class="formAutorizar place-content-center inline-flex rounded text-black">
                                                         @csrf
@@ -274,7 +274,7 @@
                                                 @if ($producto->options->status == 'Autorizado')
                                                 <?php $total = false ?>
                                                     <form
-                                                        action="{{ route('inventario.changeProductStatus', ['inventario' => $inventario->id, 'status' => 'Entregado', 'id' => $producto->id]) }}"
+                                                        action="{{ route('inventarios.changeProductStatus', ['inventario' => $inventario->id, 'status' => 'Entregado', 'id' => $producto->id]) }}"
                                                         method="PUT" enctype="multipart/form-data"
                                                         class="place-content-center inline-flex rounded text-black">
                                                         @csrf
@@ -287,7 +287,7 @@
                                                     </form>
                                                     <!-- botón no entregado -->
                                                     <form
-                                                        action="{{ route('inventario.changeProductStatus', ['inventario' => $inventario->id, 'status' => 'No entregado', 'id' => $producto->id]) }}"
+                                                        action="{{ route('inventarios.changeProductStatus', ['inventario' => $inventario->id, 'status' => 'No entregado', 'id' => $producto->id]) }}"
                                                         method="PUT" enctype="multipart/form-data"
                                                         class="place-content-center inline-flex rounded text-black">
                                                         @csrf
@@ -331,7 +331,7 @@
                                 </td>
                                 <td>
                                     @can('inventario.autorizar')
-                                    <form action="{{ route('inventario.comentario', ['inventario' => $inventario->id, 'id' => $producto->id]) }}"
+                                    <form action="{{ route('inventarios.comentario', ['inventario' => $inventario->id, 'id' => $producto->id]) }}"
                                         method="PUT" enctype="multipart/form-data"
                                         class="place-content-center inline-flex rounded text-black">
                                         @csrf

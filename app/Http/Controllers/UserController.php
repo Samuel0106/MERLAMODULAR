@@ -105,7 +105,7 @@ class UserController extends Controller
         $datos = Datosuser::all();
         $datos = $datos->keyBy('eid');
         $divisiones = DB::table('divisiones')->get();
-        $areas = DB::table('areas')->where('area_clave', 'lIKE', 'DX' . '%')->get();
+        $areas = DB::table('areas')->where('area_clave', 'lIKE', 'DN' . '%')->get();
         $secciones = DB::table('secciones')->get();
 
         $users = User::all();

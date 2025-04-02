@@ -14,7 +14,7 @@ class InventarioEmailController extends Controller
 {
     public function codigoVerificacion() {
 
-        $subject = "CFE - Su pedido ha sido autorizado";
+        $subject = "MERLA - Su pedido ha sido autorizado";
         $for = $_GET['email'];
         $id = $_GET['folio'];
         $data = [
@@ -22,7 +22,7 @@ class InventarioEmailController extends Controller
             'folio'=>$id
         ];
         Mail::send('emails.codigoInventario', $data, function($msj) use($subject, $for) {
-            $msj->from("innovacioncfedx@gmail.com", "CFE-DCJ");
+            $msj->from("adminmerla@gmail.com", "MERLA");
             $msj->subject($subject);
             $msj->to($for);
         });

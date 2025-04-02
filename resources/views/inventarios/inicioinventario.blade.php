@@ -51,7 +51,7 @@
                     $max = 400;
                 @endphp
                 <div class="row">
-                    @if (@Auth::user()->eid == '9JJGM' || @Auth::user()->can('producto.TodosAlmacenes'))
+                    @if (@Auth::user()->eid == '9JJGM' || @Auth::user()->can('producto.todosalmacenes'))
                         <!-- Inventario General -->
                         <div class="w-4 col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
                             <a href="{{ route('productos.indexTotal') }}" class="card-link">
@@ -70,6 +70,8 @@
                         </div>
                     @endif
                     <!-- Gestionar existencias -->
+                     <!-- 
+=======  Section =======
                     @can('producto.existencias')
                         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
                             <a href="{{ route('productos.eliminarExistenciasIndex') }}" class="card-link">
@@ -89,6 +91,7 @@
                             </a>
                         </div>
                     @endcan
+                    ======= Hero =======-->
                     <!-- Crear Categorias -->
                     @can('inventario.categoria')
                         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 ">

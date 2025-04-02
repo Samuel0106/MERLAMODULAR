@@ -41,13 +41,6 @@ Route::post('/filtrarProd',  [ProductoController::class, 'filtrarProd'])->name('
 // Gestionar Productos
 Route::get('productos/gestion', [App\Http\Controllers\ProductoController::class, 'gestionProductos'])->name('productos.gestionproductos');
 
-// Realizar Pedidos
-Route::get('pedidos/realizar', [App\Http\Controllers\PedidoController::class, 'realizarPedidos'])->name('pedidos.realizar');
-
-// Estado de los Pedidos
-Route::get('pedidos/estado', [App\Http\Controllers\PedidoController::class, 'estadoPedidos'])->name('pedidos.estado');
-
-
 Route::get('/getNotificationsExcel', [\App\Http\Controllers\NotificacionesController::class, 'exportNotificationsExcel']);
 Route::post('/subarea', [App\Http\Controllers\RijController::class, 'subcategorias']);
 Route::get('/users/datosPersonales', [App\Http\Controllers\UserController::class, 'datosPersonales'])->name('users.datosPersonales');

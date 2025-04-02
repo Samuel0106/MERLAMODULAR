@@ -15,7 +15,7 @@ class CategoriaController extends Controller
      */
     public function __construct() 
     {
-       $this->middleware('can:inventarios.categoria');
+       $this->middleware('can:inventario.categoria');
     }
     public function index()
     {
@@ -106,13 +106,14 @@ class CategoriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Categoria $categoria)
-    {
-        if($categoria->producto->count() == 0){
-            $categoria->delete();
-            return redirect()->route('categorias.index')->with('message', 'Categoria eliminada correctamente');
-        }
-        else{
-            return redirect()->route('categorias.index')->with('error', 'No se puede eliminar una categoria que tiene productos asociados');
-        }
+{
+    if($categoria->productos->count() == 0){ // Cambiar producto a productos
+        $categoria->delete();
+        return redirect()->route('categorias.index')->with('message', 'Categoria eliminada correctamente');
     }
+    else{
+        return redirect()->route('categorias.index')->with('error', 'No se puede eliminar una categoria que tiene productos asociados');
+    }
+}
+
 }

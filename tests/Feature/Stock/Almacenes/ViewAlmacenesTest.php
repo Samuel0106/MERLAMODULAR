@@ -38,7 +38,7 @@ class ViewAlmacenesTest extends DuskTestCase
     public function test_almacenes_shows_all_data_successfully() 
     {
         $this->browse(function (Browser $browser) {
-        $almacenes = Almacen::where('area_id', "DX00")->get();
+        $almacenes = Almacen::where('area_id', "DN00")->get();
         $browser->loginAs($this->admin)
             ->visit('/almacenes');
         foreach ($almacenes as $almacen) {
@@ -58,7 +58,7 @@ class ViewAlmacenesTest extends DuskTestCase
    public function test_almacenes_estado_checkbox_works() 
     {
         $this->browse(function (Browser $browser) {
-        $almacenes = Almacen::where('area_id', "DX00")->get();
+        $almacenes = Almacen::where('area_id', "DN00")->get();
         $browser->loginAs($this->admin)
             ->visit('/almacenes');
         foreach ($almacenes as $almacen) {
@@ -87,7 +87,7 @@ class ViewAlmacenesTest extends DuskTestCase
     {
         
         $this->browse(function (Browser $browser) {
-            $almacenes = Almacen::where('area_id', "DX00")->get();
+            $almacenes = Almacen::where('area_id', "DN00")->get();
             $browser->loginAs($this->admin)
             ->visit('/almacenes')
             ->press($almacenes->first()->jefe_eid)
@@ -114,7 +114,7 @@ class ViewAlmacenesTest extends DuskTestCase
     {
         
         $this->browse(function (Browser $browser) {
-            $almacenes = Almacen::where('area_id', "DX00")->get();
+            $almacenes = Almacen::where('area_id', "DN00")->get();
             $browser->loginAs($this->admin)
             ->visit('/almacenes')
             ->press($almacenes->first()->jefe_eid)
@@ -129,7 +129,7 @@ class ViewAlmacenesTest extends DuskTestCase
     {
         
         $this->browse(function (Browser $browser) {
-            $almacenes = Almacen::where('area_id', "DX00")->get();
+            $almacenes = Almacen::where('area_id', "DN00")->get();
             $browser->loginAs($this->admin)
             ->visit('/almacenes')
             ->press($almacenes->first()->jefe_eid)
@@ -145,7 +145,7 @@ class ViewAlmacenesTest extends DuskTestCase
     {
         
         $this->browse(function (Browser $browser) {
-            $almacenes = Almacen::where('area_id', "DX00")->get();
+            $almacenes = Almacen::where('area_id', "DN00")->get();
             $browser->loginAs($this->admin)
             ->visit('/almacenes')
             ->press($almacenes->first()->jefe_eid)
