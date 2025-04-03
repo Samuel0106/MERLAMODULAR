@@ -14,15 +14,11 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-.env
 /.idea
 /.vscode
-.env
-config/app.php
 config/livewire.php
 
 
-*.lock
 vendor/
 
 public/archivos_baja
@@ -31,5 +27,4 @@ public/imagen_resguardo
 public/archivos
 public/reportes
 
-config/app.php
 config/livewire.php

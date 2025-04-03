@@ -12,7 +12,7 @@ class TrustProxies extends Middleware
      *
      * @var array<int, string>|string|null
      */
-    protected $proxies;
+    protected $proxies = '*'; // Esto permite que Laravel confíe en todos los proxies.
 
     /**
      * The headers that should be used to detect proxies.
