@@ -142,60 +142,73 @@ class InventarioController extends Controller
      */
     public function store(Request $request)
     {
+        // Validamos que los campos esenciales estén presentes
+        $request->validate([
+            'eid' => 'required|string',
+            'nombre' => 'required|string',
+            'email' => 'required|email',
+            'area' => 'required|string',
+            'almacen' => 'required|string',
+            'subarea' => 'required|string',
+        ]);
+    
+        // Si no hay área, redirige de nuevo al formulario
         if (!$request->area) {
-            return redirect()->route('inventarios.create', ['subareaSel' => $request->subarea, 'almacenes' => $request->almacen]);
+            return redirect()->route('inventarios.create', [
+                'subareaSel' => $request->subarea,
+                'almacenes' => $request->almacen
+            ]);
         }
-
+    
+        // Obtener carrito y preparar datos del inventario
         $inventario = $request->all();
         $carro = Cart::content();
         $this->actualizarProductosSolicitados($carro, false);
-        $data = json_encode($carro);
-        $inventario['carrito'] = $data;
+    
+        $inventario['carrito'] = json_encode($carro);
         $inventario['status'] = 'Pendiente';
         $inventario['oculto'] = false;
         $inventario['fecha_entrega'] = null;
         $inventario['fecha_autorizado'] = null;
         $inventario['foto_entrega'] = '';
+    
+        // Guardar en base de datos
         Cart::destroy();
         Inventario::create($inventario);
-
+    
+        // Obtener el último inventario creado por este usuario
         $folio = Inventario::where('eid', Auth::user()->eid)->orderBy('id', 'DESC')->firstOrFail();
-
-        $almacen = Almacen::query()->where('almacen_clave', $inventario['almacen'])->first();
-        $jefe = User::query()->where('eid', $almacen->jefe_eid)->first();
-        $subareaName = Subarea::query()->where('subarea_clave', $inventario['subarea'])->pluck('subarea_nombre')->first();
+    
+        // Obtener datos relacionados
+        $almacen = Almacen::where('almacen_clave', $folio->almacen)->first();
+        $jefe = User::where('eid', $almacen->jefe_eid)->first();
+        $subareaName = Subarea::where('subarea_clave', $folio->subarea)->pluck('subarea_nombre')->first();
+    
         $jefeNombre = $jefe->datos->paterno . " " . $jefe->datos->materno . " " . $jefe->datos->nombre;
         $today = Carbon::today()->format('Y-m-d');
-
-        $nombreTmp = str_replace(",", "", $inventario['nombre']);
+        $nombreTmp = str_replace(",", "", $folio->nombre);
+    
+        // Crear notificaciones
         $notificaciones = [
             [
-                'destinatario' => $inventario['email'],
+                'destinatario' => $folio->email,
                 'asunto' => 'Pedido realizado',
-                'cuerpo' => 'Pedido con folio #' . $folio->id . ' realizado el dia ' . $today . ' por ' . $nombreTmp . ' al almacen ' . $almacen->almacen_nombre . ' encargado de revisar el pedido ' . $jefeNombre . ' lugar de entrega ' . $subareaName,
+                'cuerpo' => 'Pedido con folio #' . $folio->id . ' realizado el día ' . $today . ' por ' . $nombreTmp . ' al almacén ' . $almacen->almacen_nombre . '. Encargado de revisar: ' . $jefeNombre . '. Lugar de entrega: ' . $subareaName,
             ],
             [
                 'destinatario' => $jefe->email,
                 'asunto' => 'Pedido realizado',
-                'cuerpo' => 'Pedido con folio #' . $folio->id . ' realizado el dia ' . $today . ' por ' . $nombreTmp . ' al almacen ' . $almacen->almacen_nombre . ' encargado de revisar el pedido ' . $jefeNombre . ' lugar de entrega ' . $subareaName,
+                'cuerpo' => 'Pedido con folio #' . $folio->id . ' realizado el día ' . $today . ' por ' . $nombreTmp . ' al almacén ' . $almacen->almacen_nombre . '. Encargado de revisar: ' . $jefeNombre . '. Lugar de entrega: ' . $subareaName,
             ],
         ];
-        
-
+    
         foreach ($notificaciones as $notificacion) {
             Notificacion::create($notificacion);
         }
-
-        /* if($imagen = $request->file('foto_entrega')) {
-            $rutaGuardarImg = "imagen/";
-           //  $imagenRij = date('Ymd')."_".$area."_".$subarea."_"."saludo"."_".$eid. "." . $imagen->getClientOriginalExtension();
-            $imagenSalud = date('YmdHis')."_"."entrega".".jpg";
-            $imagen->move($rutaGuardarImg, $imagenSalud);
-            $ms['foto_entrega'] = "$imagenSalud";
-        } */
-
+    
         return redirect()->route('inventarios.inicio')->with('message', 'Su solicitud ha sido creada. Su folio es: ' . $folio->id);
     }
+    
 
     public function especial_store(Request $request)
     {
