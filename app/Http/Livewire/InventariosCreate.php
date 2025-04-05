@@ -55,16 +55,16 @@ class InventariosCreate extends Component
             $this->areas = Area::where([
                 ['division_id', '=', 'DN'],
             ])->get();
-            if(Auth::user()->hasRole('JefeInventario')){
+            if (Auth::user()->hasRole('JefeInventario')) {
                 $this->areaSeleccionada = $this->areas->first()->area_clave;
-            }else{
+            } else {
                 $this->areaSeleccionada = $this->area;
             }
             $this->areas1 = Area::where([
                 ['division_id', '=', 'DN'],
             ])->get();
             $this->areaSeleccionada1 = $this->area;
-            $this->almacenes = Almacen::where('area_id', $this->areaSeleccionada)->where('habilitado',1)->get();
+            $this->almacenes = Almacen::where('area_id', $this->areaSeleccionada)->where('habilitado', 1)->get();
             $this->subareas1 = Subarea::where([
                 ['area_id', '=', $this->areaSeleccionada1],
             ])->get();
@@ -75,11 +75,10 @@ class InventariosCreate extends Component
             }
 
             if ($this->almaceneseleccionado) {
-                
+
                 $subareaRelacionada = substr($this->almaceneseleccionado, 0, 2);
-    
+
                 $this->productosA = Producto::where('subarea', 'LIKE', $subareaRelacionada . '%')->get();
-                
             } else {
                 $this->productosA = collect();
             }
@@ -108,11 +107,11 @@ class InventariosCreate extends Component
                     break;
                 }
             }
-            if($this->subareaAux == null){
+            if ($this->subareaAux == null) {
                 $this->subareaAux = session()->get('almacenpe');
             }
             $this->almaceneseleccionado = session()->get('almacenpe');
-            if($this->areaAux == null){
+            if ($this->areaAux == null) {
                 $this->areaAux = $this->areaSeleccionada1;
             }
             /*
@@ -123,26 +122,25 @@ class InventariosCreate extends Component
             $this->areaAux = $this->areaSeleccionada1;          //
             $this->almaceneseleccionado = $this->subareaAux;     //
             */
-            
-        if ($this->almaceneseleccionado) {
-            
-            $subareaRelacionada = substr($this->almaceneseleccionado, 0, 2);
 
-            $this->productosA = Producto::where('subarea', 'LIKE', $subareaRelacionada . '%')->get();
-        } else {
-            $this->productosA = collect();
-        }
+            if ($this->almaceneseleccionado) {
+
+                $subareaRelacionada = substr($this->almaceneseleccionado, 0, 2);
+
+                $this->productosA = Producto::where('subarea', 'LIKE', $subareaRelacionada . '%')->get();
+            } else {
+                $this->productosA = collect();
+            }
             $this->detectarCambio();
             $this->mostrarPaginado();
             $this->subDestino = $this->subareaSeleccionada1;
-
         }
     }
 
     public function render()
     {
         $busqueda = $this->inputBusqueda;
-    
+
         if (!$this->almaceneseleccionado) {
             $this->productosA = collect();
         } else {
@@ -157,7 +155,7 @@ class InventariosCreate extends Component
                 })
                 ->get();
         }
-    
+
         $this->detectarCambio();
         if ($this->flagNuevaPagina) {
             $this->asignarPaginacion();
@@ -167,7 +165,7 @@ class InventariosCreate extends Component
         $this->mostrarPaginado();
         return view('livewire.inventarios-create');
     }
-    
+
     public function reiniciarOrden()
     {
         $this->orders['nombre_producto'] = 0;
@@ -180,34 +178,27 @@ class InventariosCreate extends Component
     {
         $this->reiniciarOrden();
         $this->columnaSeleccionada = $columna;
-        if($tipoOrden == 0)
-        {
+        if ($tipoOrden == 0) {
             $this->orders[$columna] = 1;
             $this->tipoOrden = 'asc';
         }
-        if($tipoOrden == 1)
-        {
+        if ($tipoOrden == 1) {
             $this->orders[$columna] = 2;
             $this->tipoOrden = 'desc';
         }
-        if($tipoOrden == 2)
-        {
+        if ($tipoOrden == 2) {
             $this->orders[$columna] = 1;
             $this->tipoOrden = 'asc';
         }
     }
     public function detectarCambio()
     {
-        if($this->productosA->count() == 0)
-        {
+        if ($this->productosA->count() == 0) {
             $this->idProductoUltimo = "";
             $this->cantidadBotones = 0;
             $this->paginaSeleccionada = 0;
-        }
-        else
-        {
-            if($this->idProductoUltimo != $this->productosA[0]->id)
-            {
+        } else {
+            if ($this->idProductoUltimo != $this->productosA[0]->id) {
                 $this->idProductoUltimo = $this->productosA[0]->id;
                 $this->asignarPaginacion();
             }
@@ -220,27 +211,23 @@ class InventariosCreate extends Component
         $this->paginaSeleccionada = 1;
         $this->flagDatos = ($numeroProductos > 0) ? true : false;
 
-        if($this->porPagina == 0)
-        {
+        if ($this->porPagina == 0) {
             $this->cantidadBotones = 0;
             $this->paginaSeleccionada = 0;
-        }
-        else
-        {
+        } else {
             $this->cantidadBotones = ceil($numeroProductos / $this->porPagina);
         }
     }
     public function cambiarPaginado()
     {
         $this->porPagina = $this->selectedPagination;
-        $this->flagNuevaPagina = true;  
+        $this->flagNuevaPagina = true;
     }
 
     public function mostrarPaginado()
     {
-        if($this->porPagina != 0)
-        {
-            $cantidadASaltar = ($this->paginaSeleccionada * $this->porPagina)-$this->porPagina;
+        if ($this->porPagina != 0) {
+            $cantidadASaltar = ($this->paginaSeleccionada * $this->porPagina) - $this->porPagina;
             $cantidadARetornar = $this->porPagina;
             $resultadosSaltados = $this->productosA->skip($cantidadASaltar);
             $resultadosTomados = $resultadosSaltados->take($cantidadARetornar);
@@ -257,13 +244,13 @@ class InventariosCreate extends Component
     public function actualizarSubareas()
     {
         $area = Area::find($this->areaSeleccionada);
-        $this->almacenes = Almacen::where('area_id', $area->area_clave)->where('habilitado',1)->get();
+        $this->almacenes = Almacen::where('area_id', $area->area_clave)->where('habilitado', 1)->get();
         try {
             $this->almaceneseleccionado = $this->almacenes->first()->almacen_clave;
         } catch (\Throwable $th) {
             $this->almaceneseleccionado = null;
         }
-        
+
         $this->productosA = Producto::where([
             ['subarea', '=', $this->almaceneseleccionado],
         ])->get();
@@ -289,14 +276,12 @@ class InventariosCreate extends Component
             return;
         }
         $subareaRelacionada = substr($this->almaceneseleccionado, 0, 2);
-        
+
         $this->productosA = Producto::where('subarea', 'LIKE', $subareaRelacionada . '%')->get();
-        
     }
     public function cambioSubDestino()
     {
         $this->subDestino = $this->subareaSeleccionada1;
         $this->reiniciarOrden();
     }
-    
 }

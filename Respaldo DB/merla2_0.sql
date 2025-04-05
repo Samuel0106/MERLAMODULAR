@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-04-2025 a las 15:00:41
+-- Tiempo de generación: 05-04-2025 a las 19:01:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -12888,7 +12888,10 @@ INSERT INTO `inventarios` (`id`, `eid`, `nombre`, `email`, `area`, `almacen`, `s
 (4, 'ADM06', 'Admin Admin, Samuel', 'smldmnxpdnts@gmail.com', 'DN0', 'DN00a-A', 'DN07', 'Rechazado', NULL, '\"{\\\"c44044614b98161e60db3c4b89698b39\\\":{\\\"rowId\\\":\\\"c44044614b98161e60db3c4b89698b39\\\",\\\"id\\\":1,\\\"name\\\":\\\"Ma\\\\u00edz\\\",\\\"qty\\\":\\\"10\\\",\\\"price\\\":0,\\\"weight\\\":0,\\\"options\\\":{\\\"status\\\":\\\"Rechazado\\\",\\\"descripcion\\\":null,\\\"justificacion\\\":\\\"no hay mucho\\\",\\\"import\\\":null,\\\"qtyAuth\\\":0},\\\"discount\\\":0,\\\"tax\\\":0,\\\"subtotal\\\":0},\\\"0cfb2ac21ec22b64e825449a18f8b361\\\":{\\\"rowId\\\":\\\"0cfb2ac21ec22b64e825449a18f8b361\\\",\\\"id\\\":2,\\\"name\\\":\\\"Harina de Ma\\\\u00edz\\\",\\\"qty\\\":\\\"35\\\",\\\"price\\\":0,\\\"weight\\\":0,\\\"options\\\":{\\\"status\\\":\\\"Rechazado\\\",\\\"descripcion\\\":null,\\\"justificacion\\\":\\\"no hay mucho\\\",\\\"import\\\":null,\\\"qtyAuth\\\":0},\\\"discount\\\":0,\\\"tax\\\":0,\\\"subtotal\\\":0}}\"', 0, NULL, NULL, NULL, '', '2025-04-02 15:23:09', '2025-04-02 17:07:12', '2025-04-06 06:00:00'),
 (5, 'ADM06', 'Admin Admin, Samuel', 'smldmnxpdnts@gmail.com', 'DN0', 'DN00a-A', 'DN07', 'Entregado', NULL, '\"{\\\"c44044614b98161e60db3c4b89698b39\\\":{\\\"rowId\\\":\\\"c44044614b98161e60db3c4b89698b39\\\",\\\"id\\\":1,\\\"name\\\":\\\"Ma\\\\u00edz\\\",\\\"qty\\\":\\\"30\\\",\\\"price\\\":0,\\\"weight\\\":0,\\\"options\\\":{\\\"status\\\":\\\"Entregado\\\",\\\"descripcion\\\":null,\\\"justificacion\\\":\\\"por ser buena gente\\\",\\\"import\\\":null,\\\"qtyAuth\\\":\\\"20\\\"},\\\"discount\\\":0,\\\"tax\\\":0,\\\"subtotal\\\":0}}\"', 0, NULL, '2025-04-02 16:48:01', '2025-04-02 16:35:38', '', '2025-04-02 16:34:40', '2025-04-02 17:07:16', '2025-04-06 06:00:00'),
 (6, 'ADM06', 'Admin Admin, Samuel', 'smldmnxpdnts@gmail.com', 'DN0', 'DN00a-A', 'DN07', 'Entregado', NULL, '\"{\\\"c44044614b98161e60db3c4b89698b39\\\":{\\\"rowId\\\":\\\"c44044614b98161e60db3c4b89698b39\\\",\\\"id\\\":1,\\\"name\\\":\\\"Ma\\\\u00edz\\\",\\\"qty\\\":\\\"4815\\\",\\\"price\\\":0,\\\"weight\\\":0,\\\"options\\\":{\\\"status\\\":\\\"Entregado\\\",\\\"descripcion\\\":null,\\\"justificacion\\\":\\\"por ser buena gente\\\",\\\"import\\\":null,\\\"qtyAuth\\\":\\\"4815\\\"},\\\"discount\\\":0,\\\"tax\\\":0,\\\"subtotal\\\":0}}\"', 0, NULL, '2025-04-02 16:49:57', '2025-04-02 16:49:42', '', '2025-04-02 16:49:11', '2025-04-02 17:07:19', '2025-04-06 06:00:00'),
-(7, 'ADM06', 'Admin Admin, Samuel', 'smldmnxpdnts@gmail.com', 'DN0', 'DN00a-A', 'DN07', 'Rechazado', NULL, '\"{\\\"c44044614b98161e60db3c4b89698b39\\\":{\\\"rowId\\\":\\\"c44044614b98161e60db3c4b89698b39\\\",\\\"id\\\":1,\\\"name\\\":\\\"Ma\\\\u00edz\\\",\\\"qty\\\":\\\"4815\\\",\\\"price\\\":0,\\\"weight\\\":0,\\\"options\\\":{\\\"status\\\":\\\"Rechazado\\\",\\\"descripcion\\\":null,\\\"justificacion\\\":null,\\\"import\\\":null,\\\"qtyAuth\\\":0},\\\"discount\\\":0,\\\"tax\\\":0,\\\"subtotal\\\":0}}\"', 0, NULL, NULL, NULL, '', '2025-04-02 16:50:40', '2025-04-02 17:07:22', '2025-04-06 06:00:00');
+(7, 'ADM06', 'Admin Admin, Samuel', 'smldmnxpdnts@gmail.com', 'DN0', 'DN00a-A', 'DN07', 'Rechazado', NULL, '\"{\\\"c44044614b98161e60db3c4b89698b39\\\":{\\\"rowId\\\":\\\"c44044614b98161e60db3c4b89698b39\\\",\\\"id\\\":1,\\\"name\\\":\\\"Ma\\\\u00edz\\\",\\\"qty\\\":\\\"4815\\\",\\\"price\\\":0,\\\"weight\\\":0,\\\"options\\\":{\\\"status\\\":\\\"Rechazado\\\",\\\"descripcion\\\":null,\\\"justificacion\\\":null,\\\"import\\\":null,\\\"qtyAuth\\\":0},\\\"discount\\\":0,\\\"tax\\\":0,\\\"subtotal\\\":0}}\"', 0, NULL, NULL, NULL, '', '2025-04-02 16:50:40', '2025-04-02 17:07:22', '2025-04-06 06:00:00'),
+(8, 'ADM06', 'Admin Admin, Samuel', 'smldmnxpdnts@gmail.com', 'DN0', 'DN00a-A', 'DN07', 'Pendiente', NULL, '\"{\\\"0cfb2ac21ec22b64e825449a18f8b361\\\":{\\\"rowId\\\":\\\"0cfb2ac21ec22b64e825449a18f8b361\\\",\\\"id\\\":2,\\\"name\\\":\\\"Harina de Ma\\\\u00edz\\\",\\\"qty\\\":\\\"100\\\",\\\"price\\\":0,\\\"weight\\\":0,\\\"options\\\":{\\\"status\\\":\\\"Pendiente\\\",\\\"descripcion\\\":null,\\\"justificacion\\\":null,\\\"import\\\":null,\\\"qtyAuth\\\":0},\\\"discount\\\":0,\\\"tax\\\":0,\\\"subtotal\\\":0}}\"', 0, NULL, NULL, NULL, '', '2025-04-05 15:59:41', '2025-04-05 15:59:41', '2025-04-08 06:00:00'),
+(9, 'ADM06', 'Admin Admin, Samuel', 'smldmnxpdnts@gmail.com', 'DN0', 'DN00a-A', 'DN07', 'Pendiente', NULL, '\"{\\\"0cfb2ac21ec22b64e825449a18f8b361\\\":{\\\"rowId\\\":\\\"0cfb2ac21ec22b64e825449a18f8b361\\\",\\\"id\\\":2,\\\"name\\\":\\\"Harina de Ma\\\\u00edz\\\",\\\"qty\\\":\\\"2\\\",\\\"price\\\":0,\\\"weight\\\":0,\\\"options\\\":{\\\"status\\\":\\\"Pendiente\\\",\\\"descripcion\\\":null,\\\"justificacion\\\":null,\\\"import\\\":null,\\\"qtyAuth\\\":0},\\\"discount\\\":0,\\\"tax\\\":0,\\\"subtotal\\\":0}}\"', 0, NULL, NULL, NULL, '', '2025-04-05 16:03:14', '2025-04-05 16:03:14', '2025-04-08 06:00:00'),
+(10, 'ADM06', 'Admin Admin, Samuel', 'smldmnxpdnts@gmail.com', 'DN0', 'DN00a-A', 'DN07', 'Pendiente', NULL, '\"{\\\"0cfb2ac21ec22b64e825449a18f8b361\\\":{\\\"rowId\\\":\\\"0cfb2ac21ec22b64e825449a18f8b361\\\",\\\"id\\\":2,\\\"name\\\":\\\"Harina de Ma\\\\u00edz\\\",\\\"qty\\\":\\\"20\\\",\\\"price\\\":0,\\\"weight\\\":0,\\\"options\\\":{\\\"status\\\":\\\"Pendiente\\\",\\\"descripcion\\\":null,\\\"justificacion\\\":null,\\\"import\\\":null,\\\"qtyAuth\\\":0},\\\"discount\\\":0,\\\"tax\\\":0,\\\"subtotal\\\":0}}\"', 0, NULL, NULL, NULL, '', '2025-04-05 16:53:01', '2025-04-05 16:53:01', '2025-04-08 06:00:00');
 
 -- --------------------------------------------------------
 
@@ -25589,7 +25592,13 @@ INSERT INTO `notificaciones` (`id`, `asunto`, `cuerpo`, `destinatario`, `exporta
 (21, 'Pedido entregado', 'Pedido con folio #6 fue entregado el dia 2025-04-02 por Admin Admin Samuel al almacen Almacén de materias primas encargado de revisar el pedido Rojas Heredia Pilar lugar de entrega Recepción de materias primas', 'smldmnxpdnts@gmail.com', NULL, '2025-04-02 16:49:57', '2025-04-02 16:49:57'),
 (22, 'Pedido entregado', 'Pedido con folio #6 fue entregado el dia 2025-04-02 por Admin Admin Samuel al almacen Almacén de materias primas encargado de revisar el pedido Rojas Heredia Pilar lugar de entrega Recepción de materias primas', 'XMOH4smerla.com.mx', NULL, '2025-04-02 16:49:57', '2025-04-02 16:49:57'),
 (23, 'Pedido realizado', 'Pedido con folio #7 realizado el dia 2025-04-02 por Admin Admin Samuel al almacen Almacén de materias primas encargado de revisar el pedido Rojas Heredia Pilar lugar de entrega Recepción de materias primas', 'smldmnxpdnts@gmail.com', NULL, '2025-04-02 16:50:40', '2025-04-02 16:50:40'),
-(24, 'Pedido realizado', 'Pedido con folio #7 realizado el dia 2025-04-02 por Admin Admin Samuel al almacen Almacén de materias primas encargado de revisar el pedido Rojas Heredia Pilar lugar de entrega Recepción de materias primas', 'XMOH4smerla.com.mx', NULL, '2025-04-02 16:50:40', '2025-04-02 16:50:40');
+(24, 'Pedido realizado', 'Pedido con folio #7 realizado el dia 2025-04-02 por Admin Admin Samuel al almacen Almacén de materias primas encargado de revisar el pedido Rojas Heredia Pilar lugar de entrega Recepción de materias primas', 'XMOH4smerla.com.mx', NULL, '2025-04-02 16:50:40', '2025-04-02 16:50:40'),
+(25, 'Pedido realizado', 'Pedido con folio #8 realizado el dia 2025-04-05 por Admin Admin Samuel al almacen Almacén de materias primas encargado de revisar el pedido Rojas Heredia Pilar lugar de entrega Administrativa', 'smldmnxpdnts@gmail.com', NULL, '2025-04-05 15:59:41', '2025-04-05 15:59:41'),
+(26, 'Pedido realizado', 'Pedido con folio #8 realizado el dia 2025-04-05 por Admin Admin Samuel al almacen Almacén de materias primas encargado de revisar el pedido Rojas Heredia Pilar lugar de entrega Administrativa', 'XMOH4smerla.com.mx', NULL, '2025-04-05 15:59:41', '2025-04-05 15:59:41'),
+(27, 'Pedido realizado', 'Pedido con folio #9 realizado el dia 2025-04-05 por Admin Admin Samuel al almacen Almacén de materias primas encargado de revisar el pedido Rojas Heredia Pilar lugar de entrega Administrativa', 'smldmnxpdnts@gmail.com', NULL, '2025-04-05 16:03:14', '2025-04-05 16:03:14'),
+(28, 'Pedido realizado', 'Pedido con folio #9 realizado el dia 2025-04-05 por Admin Admin Samuel al almacen Almacén de materias primas encargado de revisar el pedido Rojas Heredia Pilar lugar de entrega Administrativa', 'XMOH4smerla.com.mx', NULL, '2025-04-05 16:03:14', '2025-04-05 16:03:14'),
+(29, 'Pedido realizado', 'Pedido con folio #10 realizado el día 2025-04-05 por Admin Admin Samuel al almacén Almacén de materias primas. Encargado de revisar: Rojas Heredia Pilar. Lugar de entrega: Administrativa', 'smldmnxpdnts@gmail.com', NULL, '2025-04-05 16:53:01', '2025-04-05 16:53:01'),
+(30, 'Pedido realizado', 'Pedido con folio #10 realizado el día 2025-04-05 por Admin Admin Samuel al almacén Almacén de materias primas. Encargado de revisar: Rojas Heredia Pilar. Lugar de entrega: Administrativa', 'XMOH4smerla.com.mx', NULL, '2025-04-05 16:53:01', '2025-04-05 16:53:01');
 
 -- --------------------------------------------------------
 
@@ -25704,7 +25713,7 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id`, `nombre_producto`, `unidad`, `stock_minimo`, `id_categoria`, `area`, `subarea`, `existencias`, `photo_prod`, `solicitados_cant`, `total_agregado`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Maíz', 'kg', '23', 3, 'DN0', 'DN01', 0, NULL, 9778, 37, '2025-02-08 00:09:22', '2025-04-02 16:50:40', NULL),
-(2, 'Harina de Maíz', 'kg', '20', 6, 'DN0', 'DN01', 4338, NULL, 772, 161, '2025-02-08 00:09:22', '2025-04-02 15:23:09', NULL),
+(2, 'Harina de Maíz', 'kg', '20', 6, 'DN0', 'DN01', 4338, NULL, 894, 161, '2025-02-08 00:09:22', '2025-04-05 16:53:01', NULL),
 (3, 'Aceite de Maíz', 'kg', '53', 1, 'DN0', 'DN01', 749, NULL, 1017, 785, '2025-02-08 00:09:22', '2025-04-01 17:37:05', NULL),
 (4, 'Sal', 'kg', '46', 3, 'DN0', 'DN01', 138, NULL, 982, 734, '2025-02-08 00:09:22', '2025-02-08 00:09:22', NULL),
 (5, 'Especias', 'kg', '53', 4, 'DN0', 'DN01', 3068, NULL, 401, 362, '2025-02-08 00:09:22', '2025-02-08 00:09:22', NULL),
@@ -26016,7 +26025,8 @@ CREATE TABLE `sessions` (
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
 ('0SmcxuuDaGUdFuKjzzJnQdAJ3IPZsaaV8kDzDILS', 12603, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiMjcxcFBnSlNnZFZLa1huVzVpc3I0QVhDa2FycmN2MFdtandBa2tmdSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjIxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxMjYwMztzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJhJDEyJElQbkJ6Z3NKV1hiM3pjNTZBM24uZmVLbE9WZTQ3SGpLVkF2UGNxNEE0ZUxhTE92ejJLb1g2IjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyYSQxMiRJUG5CemdzSldYYjN6YzU2QTNuLmZlS2xPVmU0N0hqS1ZBdlBjcTRBNGVMYUxPdnoyS29YNiI7fQ==', 1742493232),
 ('kZsbqQh22gXb2YyVOpN8jXeS8SWTaxFxC0Oomxe2', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiZXlkcWRkZWJGeEppT0FuNDE5N2plbEpYUzhDVnlWallhM1lPeVFjTSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM0OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvcm9sZXMvNi9lZGl0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJhJDEyJFU2VnhVRmw5cklvbFpCMGJzS0Q0TWVGaEU2NHA0a1dwa2x6VFVvUXg2dGoySDhiaEMvRTl5IjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyYSQxMiRVNlZ4VUZsOXJJb2xaQjBic0tENE1lRmhFNjRwNGtXcGtselRVb1F4NnRqMkg4YmhDL0U5eSI7fQ==', 1742970622),
-('r7KyhHseogv21Z0v52D6L5TtgEnrcdBJy25wxlre', 12600, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoieXFZZEZOUk15OFlyaEpEVWZUWXhJcWQwb2RidjU1clI5dFF3VnV4eSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjUxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvcHJvZHVjdG9zL2ludmVudGFyaW8vZWxpbWluYXIiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxMjYwMDtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJhJDEyJFU2VnhVRmw5cklvbFpCMGJzS0Q0TWVGaEU2NHA0a1dwa2x6VFVvUXg2dGoySDhiaEMvRTl5IjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyYSQxMiRVNlZ4VUZsOXJJb2xaQjBic0tENE1lRmhFNjRwNGtXcGtselRVb1F4NnRqMkg4YmhDL0U5eSI7fQ==', 1742968415);
+('r7KyhHseogv21Z0v52D6L5TtgEnrcdBJy25wxlre', 12600, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoieXFZZEZOUk15OFlyaEpEVWZUWXhJcWQwb2RidjU1clI5dFF3VnV4eSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjUxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvcHJvZHVjdG9zL2ludmVudGFyaW8vZWxpbWluYXIiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxMjYwMDtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJhJDEyJFU2VnhVRmw5cklvbFpCMGJzS0Q0TWVGaEU2NHA0a1dwa2x6VFVvUXg2dGoySDhiaEMvRTl5IjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyYSQxMiRVNlZ4VUZsOXJJb2xaQjBic0tENE1lRmhFNjRwNGtXcGtselRVb1F4NnRqMkg4YmhDL0U5eSI7fQ==', 1742968415),
+('WvXtNyTL0ARynyVEtAnNwtkKyxeYooXlzbY3SBQJ', 12603, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0', 'YToxMDp7czo2OiJfdG9rZW4iO3M6NDA6IlExSFdGVE1HRjR6azFXQm4yR1JwN2RBMFJIcXVKQlVWNFk5dkpLU1oiO3M6MzoidXJsIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTI2MDM7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyYSQxMiRVNlZ4VUZsOXJJb2xaQjBic0tENE1lRmhFNjRwNGtXcGtselRVb1F4NnRqMkg4YmhDL0U5eSI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMmEkMTIkVTZWeFVGbDlySW9sWkIwYnNLRDRNZUZoRTY0cDRrV3BrbHpUVW9ReDZ0ajJIOGJoQy9FOXkiO3M6NDoiY2FydCI7YTowOnt9czoxNDoic3ViYXJlYURlc3Rpbm8iO3M6NDoiRE4wNyI7czo5OiJhbG1hY2VucGUiO3M6NzoiRE4wMGEtQSI7fQ==', 1743871981);
 
 -- --------------------------------------------------------
 
@@ -38773,7 +38783,7 @@ CREATE TABLE `view_counter` (
 --
 
 INSERT INTO `view_counter` (`id`, `pagina`, `visitas`, `created_at`, `updated_at`) VALUES
-(1, 'merla', 164, NULL, NULL),
+(1, 'merla', 172, NULL, NULL),
 (2, 'usuarios', 12, '2025-03-20 15:39:46', '2025-03-20 15:39:46');
 
 --
@@ -38984,7 +38994,7 @@ ALTER TABLE `datosusers`
 -- AUTO_INCREMENT de la tabla `inventarios`
 --
 ALTER TABLE `inventarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `mermas`
@@ -38996,7 +39006,7 @@ ALTER TABLE `mermas`
 -- AUTO_INCREMENT de la tabla `notificaciones`
 --
 ALTER TABLE `notificaciones`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidoespecial`

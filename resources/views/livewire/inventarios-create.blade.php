@@ -37,11 +37,14 @@
                         <div class="grid grid-cols-1">
                             <label
                                 class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">NOMBRE:</label>
-                            <input disabled name="nombre" value="{{$datos->paterno . " " . $datos->materno . ", " . $datos->nombre}}"
+                            <input disabled name="nombre"
+                                value="{{ $datos->paterno . ' ' . $datos->materno . ', ' . $datos->nombre }}"
                                 style="border-color: rgb(21 128 61);background-color: rgb(240, 240, 240);"
                                 class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-grey-700 focus:border-transparent"
                                 type="text" required />
-                            <input name="nombre" value="{{$datos->paterno . " " . $datos->materno . ", " . $datos->nombre}}" class="hidden" type="text" required />
+                            <input name="nombre"
+                                value="{{ $datos->paterno . ' ' . $datos->materno . ', ' . $datos->nombre }}"
+                                class="hidden" type="text" required />
                         </div>
                         <div class="grid grid-cols-1">
                             <label
@@ -53,9 +56,10 @@
                             <input name="email" value='{{ $user->email }}' class="hidden" type="text" required />
                         </div>
                         <div class="grid grid-cols-1">
-                            <label
-                                class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold" for="dateStart">FECHA REQUERIDA DE ENTREGA:</label>
-                                <input type="date" id="dateStart" name="fecha_estimada" min="" max="" data-disable-weekends="true"
+                            <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                for="dateStart">FECHA REQUERIDA DE ENTREGA:</label>
+                            <input type="date" id="dateStart" name="fecha_estimada" min="" max=""
+                                data-disable-weekends="true"
                                 class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
                         </div>
                         @if (\Gloudemans\Shoppingcart\Facades\Cart::content()->count() == 0)
@@ -78,23 +82,24 @@
                                 <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
                                     ALMACEN AL QUE SE LE SOLICITA PRODUCTOS:</label>
 
-                                <select id="_almacen" name="almacen" value='$almacen->almacen_nombre' wire:model="almaceneseleccionado"
-                                    wire:change="actualizarProductos"
+                                <select id="_almacen" name="almacen" value='$almacen->almacen_nombre'
+                                    wire:model="almaceneseleccionado" wire:change="actualizarProductos"
                                     class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 
                                     focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
 
-                                    @foreach ($almacenes as $almacen)
-                                        <option value="{{ $almacen->almacen_clave }}">
-                                            {{ $almacen->almacen_nombre }}
-                                            {{-- -
+                                @foreach ($almacenes as $almacen)
+                                    <option value="{{ $almacen->almacen_clave }}">
+                                        {{ $almacen->almacen_nombre }}
+                                        {{-- -
                                              {{DB::table('datosusers')->where('eid',$almacen->jefe_eid)->value('nombre') . " " . DB::table('datosusers')->where('eid',$almacen->jefe_eid)->value('paterno') . " " . DB::table('datosusers')->where('eid',$almacen->jefe_eid)->value('materno')}} --}}
-                                        </option>
-                                    @endforeach
+                                    </option>
+                                @endforeach
                                 </select>
                             </div>
 
                             <div class="grid grid-cols-1">
-                                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">ÁREA DEL CENTRO DE TRABAJO DONDE SE VA A ENTREGAR:</label>
+                                <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">ÁREA
+                                    DEL CENTRO DE TRABAJO DONDE SE VA A ENTREGAR:</label>
                                 <select @if (Auth::user()->hasRole('usuario') || !(auth()->user()->datos->getArea == 'DN0')) disabled @endif name="area1"
                                     value="$area1->area_nombre" wire:model="areaSeleccionada1"
                                     wire:change="actualizarSubareas1"
@@ -114,21 +119,23 @@
                                 <select @if (Auth::user()->hasRole('usuario')) disabled @endif name="subarea"
                                     wire:model="subareaSeleccionada1" wire:change="cambioSubDestino"
                                     class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 
-                                    focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                                    @foreach ($subareas1 as $subarea)
-                                        <option id="{{ $subarea->subarea_clave }}" value="{{ $subarea->subarea_clave }}">
-                                            {{ $subarea->subarea_nombre }}
-                                        </option>
-                                    @endforeach
+                                    focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+                                @foreach ($subareas1 as $subarea)
+                                    <option id="{{ $subarea->subarea_clave }}" value="{{ $subarea->subarea_clave }}">
+                                        {{ $subarea->subarea_nombre }}
+                                    </option>
+                                @endforeach
                                 </select>
                             </div>
-                        </div>
+                    </div>
                 @else
                     <div class="grid grid-cols-1">
-                        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">ÁREA DEL ALMACEN AL QUE SE LE SOLICITA:</label>
+                        <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">ÁREA DEL
+                            ALMACEN AL QUE SE LE SOLICITA:</label>
                         <select name="area"
                             style="border-color: rgb(21 128 61);background-color: rgb(240, 240, 240);"
-                            class="py-2 px-3 rounded-lg border-2  mt-1  focus:ring-green-500 " type="text" required>
+                            class="py-2 px-3 rounded-lg border-2  mt-1  focus:ring-green-500 " type="text"
+                            required>
                             <option value="{{ $areaAux }}">
                                 {{ App\Models\Area::find($areaAux)->area_nombre }}
                             </option>
@@ -214,15 +221,6 @@
                             </svg>
                         </div>
                     @endif
-                    <!--
-                    <div>
-                        <form action="{ { route('inventarios.pedidoespecial', [$areaSeleccionada1, $subareaSeleccionada1, $almaceneseleccionado]) }}"
-                        id="formEspecial" class="place-content-center inline-flex rounded">
-                            <button type="submit" class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            type="button">Pedido fuera de Catalogo</button>
-                        </form>
-                    </div>
-                    -->
                     <!-- Contador de productos en el carrito -->
                     <div class="px-2 flex flex-row-reverse">
 
@@ -265,18 +263,18 @@
                                                 <div class="mt-2">
                                                     <ol class="text-sm text-gray-500">
                                                         @foreach ($carro as $item)
-                                                        <li>
-                                                            Producto: @if (is_array($item))
-                                                                {{ $item['name'] }}
-                                                            @else
-                                                                {{ $item->name }}
-                                                            @endif
-                                                            Cantidad: @if (is_array($item))
-                                                                {{ $item['qty'] }}
-                                                            @else
-                                                                {{ $item->qty }}
-                                                            @endif
-                                                        </li>
+                                                            <li>
+                                                                Producto: @if (is_array($item))
+                                                                    {{ $item['name'] }}
+                                                                @else
+                                                                    {{ $item->name }}
+                                                                @endif
+                                                                Cantidad: @if (is_array($item))
+                                                                    {{ $item['qty'] }}
+                                                                @else
+                                                                    {{ $item->qty }}
+                                                                @endif
+                                                            </li>
                                                         @endforeach
                                                     </ol>
                                                 </div>
@@ -317,17 +315,20 @@
                         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg"
                             style="padding-left: 2em; padding-right: 2em;">
                             <div class="flex items-center justify-between pt-2 pb-1">
-                                <input type="text" class="w-64 px-4 py-2 ml-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                <input type="text"
+                                    class="w-64 px-4 py-2 ml-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                                     placeholder="Buscar Producto..." wire:model="inputBusqueda">
 
                                 @if ($flagDatos == false || $paginaSeleccionada != 0)
-                                    <div class="flex items-center">pagina  {{$paginaSeleccionada}} de {{$cantidadBotones}}</div>
+                                    <div class="flex items-center">pagina {{ $paginaSeleccionada }} de
+                                        {{ $cantidadBotones }}</div>
                                 @endif
-                                
+
                                 <div class="flex items-center">
                                     <label for="paginacion" class="mr-2">Productos por página:</label>
-                                    <select name="paginacion" id="paginacion" wire:model="selectedPagination" wire:change="cambiarPaginado()"
-                                            class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                    <select name="paginacion" id="paginacion" wire:model="selectedPagination"
+                                        wire:change="cambiarPaginado()"
+                                        class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                                         <option value="10">10</option>
                                         <option value="15">15</option>
                                         <option value="20">20</option>
@@ -336,8 +337,9 @@
                                 </div>
 
                             </div>
-                            <table id="data-table" class="border border-black shadow-2xl mb-4 rounded-lg overflow-hidden"
-                                style="width:100%; padding-top: 1em; padding-bottom: 1em;" >
+                            <table id="data-table"
+                                class="border border-black shadow-2xl mb-4 rounded-lg overflow-hidden"
+                                style="width:100%; padding-top: 1em; padding-bottom: 1em;">
                                 <colgroup>
                                     <col style="width: 30%">
                                     <col style="width: 10%">
@@ -345,75 +347,114 @@
                                     <col style="width: 10%">
                                     <col style="width: 10%">
                                     <col style="width: 30%">
-                                  </colgroup>
+                                </colgroup>
                                 <thead>
                                     <tr>
-                                        <th class="bg-gray-800 text-white border border-white px-4 py-2">NOMBRE DEL PRODUCTO
+                                        <th class="bg-gray-800 text-white border border-white px-4 py-2">NOMBRE DEL
+                                            PRODUCTO
                                             @if ($orders['nombre_producto'] == 0)
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('nombre_producto', '0')">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    </svg>                                  
+                                                <button class="text-white font-bold py-1 px-1"
+                                                    wire:click="ordenar('nombre_producto', '0')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    </svg>
                                                 </button>
                                             @elseif($orders['nombre_producto'] == 1)
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('nombre_producto', '1')">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
+                                                <button class="text-white font-bold py-1 px-1"
+                                                    wire:click="ordenar('nombre_producto', '1')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
                                                     </svg>
                                                 </button>
                                             @else
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('nombre_producto', '2')">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
-                                                    </svg>                                  
+                                                <button class="text-white font-bold py-1 px-1"
+                                                    wire:click="ordenar('nombre_producto', '2')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
+                                                    </svg>
                                                 </button>
                                             @endif
                                         </th>
-                                        <th class="bg-gray-800 text-white border border-white px-4 py-2">TIPO DE UNIDAD</th>
+                                        <th class="bg-gray-800 text-white border border-white px-4 py-2">TIPO DE UNIDAD
+                                        </th>
                                         <th class="bg-gray-800 text-white border border-white px-4 py-2">CATEGORIA
                                             @if ($orders['id_categoria'] == 0)
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('id_categoria', '0')">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    </svg>                                  
+                                                <button class="text-white font-bold py-1 px-1"
+                                                    wire:click="ordenar('id_categoria', '0')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    </svg>
                                                 </button>
                                             @elseif($orders['id_categoria'] == 1)
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('id_categoria', '1')">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
+                                                <button class="text-white font-bold py-1 px-1"
+                                                    wire:click="ordenar('id_categoria', '1')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
                                                     </svg>
                                                 </button>
                                             @else
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('id_categoria', '2')">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
-                                                    </svg>                                  
+                                                <button class="text-white font-bold py-1 px-1"
+                                                    wire:click="ordenar('id_categoria', '2')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
+                                                    </svg>
                                                 </button>
                                             @endif
                                         </th>
                                         <th class="bg-gray-800 text-white border border-white px-4 py-2">EXISTENCIAS
                                             @if ($orders['existencias'] == 0)
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('existencias', '0')">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    </svg>                                  
+                                                <button class="text-white font-bold py-1 px-1"
+                                                    wire:click="ordenar('existencias', '0')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    </svg>
                                                 </button>
                                             @elseif($orders['existencias'] == 1)
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('existencias', '1')">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
+                                                <button class="text-white font-bold py-1 px-1"
+                                                    wire:click="ordenar('existencias', '1')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
                                                     </svg>
                                                 </button>
                                             @else
-                                                <button class="text-white font-bold py-1 px-1" wire:click="ordenar('existencias', '2')">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
-                                                    </svg>                                  
+                                                <button class="text-white font-bold py-1 px-1"
+                                                    wire:click="ordenar('existencias', '2')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
+                                                    </svg>
                                                 </button>
                                             @endif
                                         </th>
                                         <th class="bg-gray-800 text-white border border-white px-4 py-2">FOTO</th>
-                                        <th class="bg-gray-800 text-white border border-white px-4 py-2">CANTIDAD A PEDIR</th>
+                                        <th class="bg-gray-800 text-white border border-white px-4 py-2">CANTIDAD A
+                                            PEDIR</th>
 
                                     </tr>
                                 </thead>
@@ -421,20 +462,27 @@
                                     @foreach ($productosA as $producto)
                                         <tr data-id="{{ $producto->id }}">
                                             <td class="border-b border-black px-4 py-2">
-                                                {!! str_ireplace($inputBusqueda, '<span class="bg-yellow-200 uppercase">' . $inputBusqueda . '</span>', $producto->nombre_producto) !!}
-                                              </td>
-                                            <td class="border-b border-black px-4 py-2" style="justify-items:center">{{ $producto->unidad }}</td>
-                                            <td class="border-b border-black px-4 py-2">{{ $producto->categoria->nombre_categoria }}</td>
-                                            <td class="border-b border-black px-4 py-2">{{ $producto->existencias }}</td>
+                                                {!! str_ireplace(
+                                                    $inputBusqueda,
+                                                    '<span class="bg-yellow-200 uppercase">' . $inputBusqueda . '</span>',
+                                                    $producto->nombre_producto,
+                                                ) !!}
+                                            </td>
+                                            <td class="border-b border-black px-4 py-2" style="justify-items:center">
+                                                {{ $producto->unidad }}</td>
+                                            <td class="border-b border-black px-4 py-2">
+                                                {{ $producto->categoria->nombre_categoria }}</td>
+                                            <td class="border-b border-black px-4 py-2">{{ $producto->existencias }}
+                                            </td>
                                             <td class="border-b border-black px-4 py-2">
                                                 @if ($producto->photo_prod != null)
                                                     <img src="{{ asset('imagen_productos/' . $producto->photo_prod) }} "
-                                                        width="50ppx" id="imagenSeleccionada" max-width="50ppx" max-height="50ppx"
-                                                        alt="Foto actual del producto">
+                                                        width="50ppx" id="imagenSeleccionada" max-width="50ppx"
+                                                        max-height="50ppx" alt="Foto actual del producto">
                                                 @else
                                                     <img src="{{ asset('imagen_productos/iconProduct.png') }}"
-                                                        width="50ppx" id="imagenSeleccionada" max-width="50ppx" max-height="50ppx"
-                                                        alt="Foto actual del producto">
+                                                        width="50ppx" id="imagenSeleccionada" max-width="50ppx"
+                                                        max-height="50ppx" alt="Foto actual del producto">
                                                 @endif
                                             </td>
 
@@ -449,9 +497,9 @@
                                                             <div>
                                                                 <input type="hidden" name="row"
                                                                     value="{{ $carro->where('id', $producto->id) }}" />
-                                                                    {{info($carro)}}
-                                                                    {{info($producto->id)}}
-                                                                    <input type="number" name="cantidad"
+                                                                {{ info($carro) }}
+                                                                {{ info($producto->id) }}
+                                                                <input type="number" name="cantidad"
                                                                     placeholder="Cantidad"
                                                                     class="rounded-lg text-sm sm:test-base ml-4 pr-4 w-2/3"
                                                                     value="{{ is_array($carro[$producto->id]) ? $carro[$producto->id]['qty'] : $carro[$producto->id]->qty }}"
@@ -505,7 +553,7 @@
                                                                     value="{{ $producto->id }}" />
                                                                 <input type="number" name="cantidad"
                                                                     placeholder="Cantidad"
-                                                                    class="rounded-lg text-sm sm:test-base m-1 pr-1 w-8/12" 
+                                                                    class="rounded-lg text-sm sm:test-base m-1 pr-1 w-8/12"
                                                                     min="1" required />
                                                                 <input type="hidden" name="subareaDestino"
                                                                     wire:model="subDestino" />
@@ -537,103 +585,133 @@
 
                             </table>
 
-                @if ($flagDatos == false)
-                    <div class="font-bold pl-2 text-gray-800 bg-gray-100 shadow-lg border border-gray-300 rounded-lg py-2 px-4 pd-4">No se Encontraron Datos</div>
-                @else
-                    <div class="flex items-center justify-center pb-3">
-                        @if ($cantidadBotones < 6)
-                            @for ($i = 1; $i < $cantidadBotones+1; $i++)
-                                @if ($i == $paginaSeleccionada)
-                                    <button class="bg-gray-300 hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2 "
-                                        wire:click="botonPaginadoSeleccionado({{$i}})" disabled>
-                                        {{$i}}
-                                    </button>
-                                @else
-                                    <button class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
-                                        wire:click="botonPaginadoSeleccionado({{$i}})">
-                                        {{$i}}
-                                    </button>       
-                                @endif
-                            @endfor
-                        @else
-                            @if ($paginaSeleccionada > 2)
-                                <button class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
-                                    wire:click="botonPaginadoSeleccionado(1)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
-                                    </svg>
-                                </button>
+                            @if ($flagDatos == false)
+                                <div
+                                    class="font-bold pl-2 text-gray-800 bg-gray-100 shadow-lg border border-gray-300 rounded-lg py-2 px-4 pd-4">
+                                    No se Encontraron Datos</div>
                             @else
-                                <button class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
-                                    wire:click="botonPaginadoSeleccionado(1)" disabled>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
-                                    </svg>  
-                                </button>
-                            @endif
+                                <div class="flex items-center justify-center pb-3">
+                                    @if ($cantidadBotones < 6)
+                                        @for ($i = 1; $i < $cantidadBotones + 1; $i++)
+                                            @if ($i == $paginaSeleccionada)
+                                                <button
+                                                    class="bg-gray-300 hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2 "
+                                                    wire:click="botonPaginadoSeleccionado({{ $i }})"
+                                                    disabled>
+                                                    {{ $i }}
+                                                </button>
+                                            @else
+                                                <button
+                                                    class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
+                                                    wire:click="botonPaginadoSeleccionado({{ $i }})">
+                                                    {{ $i }}
+                                                </button>
+                                            @endif
+                                        @endfor
+                                    @else
+                                        @if ($paginaSeleccionada > 2)
+                                            <button
+                                                class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
+                                                wire:click="botonPaginadoSeleccionado(1)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                                                </svg>
+                                            </button>
+                                        @else
+                                            <button
+                                                class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
+                                                wire:click="botonPaginadoSeleccionado(1)" disabled>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                                                </svg>
+                                            </button>
+                                        @endif
 
-                            @if ($paginaSeleccionada == 1)
-                                @for ($i = 1; $i < 4; $i++)
-                                    @if ($i == $paginaSeleccionada)
-                                        <button class="bg-gray-300 hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2 "
-                                            wire:click="botonPaginadoSeleccionado({{$i}})"disabled>
-                                            {{$i}}
-                                        </button>
-                                    @else
-                                        <button class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
-                                            wire:click="botonPaginadoSeleccionado({{$i}})">
-                                            {{$i}}
-                                        </button>       
-                                    @endif
-                                @endfor
-                            @elseif ($paginaSeleccionada == $cantidadBotones)
-                                @for ($i = $paginaSeleccionada-2; $i <= $paginaSeleccionada; $i++)
-                                    @if ($i == $paginaSeleccionada)
-                                        <button class="bg-gray-300 hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2 "
-                                            wire:click="botonPaginadoSeleccionado({{$i}})" disabled>
-                                            {{$i}}
-                                        </button>
-                                    @else
-                                        <button class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
-                                            wire:click="botonPaginadoSeleccionado({{$i}})">
-                                            {{$i}}
-                                        </button>       
-                                    @endif
-                                @endfor
-                            @elseif ($paginaSeleccionada < $cantidadBotones)
-                                @for ($i = $paginaSeleccionada-1; $i < $paginaSeleccionada+2; $i++)
-                                    @if ($i == $paginaSeleccionada)
-                                        <button class="bg-gray-300 hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2 "
-                                            wire:click="botonPaginadoSeleccionado({{$i}})" disabled>
-                                            {{$i}}
-                                        </button>
-                                    @else
-                                        <button class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
-                                            wire:click="botonPaginadoSeleccionado({{$i}})">
-                                            {{$i}}
-                                        </button>       
-                                    @endif
-                                @endfor
-                            @endif
+                                        @if ($paginaSeleccionada == 1)
+                                            @for ($i = 1; $i < 4; $i++)
+                                                @if ($i == $paginaSeleccionada)
+                                                    <button
+                                                        class="bg-gray-300 hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2 "
+                                                        wire:click="botonPaginadoSeleccionado({{ $i }})"disabled>
+                                                        {{ $i }}
+                                                    </button>
+                                                @else
+                                                    <button
+                                                        class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
+                                                        wire:click="botonPaginadoSeleccionado({{ $i }})">
+                                                        {{ $i }}
+                                                    </button>
+                                                @endif
+                                            @endfor
+                                        @elseif ($paginaSeleccionada == $cantidadBotones)
+                                            @for ($i = $paginaSeleccionada - 2; $i <= $paginaSeleccionada; $i++)
+                                                @if ($i == $paginaSeleccionada)
+                                                    <button
+                                                        class="bg-gray-300 hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2 "
+                                                        wire:click="botonPaginadoSeleccionado({{ $i }})"
+                                                        disabled>
+                                                        {{ $i }}
+                                                    </button>
+                                                @else
+                                                    <button
+                                                        class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
+                                                        wire:click="botonPaginadoSeleccionado({{ $i }})">
+                                                        {{ $i }}
+                                                    </button>
+                                                @endif
+                                            @endfor
+                                        @elseif ($paginaSeleccionada < $cantidadBotones)
+                                            @for ($i = $paginaSeleccionada - 1; $i < $paginaSeleccionada + 2; $i++)
+                                                @if ($i == $paginaSeleccionada)
+                                                    <button
+                                                        class="bg-gray-300 hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2 "
+                                                        wire:click="botonPaginadoSeleccionado({{ $i }})"
+                                                        disabled>
+                                                        {{ $i }}
+                                                    </button>
+                                                @else
+                                                    <button
+                                                        class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
+                                                        wire:click="botonPaginadoSeleccionado({{ $i }})">
+                                                        {{ $i }}
+                                                    </button>
+                                                @endif
+                                            @endfor
+                                        @endif
 
-                            @if ($paginaSeleccionada < $cantidadBotones)
-                                <button class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
-                                    wire:click="botonPaginadoSeleccionado({{$cantidadBotones}})">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-                                    </svg>
-                                </button>
-                            @else
-                                <button class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
-                                    wire:click="botonPaginadoSeleccionado({{$cantidadBotones}})" disabled>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-                                    </svg> 
-                                </button>
+                                        @if ($paginaSeleccionada < $cantidadBotones)
+                                            <button
+                                                class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
+                                                wire:click="botonPaginadoSeleccionado({{ $cantidadBotones }})">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                                                </svg>
+                                            </button>
+                                        @else
+                                            <button
+                                                class="bg-white hover:bg-gray-200 shadow-lg rounded-lg text-gray-700 font-bold border border-gray-500 py-2 px-4 ml-2"
+                                                wire:click="botonPaginadoSeleccionado({{ $cantidadBotones }})"
+                                                disabled>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                                                </svg>
+                                            </button>
+                                        @endif
+                                    @endif
+                                </div>
                             @endif
-                        @endif
-                    </div>
-                @endif
                         </div>
                         {{-- @livewire('inventarios-table') --}}
                     </div>
