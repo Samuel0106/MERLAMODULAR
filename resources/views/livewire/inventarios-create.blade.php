@@ -63,7 +63,7 @@
                                 <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">
                                     ÁREA DEL ALMACEN AL QUE SE LE SOLICITA PRODUCTOS:
                                 </label>
-                                <select @if (Auth::user()->hasRole('usuario') || !(auth()->user()->datos->getArea == 'DX00')) disabled @endif name="area"
+                                <select @if (Auth::user()->hasRole('usuario') || !(auth()->user()->datos->getArea == 'DN0')) disabled @endif name="area"
                                     value="$area->area_nombre" wire:model="areaSeleccionada"
                                     wire:change="actualizarSubareas"
                                     class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 
@@ -95,7 +95,7 @@
 
                             <div class="grid grid-cols-1">
                                 <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">ÁREA DEL CENTRO DE TRABAJO DONDE SE VA A ENTREGAR:</label>
-                                <select @if (Auth::user()->hasRole('usuario') || !(auth()->user()->datos->getArea == 'DX00')) disabled @endif name="area1"
+                                <select @if (Auth::user()->hasRole('usuario') || !(auth()->user()->datos->getArea == 'DN0')) disabled @endif name="area1"
                                     value="$area1->area_nombre" wire:model="areaSeleccionada1"
                                     wire:change="actualizarSubareas1"
                                     class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 
@@ -114,7 +114,7 @@
                                 <select @if (Auth::user()->hasRole('usuario')) disabled @endif name="subarea"
                                     wire:model="subareaSeleccionada1" wire:change="cambioSubDestino"
                                     class="py-2 px-3 rounded-lg border-2 border-blue-600 mt-1 
-                                    focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+                                    focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
                                     @foreach ($subareas1 as $subarea)
                                         <option id="{{ $subarea->subarea_clave }}" value="{{ $subarea->subarea_clave }}">
                                             {{ $subarea->subarea_nombre }}

@@ -298,4 +298,5 @@ class InventariosCreate extends Component
         $this->subDestino = $this->subareaSeleccionada1;
         $this->reiniciarOrden();
     }
+    
 }

@@ -180,6 +180,7 @@ class InventarioController extends Controller
                 'cuerpo' => 'Pedido con folio #' . $folio->id . ' realizado el dia ' . $today . ' por ' . $nombreTmp . ' al almacen ' . $almacen->almacen_nombre . ' encargado de revisar el pedido ' . $jefeNombre . ' lugar de entrega ' . $subareaName,
             ],
         ];
+        
 
         foreach ($notificaciones as $notificacion) {
             Notificacion::create($notificacion);
