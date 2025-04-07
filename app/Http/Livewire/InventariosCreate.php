@@ -97,9 +97,7 @@ class InventariosCreate extends Component
             $this->areas1 = Area::where([
                 ['area_clave', '=', $this->areaSeleccionada1],
             ])->get();
-            $this->subareas1 = Subarea::where([
-                ['subarea_clave', '=', $this->subareaSeleccionada1],
-            ])->get();
+            $this->subareas1 = Subarea::where('area_id', $this->areaSeleccionada1)->get();
             $productos = Producto::all();
             foreach ($productos as $p) {
                 if ($this->carro->where('id', $p->id)->count() > 0) {
