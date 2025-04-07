@@ -91,6 +91,7 @@ class InventariosCreate extends Component
             }
             $this->subDestino = $this->subareaSeleccionada1;
         } else {
+            $this->areaSeleccionada1 = session()->get('areaSeleccionada1', $this->area);
             $this->subareaSeleccionada1 = session()->get('subareaDestino');
             $this->almacen = Almacen::where('area_id', $this->areaSeleccionada1)->get()->first();
             $this->areas1 = Area::where([
@@ -135,6 +136,12 @@ class InventariosCreate extends Component
             $this->mostrarPaginado();
             $this->subDestino = $this->subareaSeleccionada1;
         }
+        logger('subareaDestino: ' . session()->get('subareaDestino'));
+logger('almacenpe: ' . session()->get('almacenpe'));
+logger('areaSeleccionada1: ' . $this->areaSeleccionada1);
+logger('areas1: ' . json_encode($this->areas1));
+
+
     }
 
     public function render()
@@ -242,33 +249,45 @@ class InventariosCreate extends Component
     }
 
     public function actualizarSubareas()
-    {
-        $area = Area::find($this->areaSeleccionada);
-        $this->almacenes = Almacen::where('area_id', $area->area_clave)->where('habilitado', 1)->get();
-        try {
-            $this->almaceneseleccionado = $this->almacenes->first()->almacen_clave;
-        } catch (\Throwable $th) {
-            $this->almaceneseleccionado = null;
-        }
+{
+    $area = Area::find($this->areaSeleccionada);
+    $this->almacenes = Almacen::where('area_id', $area->area_clave)->where('habilitado', 1)->get();
 
-        $this->productosA = Producto::where([
-            ['subarea', '=', $this->almaceneseleccionado],
-        ])->get();
+    try {
+        $this->almaceneseleccionado = $this->almacenes->first()->almacen_clave;
+    } catch (\Throwable $th) {
+        $this->almaceneseleccionado = null;
     }
+
+    // Guardar en sesión
+    session()->put('almacenpe', $this->almaceneseleccionado);
+
+    $this->productosA = Producto::where([
+        ['subarea', '=', $this->almaceneseleccionado],
+    ])->get();
+}
+
+
     public function actualizarSubareas1()
-    {
-        $area1 = Area::find($this->areaSeleccionada1);
-        $this->subareas1 = Subarea::where([
-            ['area_id', '=', $area1->area_clave],
-        ])->get();
-        try {
-            $this->subareaSeleccionada1 = $this->subareas1->first()->subarea_clave;
-        } catch (\Throwable $th) {
-            $this->subareaSeleccionada1 = null;
-        }
-        $this->subDestino = $this->subareaSeleccionada1;
-        $this->reiniciarOrden();
+{
+    $area1 = Area::find($this->areaSeleccionada1);
+    $this->subareas1 = Subarea::where([
+        ['area_id', '=', $area1->area_clave],
+    ])->get();
+
+    try {
+        $this->subareaSeleccionada1 = $this->subareas1->first()->subarea_clave;
+    } catch (\Throwable $th) {
+        $this->subareaSeleccionada1 = null;
     }
+
+    // Guardar en sesión
+    session()->put('subareaDestino', $this->subareaSeleccionada1);
+
+    $this->subDestino = $this->subareaSeleccionada1;
+    $this->reiniciarOrden();
+}
+
     public function actualizarProductos()
     {
         if (!$this->almaceneseleccionado) {
