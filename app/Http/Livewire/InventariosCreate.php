@@ -92,7 +92,7 @@ class InventariosCreate extends Component
             $this->subDestino = $this->subareaSeleccionada1;
         } else {
             $this->areaSeleccionada1 = session()->get('areaSeleccionada1', $this->area);
-            $this->subareaSeleccionada1 = session()->get('subareaDestino');
+            $this->subareaSeleccionada1 = session()->get('subareaDestino', $this->subarea);
             $this->almacen = Almacen::where('area_id', $this->areaSeleccionada1)->get()->first();
             $this->areas1 = Area::where([
                 ['area_clave', '=', $this->areaSeleccionada1],
@@ -301,6 +301,7 @@ logger('areas1: ' . json_encode($this->areas1));
     public function cambioSubDestino()
     {
         $this->subDestino = $this->subareaSeleccionada1;
+        session()->put('subareaDestino', $this->subareaSeleccionada1); 
         $this->reiniciarOrden();
     }
 }
