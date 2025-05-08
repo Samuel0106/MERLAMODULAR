@@ -2,6 +2,7 @@ APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=base64:b9r54S4t9Y1tKTVWBrcbRMVwdZR/jwePhmw55RlSw6g=
 APP_DEBUG=true
+OPENAI_API_KEY=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
 APP_URL=http://localhost:8000
 ASSET_URL=http://localhost:8000
 

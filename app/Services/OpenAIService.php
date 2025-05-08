@@ -20,8 +20,7 @@ class OpenAIService
 
     public function __construct()
     {
-        $this->apiKey = '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';
-
+        $this->apiKey = env('OPENAI_API_KEY');
         $this->baseUrl = 'https://api.openai.com/v1';
     }
 
