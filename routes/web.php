@@ -53,7 +53,6 @@ Route::post('/filtrarProd',  [ProductoController::class, 'filtrarProd'])->name('
 Route::get('productos/gestion', [App\Http\Controllers\ProductoController::class, 'gestionProductos'])->name('productos.gestionproductos');
 
 Route::get('/getNotificationsExcel', [\App\Http\Controllers\NotificacionesController::class, 'exportNotificationsExcel']);
-Route::post('/subarea', [App\Http\Controllers\RijController::class, 'subcategorias']);
 Route::get('/users/datosPersonales', [App\Http\Controllers\UserController::class, 'datosPersonales'])->name('users.datosPersonales');
 Route::get('/users/usuariosBaja', [App\Http\Controllers\UserController::class, 'usuariosBaja'])->name('users.usuariosBaja');
 Route::get('/users/centros', [App\Http\Controllers\UserController::class, 'centros'])->name('users.centros');
@@ -110,7 +109,6 @@ Route::middleware(['auth:sanctum', 'verified', 'datos.completos'])->group( funct
     Route::post('/cart/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::resource('users', UserController::class);
     Route::resource('roles', RoleController::class)->names('roles');
-    Route::resource('calendario', CalendarController::class);
     Route::resource('soportes', SoporteController::class);
     Route::resource('inventarios', InventarioController::class);
     Route::resource('categorias', CategoriaController::class);
@@ -125,12 +123,6 @@ Route::middleware(['auth:sanctum', 'verified', 'datos.completos'])->group( funct
     Route::post('/storeMerma', [App\Http\Controllers\MermaController::class, 'store']);
     Route::resource('mermas', MermaController::class);
     Route::resource('almacenes', AlmacenController::class);
-    Route::get('personales/{eid}', [App\Http\Controllers\PersonalesController::class, 'indice'])->name('personales.indice');
-    Route::get('personales/{eid}/create', [App\Http\Controllers\PersonalesController::class, 'create'])->name('personales.create');
-    Route::post('personales/{eid}', [App\Http\Controllers\PersonalesController::class, 'store'])->name('personales.store');
-    Route::patch('personales/{id}/edit', [App\Http\Controllers\PersonalesController::class, 'update'])->name('personales.update');
-    Route::delete('personales/{eid}/{id}', [App\Http\Controllers\PersonalesController::class, 'destroy'])->name('personales.destroy');
-    Route::resource('personales', PersonalesController::class)->except(['create', 'store', 'destroy']);
 
     Route::post('/filtrarUsuarios', [App\Http\Controllers\UserController::class, 'filterUsers'])->name('users.filterUsers');
     Route::post('/filtrarProductos', [App\Http\Controllers\ProductoController::class, 'generalStockFilter']);
@@ -138,8 +130,6 @@ Route::middleware(['auth:sanctum', 'verified', 'datos.completos'])->group( funct
     Route::post('/ubicacionSelect', [App\Http\Controllers\ProductoController::class, 'ubicacionInvGen']);
 
     // Route::post('/filtrarVacacionesFuera', [App\Http\Controllers\VacacionesFueraController::class, 'filterVacations'])->name('solicitarfuera.filterVacations');
-    Route::post('/areas', [App\Http\Controllers\RijController::class, 'areas']);
-    Route::post('/fullcalenderajax', [App\Http\Controllers\CalendarController::class, 'ajax']);
     Route::post('/recargarCategorias', [App\Http\Controllers\ProductoController::class, 'updateTable']);
     Route::post('/actualizar', [App\Http\Controllers\InventarioController::class, 'updateTable']);
     Route::post('/areas', [App\Http\Controllers\UserController::class,'areas']);
@@ -162,12 +152,3 @@ Route::middleware(['auth:sanctum', 'verified', 'datos.completos'])->group( funct
 
     });
 
-Route::middleware(['auth', 'bloquear.form.datos'])->group(function() {
-
-    Route::get('llenar-datos-personales', [\App\Http\Controllers\DatosPersonalesController::class, 'mostrarFormulario'])
-        ->name('llenar-datos-personales.form');
-
-    Route::post('llenar-datos-personales', [\App\Http\Controllers\DatosPersonalesController::class, 'guardarDatos'])
-        ->name('llenar-datos-personales.store');
-
-});

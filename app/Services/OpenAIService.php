@@ -150,9 +150,57 @@ class OpenAIService
             return "Las subáreas disponibles son: " . implode(', ', $subareas);
         }
 
+        if (str_contains($queryLower, 'cómo hacer un pedido') || str_contains($queryLower, 'crear pedido')) {
+            return "Para hacer un pedido, dirígete al módulo de Productos, selecciona lo que necesitas y agrégalo al carrito. Luego confirma el pedido en la sección del Carrito.";
+        }
+
+        if (str_contains($queryLower, 'ver historial') || str_contains($queryLower, 'consultar historial')) {
+            return "Puedes consultar el historial de pedidos en la sección 'Historial de Bajas' desde el menú principal.";
+        }
+
+        if (str_contains($queryLower, 'gestionar productos') || str_contains($queryLower, 'agregar producto')) {
+            return "Puedes gestionar productos en el apartado de 'Productos' del menú. Desde ahí puedes crear, editar o eliminar productos.";
+        }
+
+        if (str_contains($queryLower, 'gestionar usuarios') || str_contains($queryLower, 'crear usuario')) {
+            return "Para crear o editar usuarios, ve al módulo de 'Usuarios'. Ahí puedes asignar roles, áreas, subáreas y divisiones.";
+        }
+
+        if (str_contains($queryLower, 'ver almacenes') || str_contains($queryLower, 'navegar almacén')) {
+            return "En la sección de 'Almacenes' puedes visualizar, habilitar o deshabilitar almacenes disponibles para el sistema.";
+        }
+
+        if (str_contains($queryLower, 'ver categorías') || str_contains($queryLower, 'gestionar categorías')) {
+            return "En el módulo 'Categorías' puedes crear nuevas categorías o modificar las existentes para clasificar tus productos.";
+        }
+        // 3. ¿Qué puedo hacer en MERLA?
+    if (str_contains($queryLower, '¿qué puedo hacer') || str_contains($queryLower, 'que puedo hacer') || str_contains($queryLower, 'funciones merla')) {
+        $acciones = implode(", ", array_keys($this->funcionesSistema));
+        return "En MERLA puedes realizar acciones como: $acciones.";
+    }
+
+    // 4. ¿Qué módulos hay?
+    if (str_contains($queryLower, '¿qué módulos hay') || str_contains($queryLower, 'que modulos hay') || str_contains($queryLower, 'módulos del sistema')) {
+        return "Los módulos disponibles en MERLA incluyen: Productos, Inventarios, Bajas, Usuarios, Roles, Categorías y Almacenes.";
+    }
+
+    // 5. ¿Qué permisos necesito para crear usuarios?
+    if (str_contains($queryLower, 'permiso') && str_contains($queryLower, 'crear') && str_contains($queryLower, 'usuario')) {
+        return "Para crear usuarios necesitas el permiso: 'users.create'.";
+    }
+
         // Si no se detectó ninguna intención conocida
         return null;
     }
+    
+    private $funcionesSistema = [
+        'crear pedido' => 'Ir a Productos -> Agregar al carrito -> Ver carrito -> Enviar pedido',
+        'dar de baja' => 'Ir a Bajas -> Seleccionar producto -> Llenar formulario',
+        'nuevo usuario' => 'Ir a Usuarios -> Crear -> Llenar datos -> Guardar',
+        'autorizar pedido' => 'Ir a Inventarios -> Ver pedidos pendientes -> Autorizar',
+        'ver historial de bajas' => 'Ir a Bajas -> Historial',
+    ];
+    
 
     private function generateDynamicResponse(string $query, array $data): string
     {
@@ -162,7 +210,7 @@ class OpenAIService
 
         $contexto = json_encode($data);
 
-        // Preparar el mensaje
+        // Preparar el queryLower
         $prompt = "MERLA. Datos disponibles:\n";
 
         foreach ($data['productos'] as $p) {
@@ -186,8 +234,8 @@ class OpenAIService
             'messages' => [
                 [
                     'role' => 'system',
-                    'content' => "Eres un asistente experto en Manejo y Estrategia de Registros para Logística y Almacenes por sus siglas MERLA un sistema de inventarios . Responde de forma clara y concisa."
-                ],
+                    'content' => "Eres un asistente virtual llamado Merl-IA, experto en el sistema MERLA (Manejo y Estrategia de Registros para Logística y Almacenes). Solo responde preguntas relacionadas con pedidos, inventarios, productos, almacenes, usuarios, categorías, áreas y subáreas. Si la pregunta no es relevante para MERLA, responde amablemente que solo puedes ayudar con temas del sistema."
+                ],                
                 [
                     'role' => 'user',
                     'content' => $prompt

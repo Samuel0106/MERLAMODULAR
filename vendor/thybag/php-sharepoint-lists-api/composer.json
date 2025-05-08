@@ -1,0 +1,22 @@
+{
+	"name": "thybag/php-sharepoint-lists-api",
+	"type": "library",
+	"description": "A simple PHP API to make working with SharePoint lists easy.",
+	"homepage": "https://github.com/thybag/PHP-SharePoint-Lists-API",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Carl Saggs",
+			"email": "carl@userbag.co.uk"
+		}
+	],
+	"require": {
+		"php": "^7.1 || ^8.0",
+		"ext-soap": "*"
+        },
+	"autoload": {
+		"psr-0": {
+			"Thybag" : "src/"
+		}
+	}
+}

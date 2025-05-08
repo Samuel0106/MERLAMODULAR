@@ -720,7 +720,19 @@ class InventarioController extends Controller
         $countPedidos = Inventario::select(DB::raw('count(*) as count'))->where('eid', Auth::user()->eid)->get();
         $countPedidos = $countPedidos[0]->count;
         $area = auth()->user()->datos->area;
-        $almacen = Almacen::where('area_id', $area)->first()->almacen_clave;
+        // Buscar por coincidencia de los primeros 2 dígitos del área
+$almacenObj = Almacen::whereRaw('LEFT(almacen_clave, 2) = ?', [substr($area, 0, 2)])->first();
+
+if ($almacenObj) {
+    $almacen = $almacenObj->almacen_clave;
+
+    // Buscar productos con coincidencia en los primeros 3 dígitos de subárea con el almacén
+    $productos = Producto::whereRaw('LEFT(subarea, 3) = ?', [substr($almacen, 0, 3)])->count();
+} else {
+    $almacen = null;
+    $productos = 0; // No hay almacén compatible
+}
+
         $productos = Producto::where('subarea', $almacen)->count();
         $countCategorias = Categoria::select(DB::raw('count(*) as count'))->get();
         $countCategorias = $countCategorias[0]->count;
@@ -770,7 +782,19 @@ class InventarioController extends Controller
         $countPedidos = Inventario::select(DB::raw('count(*) as count'))->where('eid', Auth::user()->eid)->get();
         $countPedidos = $countPedidos[0]->count;
         $area = auth()->user()->datos->area;
-        $almacen = Almacen::where('area_id', $area)->first()->almacen_clave;
+        // Buscar por coincidencia de los primeros 2 dígitos del área
+$almacenObj = Almacen::whereRaw('LEFT(almacen_clave, 2) = ?', [substr($area, 0, 2)])->first();
+
+if ($almacenObj) {
+    $almacen = $almacenObj->almacen_clave;
+
+    // Buscar productos con coincidencia en los primeros 3 dígitos de subárea con el almacén
+    $productos = Producto::whereRaw('LEFT(subarea, 3) = ?', [substr($almacen, 0, 3)])->count();
+} else {
+    $almacen = null;
+    $productos = 0; // No hay almacén compatible
+}
+
         $productos = Producto::where('subarea', $almacen)->count();
         $countCategorias = Categoria::select(DB::raw('count(*) as count'))->get();
         $countCategorias = $countCategorias[0]->count;
@@ -820,7 +844,19 @@ class InventarioController extends Controller
         $countPedidos = Inventario::select(DB::raw('count(*) as count'))->where('eid', Auth::user()->eid)->get();
         $countPedidos = $countPedidos[0]->count;
         $area = auth()->user()->datos->area;
-        $almacen = Almacen::where('area_id', $area)->first()->almacen_clave;
+        // Buscar por coincidencia de los primeros 2 dígitos del área
+$almacenObj = Almacen::whereRaw('LEFT(almacen_clave, 2) = ?', [substr($area, 0, 2)])->first();
+
+if ($almacenObj) {
+    $almacen = $almacenObj->almacen_clave;
+
+    // Buscar productos con coincidencia en los primeros 3 dígitos de subárea con el almacén
+    $productos = Producto::whereRaw('LEFT(subarea, 3) = ?', [substr($almacen, 0, 3)])->count();
+} else {
+    $almacen = null;
+    $productos = 0; // No hay almacén compatible
+}
+
         $productos = Producto::where('subarea', $almacen)->count();
         $countCategorias = Categoria::select(DB::raw('count(*) as count'))->get();
         $countCategorias = $countCategorias[0]->count;

@@ -66,11 +66,17 @@
 </style>
 
 <!-- Botón flotante -->
-<button id="chatbot-toggle">💬</button>
+<button id="chatbot-toggle">
+    <img src="{{ asset('assets/asistentevirtuallogo.png') }}" alt="Asistente" width="30" height="30">
+</button>
 
 <!-- Contenedor del chatbot -->
 <div id="chatbot-container">
-    <div id="chatbot-header">🤖 Merl-IA</div> <!-- Cambié "Asistente Virtual" por "Merl-IA" -->
+    <div id="chatbot-header">
+        <img src="{{ asset('assets/asistentevirtuallogo.png') }}" alt="Logo" width="20" height="20" style="vertical-align: middle; margin-right: 8px;">
+        Merl-IA
+    </div>
+     <!-- Cambié "Asistente Virtual" por "Merl-IA" -->
     <div id="chatbot-messages"></div>
     <div id="chatbot-input">
         <input type="text" id="chatbot-question" placeholder="Escribe tu pregunta..." />
@@ -80,13 +86,21 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const toggleButton = document.getElementById('chatbot-toggle');
-        const container = document.getElementById('chatbot-container');
+    const toggleButton = document.getElementById('chatbot-toggle');
+    const container = document.getElementById('chatbot-container');
 
-        toggleButton.addEventListener('click', () => {
-            container.style.display = container.style.display === 'none' || container.style.display === '' ? 'flex' : 'none';
-        });
+    toggleButton.addEventListener('click', () => {
+        container.style.display = container.style.display === 'none' || container.style.display === '' ? 'flex' : 'none';
     });
+
+    // Enviar mensaje con la tecla Enter
+    document.getElementById('chatbot-question').addEventListener('keydown', function (e)  {
+        if (e.key === 'Enter') {
+            sendChatbotMessage();
+        }
+    });
+});
+
 
     async function sendChatbotMessage() {
         const input = document.getElementById('chatbot-question');

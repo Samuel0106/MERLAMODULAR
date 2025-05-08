@@ -1,4 +1,4 @@
-/vendor
+
 /node_modules
 /public/hot
 /public/storage
@@ -18,8 +18,6 @@ yarn-error.log
 /.vscode
 config/livewire.php
 
-
-vendor/
 
 public/archivos_baja
 public/facturas
