@@ -1,24 +1,36 @@
-name: CI Workflow
+name: Deploy to Heroku with OpenAI API Key
 
 on:
   push:
     branches:
-      - main  # O la rama principal que desees, puede ser 'master' o cualquier otra
+      - MerlaA_Sam  # Esta es la rama que mencionaste
 
 jobs:
-  build:
-    runs-on: ubuntu-latest  # Puedes cambiar a otro sistema operativo si lo necesitas
+  deploy:
+    runs-on: ubuntu-latest  # Usamos un runner de Ubuntu para este flujo de trabajo
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2  # Esto descargará tu código del repositorio
+      uses: actions/checkout@v2  # Esta acción obtiene tu código desde el repositorio
 
-    - name: Set up OpenAI API key
-      run: |
-        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV  # Establece la API key desde los secrets
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2  # Configura el entorno PHP para el proyecto Laravel
+      with:
+        php-version: '7.4'  # Asegúrate de usar la versión correcta de PHP para tu proyecto
+        extensions: mbstring, bcmath, exif, gd, zip  # Extensiones comunes de PHP para Laravel
 
-    - name: Run your script or code
+    - name: Install dependencies
       run: |
-        # Aquí puedes correr el script o el código que usa la clave API
-        echo "The OpenAI API Key is set and ready to use"
-        curl -X POST -H "Authorization: Bearer $OPENAI_API_KEY" https://api.openai.com/v1/completions
+        composer install --no-progress --no-suggest --prefer-dist  # Instala las dependencias de Laravel
+
+    - name: Set up Heroku API Key and Deploy
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}  # La API Key de Heroku que debes agregar en Secrets de GitHub
+      run: |
+        echo "Deploying to Heroku..."
+        git remote add heroku https://git.heroku.com/your-heroku-app.git  # Asegúrate de usar la URL correcta de tu app en Heroku
+        git push heroku MerlaA_Sam:master  # Empuja los cambios a Heroku
+
+    - name: Set OpenAI API Key on Heroku
+      run: |
+        heroku config:set OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} --app your-heroku-app  # Configura la clave de OpenAI en Heroku
