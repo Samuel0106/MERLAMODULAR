@@ -30,6 +30,17 @@ use App\Http\Controllers\PedidoController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\GuzzleTestController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\AiQueryController;
+
+// Ruta para procesar la consulta de IA
+Route::post('/ai/query', [AiQueryController::class, 'query'])->name('ai.query');
+
+Route::post('/chat', [ChatController::class, 'send']);
+
+Route::get('/guzzle-test', [GuzzleTestController::class, 'test']);
+
 Route::get('/', function () {
     return redirect()->route('inventarios.inicio'); 
 });

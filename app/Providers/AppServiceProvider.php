@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Schema;
+use App\Services\OpenAIService;
+use GuzzleHttp\Client;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,10 +16,13 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-        //
-    }
+public function register()
+{
+    $this->app->singleton(OpenAIService::class, function ($app) {
+        return new OpenAIService(new Client());
+    });
+}
+
 
     /**
      * Bootstrap any application services.

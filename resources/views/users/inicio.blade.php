@@ -50,6 +50,7 @@
                             </div>
                         </a>
                     </div>
+                    
                     <!-- Roles -->
                     <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5">
                         <a href="{{ route('roles.index') }}" class="card-link">
